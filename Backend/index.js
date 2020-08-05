@@ -13,10 +13,10 @@ const mongoose = require("mongoose");
 const initDb = require("./config/initDb");
 initDb;
 
-// io.on("connection", (socket) => {
-//   console.log("a user connection");
-// });
-
+//body parser
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use("/user", require("./routes/user"));
 
 server.listen(port, () => console.log("server running on :", port));
