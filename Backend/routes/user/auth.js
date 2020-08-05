@@ -12,4 +12,8 @@ router.use(
   require("./authAction/login")
 );
 
+router.use("/", (req, res) => {
+  res.send("login or register");
+});
+
 module.exports = router;
