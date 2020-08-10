@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
+const crypto = require("crypto");
 
 const accessTokenSecret = process.env.accessTokenSecret;
 const emailTransporter = process.env.emailTransporter;
@@ -76,6 +77,7 @@ userSchema.methods.generateToken = function (cb) {
 };
 
 userSchema.methods.sendEmail = function (mailReceive, cb) {
+  var user = this;
   let transpoter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -84,16 +86,22 @@ userSchema.methods.sendEmail = function (mailReceive, cb) {
     },
   });
 
+  user.token = Math.floor(100000 + Math.random() * 900000);
+
   let mailOptions = {
     from: `${emailTransporter}`,
     to: `${mailReceive}`,
     subject: "Login chat app",
-    text: "Welcom to our chat",
+    text: `Your register code is ${user.token}`,
   };
-
   transpoter.sendMail(mailOptions, function (err, isSend) {
     if (err) return cb(err);
-    cb(null, isSend);
+    user
+      .save()
+      .then(() => {
+        cb(null, isSend);
+      })
+      .catch((err) => console.log(err));
   });
 };
 
