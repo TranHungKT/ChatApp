@@ -6,7 +6,7 @@ const accessTokenSecret = process.env.accessTokenSecret;
 const bcrypt = require("bcryptjs");
 router.post("/", (req, res) => {
   const user = new User(req.body);
-
+  //Remember to check do every fields are filled in front end
   var errors = "";
   User.findOne({ email: user.email })
     .then((doc) => {
@@ -33,6 +33,8 @@ router.post("/", (req, res) => {
 
 router.post("/codeConfirm", (req, res) => {
   const { code, email } = req.body;
+
+  // Remember to check code fill in
   User.findOne({ email: email })
     .then((doc) => {
       if (doc.token == code) {

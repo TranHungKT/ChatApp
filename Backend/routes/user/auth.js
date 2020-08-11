@@ -26,6 +26,17 @@ router.use(
   require("./authAction/register")
 );
 
+router.use(
+  "/reset",
+  (req, res, next) => {
+    if (req.method != "POST") {
+      return res.status(400).json({ message: "Get is not allowed!!!" });
+    }
+    next();
+  },
+  require("./authAction/reset")
+);
+
 router.use("/", (req, res) => {
   res.send("login or register");
 });
