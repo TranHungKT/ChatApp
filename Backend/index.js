@@ -17,6 +17,14 @@ initDb;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+//io connection
+io.on("connection", (socket) => {
+  console.log("New WS connection");
+
+  socket.emit("message", "Welcome to chat app");
+});
+
+app.use("/", (req, res) => res.send("WELCOME"));
 app.use("/user", require("./routes/user"));
 
 server.listen(port, () => console.log("server running on :", port));
