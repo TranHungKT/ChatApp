@@ -3,6 +3,9 @@ const router = express.Router();
 const { User } = require("../../../modal/userSchema");
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
+
+const { codeValidate, validateLogin } = require("../../../utils/validator");
+
 router.post("/getCode", (req, res) => {
   const { email } = req.body;
 
@@ -24,6 +27,11 @@ router.post("/getCode", (req, res) => {
 router.post("/", (req, res) => {
   const { email, code } = req.body;
   // remember to check fill in all fields in front end
+  const tempCode = { code };
+  const { valid, errors } = codeValidate(tempCode);
+
+  if (!valid) return res.status(400).json(errors);
+
   User.findOne({ email: email }).then((doc) => {
     if (doc.token == code) {
       return res.status(200).json({ message: "Right code" });
@@ -35,6 +43,13 @@ router.post("/", (req, res) => {
 router.post("/resetPassword", (req, res) => {
   const { password, email } = req.body;
   // Remember to check password and confirm password in front end
+
+  const user = { password, email };
+
+  const { valid, errors } = validateLogin(user);
+
+  if (!valid) return res.status(400).json(errors);
+
   User.findOne({ email: email }).then((doc) => {
     bcrypt.genSalt(saltRounds, (err, salt) => {
       if (err) return res.status(400).json({ message: "Cant hash" });
