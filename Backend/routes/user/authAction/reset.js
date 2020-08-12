@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { User } = require("../../../modal/userSchema");
 const bcrypt = require("bcryptjs");
-const saltRounds = process.env.saltRounds;
+const saltRounds = 10;
 router.post("/getCode", (req, res) => {
   const { email } = req.body;
 

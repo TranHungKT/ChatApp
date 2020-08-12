@@ -1,13 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const jwt = require("jsonwebtoken");
 const { User } = require("../../../modal/userSchema");
-const accessTokenSecret = process.env.accessTokenSecret;
-const bcrypt = require("bcryptjs");
+
+const { validateRegister, codeValidate } = require("../../../utils/validator");
+
 router.post("/", (req, res) => {
   const user = new User(req.body);
-  //Remember to check do every fields are filled in front end
-  var errors = "";
+
+  const { valid, errors } = validateRegister(user);
+  //Check confirm password in front end
+  if (!valid) return res.status(400).json(errors);
+
   User.findOne({ email: user.email })
     .then((doc) => {
       if (doc) {
@@ -33,8 +36,10 @@ router.post("/", (req, res) => {
 
 router.post("/codeConfirm", (req, res) => {
   const { code, email } = req.body;
+  const user = { code, email };
+  const { valid, errors } = codeValidate(user);
 
-  // Remember to check code fill in
+  if (!valid) return res.status(400).json(errors);
   User.findOne({ email: email })
     .then((doc) => {
       if (doc.token == code) {
