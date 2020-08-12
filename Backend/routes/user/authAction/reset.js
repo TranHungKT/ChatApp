@@ -1,10 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const jwt = require("jsonwebtoken");
 const { User } = require("../../../modal/userSchema");
-const accessTokenSecret = process.env.accessTokenSecret;
 const bcrypt = require("bcryptjs");
-
+const saltRounds = process.env.saltRounds;
 router.post("/getCode", (req, res) => {
   const { email } = req.body;
 
@@ -13,7 +11,11 @@ router.post("/getCode", (req, res) => {
       if (!isSend) {
         return res.status(401).json({ message: "Cant send" });
       }
-      g;
+      setTimeout(() => {
+        user.updateOne({ token: undefined }, function (err, doc) {
+          if (err) return res.json({ err });
+        });
+      }, 60000);
       return res.status(200).json({ message: `${doc.token}` });
     });
   });
@@ -34,10 +36,18 @@ router.post("/resetPassword", (req, res) => {
   const { password, email } = req.body;
   // Remember to check password and confirm password in front end
   User.findOne({ email: email }).then((doc) => {
-    doc
-      .updateOne({ password: password })
-      .then(() => res.status(200).json({ message: "Reset password success" }))
-      .catch((err) => console.log(err));
+    bcrypt.genSalt(saltRounds, (err, salt) => {
+      if (err) return res.status(400).json({ message: "Cant hash" });
+      bcrypt.hash(password, salt, function (err, hash) {
+        if (err) return res.status(400).json({ message: "Cant hash" });
+        doc
+          .updateOne({ password: hash })
+          .then(() =>
+            res.status(200).json({ message: "change password succes" })
+          )
+          .catch((err) => console.log(err));
+      });
+    });
   });
 });
 

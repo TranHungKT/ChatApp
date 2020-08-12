@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const saltRounds = 10;
+const saltRounds = process.env.saltRounds;
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-const crypto = require("crypto");
 
 const accessTokenSecret = process.env.accessTokenSecret;
 const emailTransporter = process.env.emailTransporter;
@@ -92,7 +91,7 @@ userSchema.methods.sendEmail = function (mailReceive, cb) {
     from: `${emailTransporter}`,
     to: `${mailReceive}`,
     subject: "Login chat app",
-    text: `Your register code is ${user.token}`,
+    text: `Your code is ${user.token}`,
   };
   transpoter.sendMail(mailOptions, function (err, isSend) {
     if (err) return cb(err);
