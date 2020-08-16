@@ -11,6 +11,12 @@ import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator, BottomTabBar} from 'react-navigation-tabs';
 
 import AuthScreen from './AuthScreen';
-import {} from '@common';
+import {RouteNames} from '@common';
 
-const AuthStack = createStackNavigator({});
+const AuthStack = createStackNavigator({
+  [RouteNames.Auth]: {
+    screen: AuthScreen,
+  },
+});
+
+export default createAppContainer(AuthStack);
