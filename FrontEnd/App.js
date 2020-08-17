@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StatusBar, View, Text} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
+import Router from './src/navigation/index';
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -9,10 +10,6 @@ export default class App extends Component {
     SplashScreen.hide();
   }
   render() {
-    return (
-      <View>
-        <Text>Hello</Text>
-      </View>
-    );
+    return <Router />;
   }
 }
