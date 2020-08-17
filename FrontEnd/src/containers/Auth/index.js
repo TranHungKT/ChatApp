@@ -10,7 +10,7 @@ export default class Auth extends Component {
   render() {
     return (
       <View>
-        <Text> index </Text>
+        <Text> Hello </Text>
       </View>
     );
   }
