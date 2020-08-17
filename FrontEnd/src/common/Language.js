@@ -15,5 +15,11 @@ export default new LocalizedStrings({
       description3:
         'Get to find new friend bla bla bla bla bla bla bla bla bla bla bla bla',
     },
+    title: {
+      your_single_chat: 'Your single chat',
+      your_group_chat: 'Your group chats',
+      your_contact: 'Your contacts',
+      setting: 'Setting',
+    },
   },
 });

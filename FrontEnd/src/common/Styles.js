@@ -1,5 +1,5 @@
 import {Dimensions, Platform} from 'react-native';
-import {getStatusBarHeight} from 'react-native-status-bar-height';
+// import {getStatusBarHeight} from 'react-native-status-bar-height';
 import Device from './Device';
 import {normalizeText} from '@utils/mixins';
 const {height, width} = Dimensions.get('window');
@@ -44,7 +44,7 @@ const Styles = {
     OptimaRegular: 'Optima-Regular',
   },
   specifications: {
-    statusBarHeight: getStatusBarHeight(),
+    // statusBarHeight: getStatusBarHeight(),
     headerHeight: 54,
     bottomNavbarHeight: 50,
 

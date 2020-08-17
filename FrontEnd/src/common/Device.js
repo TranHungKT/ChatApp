@@ -1,10 +1,9 @@
 import {Dimensions, Platform, NativeModules} from 'react-native';
-import {platform} from 'ultils/variables';
 
 const {width, height} = Dimensions.get('window');
 
 const isIphoneX =
-  platform.OS === 'ios' &&
+  Platform.OS === 'ios' &&
   !Platform.isPad &&
   !Platform.isTVOS &&
   (height >= 812 || width >= 812);

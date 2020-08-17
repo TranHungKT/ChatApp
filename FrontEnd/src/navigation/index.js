@@ -13,22 +13,26 @@ import {createBottomTabNavigator, BottomTabBar} from 'react-navigation-tabs';
 import AuthScreen from './AuthScreen';
 import {RouteNames} from '@common';
 
-const createDefaultStackNavigator = (screenObject, customOtions) => {
-  createStackNavigator(screenObject, {});
+import {Header} from '@components';
+
+const defaultHeaderObject = {
+  header: (props) => <Header typeOfTab={props.typeOfTab} />,
 };
 
-const AuthStack = createStackNavigator(
+const createDefaultStackNavigator = (screensObject, customOptions) =>
+  createStackNavigator(screensObject, {
+    defaultNavigationOptions: {...defaultHeaderObject},
+    headerMode: 'screen',
+    ...customOptions,
+  });
+
+const AuthStack = createDefaultStackNavigator(
   {
-    [RouteNames.Auth]: {
-      screen: AuthScreen,
-      navigationOptions: {
-        headerShown: false,
-      },
-    },
+    [RouteNames.Auth]: {screen: AuthScreen},
   },
   {
-    navigationOptions: {
-      headerShown: false,
+    defaultNavigationOptions: {
+      header: (props) => <Header typeOfTab={props.typeOfTab} />,
     },
   },
 );
