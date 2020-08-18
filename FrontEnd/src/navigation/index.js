@@ -28,11 +28,17 @@ const createDefaultStackNavigator = (screensObject, customOptions) =>
 
 const AuthStack = createDefaultStackNavigator(
   {
-    [RouteNames.Auth]: {screen: AuthScreen},
+    [RouteNames.Auth]: {
+      screen: AuthScreen,
+      navigationOptions: ({navigation}) => ({
+        headerMode: 'none',
+        headerShown: false,
+      }),
+    },
   },
   {
     defaultNavigationOptions: {
-      header: (props) => <Header typeOfTab={props.typeOfTab} />,
+      // header: (props) => <Header typeOfTab={props.typeOfTab} />,
     },
   },
 );
