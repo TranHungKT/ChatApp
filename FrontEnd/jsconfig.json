@@ -10,7 +10,8 @@
       "@services": ["services"],
       "@store": ["store"],
       "@utils": ["utils"],
-      "@redux": ["redux"]
+      "@redux": ["redux"],
+      "@svg": ["svg"]
     }
   },
   "exclude": ["node_modules"]
