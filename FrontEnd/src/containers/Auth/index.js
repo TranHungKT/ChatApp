@@ -3,7 +3,7 @@ import {Text, View} from 'react-native';
 import Swiper from 'react-native-swiper';
 import {SwiperHandle} from '@components';
 import {SvgAuth1, SvgAuth2, SvgAuth3} from '@svg';
-import {Language} from '@common';
+import {Language, Styles} from '@common';
 var styles = {
   wrapper: {},
   slide1: {
@@ -26,8 +26,8 @@ var styles = {
   },
   text: {
     color: '#fff',
-    fontSize: 30,
-    fontWeight: 'bold',
+    fontSize: 40,
+    fontFamily: Styles.FontFamily.QuicksandSemiBold,
   },
 };
 
@@ -57,9 +57,6 @@ export default class Auth extends Component {
       <Swiper style={styles.wrapper} showsButtons loop={false}>
         {a}
       </Swiper>
-      // <SwiperHandle svgAuth =  {svgAuth} textDes = {textDes} textTitle = {textTitle} />
-
-      // <Swiper />
     );
   }
 }

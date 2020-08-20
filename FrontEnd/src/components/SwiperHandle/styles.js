@@ -16,6 +16,6 @@ export default StyleSheet.create({
   },
   pagination: {},
   textTitle: {
-    // fontFamily: Styles
+    fontFamily: Styles.FontFamily.QuicksandBold,
   },
 });
