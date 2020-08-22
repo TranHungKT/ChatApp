@@ -2,8 +2,11 @@ import {StyleSheet} from 'react-native';
 import {Color, Styles} from '@common';
 
 export default StyleSheet.create({
+  mainView: {
+    flex: 1,
+  },
   titleView: {
-    flex: 0.15,
+    flex: 0.2,
     alignItems: 'center',
     marginHorizontal: 20,
   },
@@ -22,5 +25,17 @@ export default StyleSheet.create({
     fontFamily: Styles.FontFamily.QuicksandRegular,
     fontSize: Styles.FontSize.big,
     textAlign: 'center',
+  },
+  buttonView: {
+    flex: 0.4,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  buttonShort: {
+    ...Styles.Common.buttonShort,
+  },
+  textButtonShort: {
+    ...Styles.Common.textButtonShort,
   },
 });

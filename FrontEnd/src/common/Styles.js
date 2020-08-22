@@ -1,6 +1,7 @@
 import {Dimensions, Platform} from 'react-native';
 // import {getStatusBarHeight} from 'react-native-status-bar-height';
 import Device from './Device';
+import Color from './Color';
 const {height, width} = Dimensions.get('window');
 
 const Styles = {
@@ -126,6 +127,19 @@ Styles.Common = {
     height: 20,
     margin: 12,
     zIndex: 9999,
+  },
+  buttonShort: {
+    width: (Styles.width * 1.5) / 4,
+    height: 47,
+    backgroundColor: Color.buttonColor,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textButtonShort: {
+    color: Color.textButtonColor,
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 };
 

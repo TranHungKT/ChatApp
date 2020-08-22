@@ -19,4 +19,6 @@ export default {
   },
   //Header
   headerTitleColor: '#4A4A4A',
+  buttonColor: '#A8E490',
+  textButtonColor: '#FFF',
 };

@@ -1,25 +1,22 @@
 import {StyleSheet, Dimensions} from 'react-native';
 import {Color, Styles} from '@common';
-const {height, width} = Dimensions.get('window');
+
 export default StyleSheet.create({
   background: {
-    width: width,
-    height: height,
+    width: Styles.width,
+    height: Styles.height,
   },
   slide: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-  },
-  text: {
-    color: '#fff',
-    fontSize: 40,
-    fontFamily: Styles.FontFamily.QuicksandSemiBold,
-    flex: 0.5,
-    backgroundColor: 'blue',
+    ...Styles.Common.ColumnCenter,
+    flex: 1,
   },
   svg: {
     alignItems: 'center',
     justifyContent: 'center',
+    flex: 0.5,
+  },
+  pagination: {
+    flex: 0.1,
+    ...Styles.Common.ColumnCenter,
   },
 });

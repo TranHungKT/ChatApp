@@ -7,13 +7,13 @@ export default new LocalizedStrings({
     splash: {
       connect_with_friend: 'Connect with friends!',
       description1:
-        'Get to find new friend and group all over the world, bla bla ',
+        'Sed ut perspiciatis unde omnis iste rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae.',
       get_intouch_instantly: 'Get intouch instantly',
       description2:
-        'Easy to find your frined and have a chit chat, bla bla bla',
+        'Eaque ipsa quae abed ut perspiciatis unde omnis iste rem aperiam, eaque ipsa quae ab illo inventore verita.',
       many_platforms_one_chat: 'Many platforms, one chat',
       description3:
-        'Get to find new friend bla bla bla bla bla bla bla bla bla',
+        'Aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae. Isterem aperiam, eaque ab illo.',
     },
     title: {
       your_single_chat: 'Your single chat',
