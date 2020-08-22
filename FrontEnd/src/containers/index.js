@@ -1,3 +1,3 @@
 import Auth from './Auth';
-
-export {Auth};
+import Login from './Login';
+export {Auth, Login};

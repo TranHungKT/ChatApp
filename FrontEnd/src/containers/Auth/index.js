@@ -15,6 +15,7 @@ import styles from './styles';
 
 export default class Auth extends Component {
   render() {
+    const {navigation} = this.props;
     return (
       <ImageBackground source={Images.backgroundAuth} style={styles.background}>
         <Swiper style={styles.wrapper} loop={false} showsPagination={false}>
@@ -33,6 +34,7 @@ export default class Auth extends Component {
               style={{flex: 0.4}}
               textDes={`${Language.splash.description1}`}
               textTitle={`${Language.splash.connect_with_friend}`}
+              navigation={navigation}
             />
           </View>
           <View style={styles.slide}>
@@ -50,6 +52,7 @@ export default class Auth extends Component {
               style={{flex: 0.4}}
               textDes={`${Language.splash.description2}`}
               textTitle={`${Language.splash.get_intouch_instantly}`}
+              navigation={navigation}
             />
           </View>
           <View style={styles.slide}>
@@ -67,6 +70,7 @@ export default class Auth extends Component {
               style={{flex: 0.4}}
               textDes={`${Language.splash.description3}`}
               textTitle={`${Language.splash.many_platforms_one_chat}`}
+              navigation={navigation}
             />
           </View>
         </Swiper>
