@@ -1,5 +1,4 @@
 const express = require("express");
-const { route } = require("./authAction/login");
 const router = express.Router();
 
 router.use(

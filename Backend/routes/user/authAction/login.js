@@ -27,11 +27,14 @@ router.post("/", (req, res) => {
         if (!isMatch) {
           return res.status(401).json({ message: "Password is not match" });
         }
-        let token = jwt.sign(
-          { email: email, password: password },
-          accessTokenSecret
-        );
-        return res.status(200).json({ token });
+        user.generateToken((err, user) => {
+          if (err) return res.status(400).send(err);
+          res.cookie("w_authExp", user.tokenExp);
+          res.cookie("w_auth", user.token).status(200).json({
+            loginSuccess: true,
+            userId: user._id,
+          });
+        });
       });
     })
     .catch((err) => console.log(err));

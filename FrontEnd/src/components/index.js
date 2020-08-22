@@ -1,3 +1,4 @@
 import Header from './Header';
 import SwiperHandle from './SwiperHandle';
-export {Header, SwiperHandle};
+import Button from './Button';
+export {Header, SwiperHandle, Button};
