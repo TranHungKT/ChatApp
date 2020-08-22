@@ -2,20 +2,25 @@ import {StyleSheet} from 'react-native';
 import {Color, Styles} from '@common';
 
 export default StyleSheet.create({
-  slide: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#F2F2F2',
+  titleView: {
+    flex: 0.15,
+    alignItems: 'center',
+    marginHorizontal: 20,
   },
-  imageView: {
-    flex: 0.7,
-  },
-  svg: {
-    width: 297,
-    height: 297,
-  },
-  pagination: {},
   textTitle: {
-    fontFamily: Styles.FontFamily.QuicksandBold,
+    fontFamily: Styles.FontFamily.QuicksandRegular,
+    fontSize: Styles.FontSize.xxbig,
+    fontWeight: 'bold',
+  },
+  desView: {
+    flex: 0.3,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 30,
+  },
+  textDes: {
+    fontFamily: Styles.FontFamily.QuicksandRegular,
+    fontSize: Styles.FontSize.big,
+    textAlign: 'center',
   },
 });

@@ -1,7 +1,6 @@
 import {Dimensions, Platform} from 'react-native';
 // import {getStatusBarHeight} from 'react-native-status-bar-height';
 import Device from './Device';
-import {normalizeText} from '@utils/mixins';
 const {height, width} = Dimensions.get('window');
 
 const Styles = {
@@ -26,6 +25,7 @@ const Styles = {
     tiny: 12,
     medium: 14,
     big: 16,
+    xxbig: 20,
   },
   IconSize: {
     TextInput: 20,

@@ -5,15 +5,15 @@ export default new LocalizedStrings({
     login: 'LOGIN',
     signup: 'SIGN UP',
     splash: {
-      connect_with_friend: 'connect with friends!',
+      connect_with_friend: 'Connect with friends!',
       description1:
-        'Get to find new friend bla bla bla bla bla bla bla bla bla bla bla bla',
-      get_intouch_instantly: 'get intouch instantly',
+        'Get to find new friend and group all over the world, bla bla ',
+      get_intouch_instantly: 'Get intouch instantly',
       description2:
-        'Get to find new friend bla bla bla bla bla bla bla bla bla bla bla bla',
-      many_platforms_one_chat: 'many platforms, one chat',
+        'Easy to find your frined and have a chit chat, bla bla bla',
+      many_platforms_one_chat: 'Many platforms, one chat',
       description3:
-        'Get to find new friend bla bla bla bla bla bla bla bla bla bla bla bla',
+        'Get to find new friend bla bla bla bla bla bla bla bla bla',
     },
     title: {
       your_single_chat: 'Your single chat',

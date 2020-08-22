@@ -7,20 +7,16 @@ import Swiper from 'react-native-swiper';
 
 export default class SwiperHandle extends React.PureComponent {
   render() {
-    const {svgAuth, textDes, textTitle} = this.props;
-    let swiper = svgAuth.map((svg, key) => {
-      textDes.map((text_des, keyDes) => {
-        textTitle.map((text_title, keyTitle) => {
-          <View style={styles.slide}>
-            <View style={styles.imageView}>
-              <svg style={styles.svg} />
-            </View>
-            <View style={styles.pagination} />
-            <View style={styles.textTitle} />
-          </View>;
-        });
-      });
-    });
-    return <Swiper showsButtons></Swiper>;
+    const {textDes, textTitle} = this.props;
+    return (
+      <View style={styles.mainView}>
+        <View style={styles.titleView}>
+          <Text style={styles.textTitle}>{textTitle}</Text>
+        </View>
+        <View style={styles.desView}>
+          <Text style={styles.textDes}>{textDes}</Text>
+        </View>
+      </View>
+    );
   }
 }
