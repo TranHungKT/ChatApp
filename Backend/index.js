@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const bodyParser = require("body-parser");
-
+const cookieParser = require("cookie-parser");
 const io = require("socket.io").listen(server);
 require("dotenv").config();
 const port = 3000;
@@ -16,7 +16,7 @@ initDb;
 //body parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+app.use(cookieParser());
 //io connection
 io.on("connection", (socket) => {
   console.log("New WS connection");

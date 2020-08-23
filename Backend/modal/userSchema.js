@@ -105,6 +105,17 @@ userSchema.methods.sendEmail = function (mailReceive, cb) {
   });
 };
 
+userSchema.statics.findByToken = function (token, cb) {
+  var user = this;
+
+  jwt.verify(token, accessTokenSecret, function (err, decode) {
+    user.findOne({ _id: decode, token: token }, function (err, user) {
+      if (err) return cb(err);
+      cb(null, user);
+    });
+  });
+};
+
 const User = mongoose.model("User", userSchema);
 
 module.exports = { User };
