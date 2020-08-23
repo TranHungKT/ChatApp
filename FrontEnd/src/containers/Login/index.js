@@ -12,7 +12,9 @@ import {Icon, Left, Spinner} from 'native-base';
 const {height: HEIGHT} = Dimensions.get('window');
 const {width: WIDTH} = Dimensions.get('window');
 
-export default class Password extends Component {
+import {connect} from 'react-redux';
+import {getUserData} from '../../redux/actions/userAction';
+class Password extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,21 +26,22 @@ export default class Password extends Component {
   }
   login = (username, password) => () => {
     this.setState({loading: true});
-    return fetch('https://iotserver192.herokuapp.com/login', {
+    console.log('username', username);
+    console.log('password', password);
+    return fetch('http://192.168.1.19:3000/user/auth/login', {
       method: 'POST',
       headers: {'content-type': 'application/json'},
       body: JSON.stringify({
-        user_id: `${username}`,
+        email: `${username}`,
         password: `${password}`,
       }),
     })
       .then((response) => {
-        if (response.status == 200) {
-          this.setState({loading: false});
-          this.props.navigation.navigate('HomeContainer');
-        } else {
-          this.setState({err: 'Mời bạn nhập lại thông tin', loading: false});
-        }
+        // if (response.status == 200) {
+        //   console.log(response);
+        //   this.props.getUserData();
+        // }
+        console.log(response);
       })
       .catch((err) => console.log(err));
   };
@@ -150,3 +153,13 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
+
+const mapStateToProps = (state) => ({
+  userReducer: state.userReducer,
+});
+
+const mapActionToProps = {
+  getUserData,
+};
+
+export default connect(mapStateToProps, mapActionToProps)(Password);
