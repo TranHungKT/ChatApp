@@ -18,20 +18,26 @@ export const login = (email, password) => (dispatch) => {
   });
 };
 
-export const getUserData = () => (dispatch) => {
-  return fetch('http://localhost:3000/user/action/auth', {
+export const getUserData = (cookie) => (dispatch) => {
+  return fetch('http://192.168.1.19:3000/user/action/auth', {
     method: 'GET',
     headers: {
-      'content-type': 'application/json',
-      cookie: cookie,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Cookie: cookie,
     },
   })
     .then((response) => {
       if (response.status == 200) {
-        return dispatch({
-          type: LOAD_DATA,
-          payload: response.body,
-        });
+        return response
+          .json()
+          .then((data) => {
+            return dispatch({
+              type: LOAD_DATA,
+              payload: data,
+            });
+          })
+          .catch((err) => console.log(err));
       }
     })
     .catch((err) => console.log(err));

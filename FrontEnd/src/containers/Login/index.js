@@ -18,8 +18,8 @@ class Password extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      username: 'tranhung26122612@email.com',
+      password: 'tuntun',
       press: false,
       loading: false,
     };
@@ -37,11 +37,11 @@ class Password extends Component {
       }),
     })
       .then((response) => {
-        // if (response.status == 200) {
-        //   console.log(response);
-        //   this.props.getUserData();
-        // }
-        console.log(response);
+        if (response.status == 200) {
+          // console.log(response);
+          let cookie = response.headers.get('set-cookie');
+          this.props.getUserData(cookie);
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -58,7 +58,7 @@ class Password extends Component {
         </View>
         <View style={styles.input}>
           <Left style={{flex: 0}}>
-            <Icon name="ios-contact" style={{fontSize: 32, marginLeft: 5}} />
+            <Icon name="add" style={{fontSize: 32, marginLeft: 5}} />
           </Left>
           <TextInput
             placeholder="username"
@@ -68,7 +68,7 @@ class Password extends Component {
         </View>
         <View style={styles.input}>
           <Left style={{flex: 0}}>
-            <Icon name="ios-lock" style={{fontSize: 32, marginLeft: 5}} />
+            <Icon name="add-circle" style={{fontSize: 32, marginLeft: 5}} />
           </Left>
           <TextInput
             placeholder="password"
