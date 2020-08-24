@@ -5,6 +5,10 @@ import _Pagination1 from './Auth/Pagination1';
 import _Pagination2 from './Auth/Pagination2';
 import _Pagination3 from './Auth/Pagination3';
 import _Logo from './Auth/Logo';
+import _Facebook from './Login/Facebook';
+import _Twitter from './Login/Twitter';
+import _Google from './Login/Google';
+
 export const SvgAuth1 = _SvgAuth1;
 export const SvgAuth2 = _SvgAuth2;
 export const SvgAuth3 = _SvgAuth3;
@@ -12,3 +16,6 @@ export const Pagination1 = _Pagination1;
 export const Pagination2 = _Pagination2;
 export const Pagination3 = _Pagination3;
 export const Logo = _Logo;
+export const Facebook = _Facebook;
+export const Twitter = _Twitter;
+export const Google = _Google;

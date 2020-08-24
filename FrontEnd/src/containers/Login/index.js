@@ -6,15 +6,16 @@ import {
   TextInput,
   Dimensions,
   TouchableOpacity,
+  Switch,
+  KeyboardAvoidingView,
 } from 'react-native';
-import {Icon, Left, Spinner} from 'native-base';
 
-const {height: HEIGHT} = Dimensions.get('window');
-const {width: WIDTH} = Dimensions.get('window');
-
+import {Input, Button, LoginWithFTG} from '@components';
+import styles from './styles';
+import {Language} from '@common';
 import {connect} from 'react-redux';
 import {getUserData} from '../../redux/actions/userAction';
-class Password extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,6 +23,7 @@ class Password extends Component {
       password: 'tuntun',
       press: false,
       loading: false,
+      remember: true,
     };
   }
   login = (username, password) => () => {
@@ -45,114 +47,51 @@ class Password extends Component {
       })
       .catch((err) => console.log(err));
   };
-  hidePassword = () => {
-    this.setState((prevState) => ({press: !prevState.press}));
+  toggleRemmeber = () => {
+    this.setState((prevState) => ({remember: !prevState.remember}));
   };
 
   render() {
     const {username, password} = this.state;
     return (
-      <View style={{flex: 1, backgroundColor: '#74BFE4'}}>
-        <View style={styles.title}>
-          <Text style={styles.loginTitle}>Login</Text>
+      <KeyboardAvoidingView
+        style={styles.mainView}
+        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
+        <View style={styles.inputView}>
+          <Input text={'Email'} placeholder={'your.name@email.com'} />
+          <Input text={'Password'} />
+          <View style={styles.remmemberView}>
+            <Text style={styles.text}>{Language.login.remmeber_me}</Text>
+            <Switch
+              trackColor={{false: '#767577', true: '#6DCAF3'}}
+              thumbColor={'#f4f3f4'}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={this.toggleRemmeber}
+              value={this.state.remember}
+              style={styles.switch}
+            />
+          </View>
         </View>
-        <View style={styles.input}>
-          <Left style={{flex: 0}}>
-            <Icon name="add" style={{fontSize: 32, marginLeft: 5}} />
-          </Left>
-          <TextInput
-            placeholder="username"
-            onChangeText={(username) => this.setState({username})}
-            value={this.state.username}
-            style={{width: WIDTH}}></TextInput>
+        <View style={styles.buttonView}>
+          <Button
+            styleButton={styles.button}
+            title={Language.login.login}></Button>
         </View>
-        <View style={styles.input}>
-          <Left style={{flex: 0}}>
-            <Icon name="add-circle" style={{fontSize: 32, marginLeft: 5}} />
-          </Left>
-          <TextInput
-            placeholder="password"
-            onChangeText={(password) => this.setState({password})}
-            value={this.state.password}
-            secureTextEntry={true}
-            style={{width: WIDTH}}></TextInput>
+        <View style={styles.FTGview}>
+          <LoginWithFTG text={Language.login.login_with_another_api} />
         </View>
-        <Text
-          style={{
-            color: 'red',
-            alignSelf: 'center',
-            marginTop: 10,
-          }}>
-          {this.state.err}
-        </Text>
-        <TouchableOpacity
-          style={styles.loginButton}
-          onPress={this.login(username, password)}>
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableOpacity>
-        <View style={{flex: 0.1}}>
-          {this.state.loading == true ? <Spinner color="red" /> : null}
+        <View style={styles.signupView}>
+          <Text style={[styles.text, {textAlign: 'center'}]}>
+            {Language.login.not_registered}
+          </Text>
+          <Text style={[styles.text, {textAlign: 'center', color: '#0000FF'}]}>
+            {Language.login.signup}
+          </Text>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  title: {
-    flex: 0.4,
-    alignContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
-    justifyContent: 'center',
-  },
-  loginTitle: {
-    color: 'white',
-    fontSize: 36,
-    fontWeight: 'bold',
-    lineHeight: 40,
-    textAlign: 'center',
-    fontFamily: 'sans-serif',
-    textShadowRadius: 10,
-    textShadowOffset: {width: 2, height: 2},
-    textTransform: 'uppercase',
-    textAlignVertical: 'top',
-  },
-  text: {
-    color: 'white',
-  },
-  input: {
-    flexDirection: 'row',
-    backgroundColor: '#E2EAE6',
-    borderRadius: 25,
-    height: 50,
-    marginHorizontal: 15,
-    marginTop: 20,
-  },
-  loginButton: {
-    position: 'absolute',
-    top: HEIGHT - 300,
-    width: WIDTH - 155,
-    left: 155 / 2,
-    height: 55,
-    borderRadius: 55,
-    backgroundColor: '#E2EAE6',
-  },
-  loginText: {
-    alignSelf: 'center',
-    fontSize: 26,
-    color: 'blue',
-  },
-  register: {
-    position: 'absolute',
-    top: HEIGHT - 100,
-    alignSelf: 'center',
-    flexDirection: 'row',
-  },
-  registerText: {
-    color: 'white',
-  },
-});
 
 const mapStateToProps = (state) => ({
   userReducer: state.userReducer,
@@ -162,4 +101,4 @@ const mapActionToProps = {
   getUserData,
 };
 
-export default connect(mapStateToProps, mapActionToProps)(Password);
+export default connect(mapStateToProps, mapActionToProps)(Login);

@@ -2,8 +2,16 @@ import LocalizedStrings from 'react-native-localization';
 
 export default new LocalizedStrings({
   en: {
-    login: 'LOGIN',
-    signup: 'SIGN UP',
+    login: {
+      login: 'LOGIN',
+      remmeber_me: 'Remember me',
+      login_with_another_api: 'You can also login with …',
+      not_registered: 'Not registered yet?',
+      signup: ' Sign up!',
+    },
+    signup: {
+      signup: 'SIGN UP',
+    },
     splash: {
       connect_with_friend: 'Connect with friends!',
       description1:

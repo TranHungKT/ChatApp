@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {RouteNames} from '@common';
+import {RouteNames, Language} from '@common';
 import styles from './styles';
-
-import Swiper from 'react-native-swiper';
 
 export default class SwiperHandle extends React.PureComponent {
   render() {
@@ -18,12 +16,12 @@ export default class SwiperHandle extends React.PureComponent {
         </View>
         <View style={styles.buttonView}>
           <ButtonComponents
-            title={'Sign up'}
+            title={Language.signup.signup}
             navigation={navigation}
             to={`${RouteNames.SignUp}`}
           />
           <ButtonComponents
-            title={'Login'}
+            title={Language.login.login}
             navigation={navigation}
             to={`${RouteNames.Login}`}
           />

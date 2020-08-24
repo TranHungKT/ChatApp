@@ -19,7 +19,11 @@ export default class HeaderAuth extends React.PureComponent {
   render() {
     return (
       <View style={styles.logo}>
-        <Logo height={Styles.height / 10} width={Styles.width / 5} />
+        <Logo
+          height={Styles.height / 10}
+          width={Styles.width / 5}
+          style={{marginTop: 20, marginBottom: 20}}
+        />
       </View>
     );
   }
