@@ -141,6 +141,11 @@ Styles.Common = {
     fontSize: 18,
     fontWeight: 'bold',
   },
+  textCommon: {
+    fontSize: 16,
+    fontFamily: 'Quicksand-Regular',
+    color: '#4A4A4A',
+  },
 };
 
 export default Styles;

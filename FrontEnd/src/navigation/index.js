@@ -14,7 +14,7 @@ import AuthScreen from './AuthScreen';
 import LoginScreen from './LoginScreen';
 import {RouteNames} from '@common';
 
-import {Header} from '@components';
+import {HeaderAuth} from '@components';
 
 const defaultHeaderObject = {
   header: (props) => <Header typeOfTab={props.typeOfTab} />,
@@ -31,6 +31,9 @@ const AuthStack = createDefaultStackNavigator(
   {
     [RouteNames.Auth]: {
       screen: AuthScreen,
+      navigationOptions: {
+        headerShown: false,
+      },
     },
     [RouteNames.Login]: {
       screen: LoginScreen,
@@ -38,7 +41,7 @@ const AuthStack = createDefaultStackNavigator(
   },
   {
     defaultNavigationOptions: {
-      headerShown: false,
+      header: () => <HeaderAuth />,
     },
   },
 );
