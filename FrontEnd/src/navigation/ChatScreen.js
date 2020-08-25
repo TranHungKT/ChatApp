@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Auth} from '@containers';
+import {Chat} from '@containers';
 
 export default class ChatScreen extends Component {
   render() {
-    return <ChatScreen navigation={this.props.navigation} />;
+    return <Chat navigation={this.props.navigation} />;
   }
 }

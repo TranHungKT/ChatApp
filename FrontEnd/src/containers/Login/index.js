@@ -12,15 +12,15 @@ import {
 
 import {Input, Button, LoginWithFTG} from '@components';
 import styles from './styles';
-import {Language} from '@common';
+import {Language, RouteNames} from '@common';
 import {connect} from 'react-redux';
 import {getUserData} from '../../redux/actions/userAction';
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
+      email: 'tranhung26122612@email.com',
+      password: 'tuntun',
       press: false,
       loading: false,
       remember: true,
@@ -33,8 +33,6 @@ class Login extends Component {
   }
   login = (email, password) => {
     this.setState({loading: true});
-    console.log('email', email);
-    console.log('password', password);
     return fetch('http://192.168.1.19:3000/user/auth/login', {
       method: 'POST',
       headers: {'content-type': 'application/json'},
@@ -45,9 +43,9 @@ class Login extends Component {
     })
       .then((response) => {
         if (response.status == 200) {
-          // console.log(response);
           let cookie = response.headers.get('set-cookie');
           this.props.getUserData(cookie);
+          this.props.navigation.navigate(RouteNames.Chat);
         }
       })
       .catch((err) => console.log(err));
@@ -58,6 +56,7 @@ class Login extends Component {
 
   render() {
     const {email, password} = this.state;
+    // console.log(this.props.navigation);
     return (
       <KeyboardAvoidingView
         style={styles.mainView}
@@ -95,7 +94,12 @@ class Login extends Component {
           <Button
             styleButton={styles.button}
             title={Language.login.login}
-            onPress={() => this.login(email, password)}></Button>
+            onPress={() => this.login(email, password)}
+            navigation={this.props.navigation}></Button>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate(RouteNames.Chat)}>
+            <Text>hello</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.FTGview}>
           <LoginWithFTG text={Language.login.login_with_another_api} />
