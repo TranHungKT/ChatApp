@@ -96,10 +96,6 @@ class Login extends Component {
             title={Language.login.login}
             onPress={() => this.login(email, password)}
             navigation={this.props.navigation}></Button>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate(RouteNames.Chat)}>
-            <Text>hello</Text>
-          </TouchableOpacity>
         </View>
         <View style={styles.FTGview}>
           <LoginWithFTG text={Language.login.login_with_another_api} />
