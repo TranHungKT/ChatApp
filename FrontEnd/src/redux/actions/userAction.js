@@ -32,6 +32,7 @@ export const getUserData = (cookie) => (dispatch) => {
         return response
           .json()
           .then((data) => {
+            console.log(data);
             return dispatch({
               type: LOAD_DATA,
               payload: data,

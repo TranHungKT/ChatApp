@@ -12,6 +12,7 @@ import {createBottomTabNavigator, BottomTabBar} from 'react-navigation-tabs';
 
 import AuthScreen from './AuthScreen';
 import LoginScreen from './LoginScreen';
+import ChatScreen from './ChatScreen';
 import {RouteNames} from '@common';
 
 import {HeaderAuth} from '@components';
@@ -37,6 +38,9 @@ const AuthStack = createDefaultStackNavigator(
     },
     [RouteNames.Login]: {
       screen: LoginScreen,
+    },
+    [RouteNames.Chat]: {
+      screen: ChatScreen,
     },
   },
   {

@@ -19,22 +19,27 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'tranhung26122612@email.com',
-      password: 'tuntun',
+      email: '',
+      password: '',
       press: false,
       loading: false,
       remember: true,
     };
+    this.oneEmailEditHandle = (email) => this.setState({email});
+    this.onPasswordEditHandle = (password) => this.setState({password});
+    this.focusPassword = () => {
+      this.password && this.password.focus();
+    };
   }
-  login = (username, password) => () => {
+  login = (email, password) => {
     this.setState({loading: true});
-    console.log('username', username);
+    console.log('email', email);
     console.log('password', password);
     return fetch('http://192.168.1.19:3000/user/auth/login', {
       method: 'POST',
       headers: {'content-type': 'application/json'},
       body: JSON.stringify({
-        email: `${username}`,
+        email: `${email}`,
         password: `${password}`,
       }),
     })
@@ -52,14 +57,28 @@ class Login extends Component {
   };
 
   render() {
-    const {username, password} = this.state;
+    const {email, password} = this.state;
     return (
       <KeyboardAvoidingView
         style={styles.mainView}
         behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
         <View style={styles.inputView}>
-          <Input text={'Email'} placeholder={'your.name@email.com'} />
-          <Input text={'Password'} />
+          <Input
+            text={'Email'}
+            ref={(comp) => (this.email = comp)}
+            placeholder={'your.name@email.com'}
+            onChangeText={this.oneEmailEditHandle}
+            onSubmitEditing={this.focusPassword}
+            keyboardType="email-address"
+            returnKeyType="next"
+            value={email}
+          />
+          <Input
+            text={'Password'}
+            ref={(comp) => (this.password = comp)}
+            onChangeText={this.onPasswordEditHandle}
+            value={password}
+          />
           <View style={styles.remmemberView}>
             <Text style={styles.text}>{Language.login.remmeber_me}</Text>
             <Switch
@@ -75,7 +94,8 @@ class Login extends Component {
         <View style={styles.buttonView}>
           <Button
             styleButton={styles.button}
-            title={Language.login.login}></Button>
+            title={Language.login.login}
+            onPress={() => this.login(email, password)}></Button>
         </View>
         <View style={styles.FTGview}>
           <LoginWithFTG text={Language.login.login_with_another_api} />

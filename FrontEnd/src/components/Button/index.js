@@ -10,7 +10,7 @@ const ShortButton = (props) => {
   return (
     <TouchableOpacity
       style={[styles.buttonShort, props.styleButton]}
-      onPress={() => props.navigate()}>
+      onPress={props.onPress}>
       <Text style={styles.textButtonShort}>{props.title}</Text>
     </TouchableOpacity>
   );

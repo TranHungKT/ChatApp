@@ -1,15 +1,12 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import {Styles} from '@common';
-const Input = (props) => {
-  return <StandartTextInput {...props} />;
-};
-
-const StandartTextInput = (props) => {
+const Input = React.forwardRef((props, ref) => {
   return (
     <View>
       <Text style={styles.text}>{props.text}</Text>
       <TextInput
+        ref={ref}
         style={[styles.textInput, props.inputStyle]}
         placeholderTextColor="#7C7777"
         placeholderStyle={styles.placeHolder}
@@ -18,7 +15,7 @@ const StandartTextInput = (props) => {
       />
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   textInput: {
