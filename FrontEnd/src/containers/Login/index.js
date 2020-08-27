@@ -19,8 +19,8 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'tranhung26122612@email.com',
-      password: 'tuntun',
+      email: 'tranhung@gmail.com',
+      password: '123456',
       press: false,
       loading: false,
       remember: true,
@@ -113,9 +113,7 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  userReducer: state.userReducer,
-});
+const mapStateToProps = (state) => ({});
 
 const mapActionToProps = {
   getUserData,

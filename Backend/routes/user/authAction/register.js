@@ -14,8 +14,8 @@ router.post("/", (req, res) => {
   User.findOne({ email: user.email })
     .then((doc) => {
       if (doc) {
-        errors = "Your email is registerd";
-        return res.status(400).json(errors);
+        // errors = "Your email is registerd";
+        return res.status(400).json({ message: "Your email is registerd" });
       } else {
         user.sendEmail(user.email, (err, isSend) => {
           if (!isSend) {

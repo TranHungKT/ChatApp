@@ -4,6 +4,7 @@ const server = require("http").createServer(app);
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const io = require("socket.io").listen(server);
+const { Chat } = require("./modal/chatSchema");
 require("dotenv").config();
 const port = 3000;
 
@@ -11,7 +12,8 @@ const mongoose = require("mongoose");
 
 //Connect Db
 const initDb = require("./config/initDb");
-initDb;
+
+const connect = initDb;
 
 //body parser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,9 +21,31 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 //io connection
 io.on("connection", (socket) => {
-  console.log("New WS connection");
-
-  socket.emit("message", "Welcome to chat app");
+  socket.on("Input chat message", (msg) => {
+    connect.then((db) => {
+      try {
+        let chat = new Chat({
+          message: msg.chatMessage,
+          sender: msg._id,
+          type: msg.type,
+        });
+        chat
+          .save()
+          .then((doc) => {
+            Chat.find({ _id: doc._id })
+              .populate("sender")
+              .exec()
+              .then((doc) => {
+                return io.emit("Output chat message", doc);
+              })
+              .catch((err) => console.log(err));
+          })
+          .catch((err) => console.log(err));
+      } catch (err) {
+        console.log(err);
+      }
+    });
+  });
 });
 
 // app.use("/", (req, res) => res.send("WELCOME"));

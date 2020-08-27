@@ -48,7 +48,7 @@ exports.validateLogin = (data) => {
 exports.codeValidate = (data) => {
   let errors = {};
 
-  if (isNotFull(data.code)) errors.code = "Must have 6 digits";
+  if (data.code && isNotFull(data.code)) errors.code = "Must have 6 digits";
   return {
     errors,
     valid: Object.keys(errors).length === 0 ? true : false,

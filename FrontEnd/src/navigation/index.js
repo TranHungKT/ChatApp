@@ -41,6 +41,9 @@ const AuthStack = createDefaultStackNavigator(
     },
     [RouteNames.Chat]: {
       screen: ChatScreen,
+      navigationOptions: {
+        headerShown: false,
+      },
     },
   },
   {

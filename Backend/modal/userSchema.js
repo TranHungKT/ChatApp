@@ -30,7 +30,11 @@ const userSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
-  image: String,
+  image: {
+    type: String,
+    default:
+      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y",
+  },
   token: {
     type: String,
   },
