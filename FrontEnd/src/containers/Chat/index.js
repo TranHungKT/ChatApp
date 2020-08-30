@@ -25,7 +25,6 @@ class Chat extends Component {
     this.socket.on('Output chat message', (msg) => {
       this.props.afterPostMessage(msg);
     });
-    console.log(this.props.chatReducer.rooms);
   }
 
   submitChatMessage() {

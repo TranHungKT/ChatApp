@@ -3,4 +3,5 @@ export default {
   Login: 'Login',
   SignUp: 'SignUp',
   Chat: 'Chat',
+  GroupChat: 'GroupChat',
 };
