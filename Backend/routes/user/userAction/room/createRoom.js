@@ -21,19 +21,7 @@ router.post("/", auth, (req, res) => {
           { friendsInRoom: `${mongoose.Types.ObjectId(_idReceiver)}` },
         ],
       })
-        // .and([
-        //   {
-        //     friendsInRoom:
-        //       // mongoose.Types.ObjectId(_idRequest),
-        //       mongoose.Types.ObjectId(_idReceiver),
-        //     friendsInRoom: mongoose.Types.ObjectId(_idRequest),
-        //     // mongoose.Types.ObjectId(_idReceiver),
-        //   },
-        // ])
-        // // .exec()
         .then((room) => {
-          // return res.send(room);
-          console.log(room.length);
           if (room.length == 0) {
             let tempRoom = new Rooms({
               friendsInRoom: [{ _id: _idRequest }, { _id: _idReceiver }],

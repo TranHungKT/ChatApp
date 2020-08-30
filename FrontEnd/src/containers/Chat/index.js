@@ -2,7 +2,11 @@ import React, {Component} from 'react';
 import {TextInput, StyleSheet, Text, View} from 'react-native';
 import io from 'socket.io-client';
 import {connect} from 'react-redux';
-import {getChats, afterPostMessage} from '../../redux/actions/chatAction';
+import {
+  getChats,
+  afterPostMessage,
+  getRooms,
+} from '../../redux/actions/chatAction';
 import moment from 'moment';
 class Chat extends Component {
   constructor(props) {
@@ -14,13 +18,14 @@ class Chat extends Component {
   }
 
   componentDidMount() {
+    console.log('hi');
     let {cookie} = this.props.navigation.state.params;
     this.socket = io('http://192.168.1.19:3000');
-    this.props.getChats(cookie);
+    this.props.getRooms(cookie);
     this.socket.on('Output chat message', (msg) => {
       this.props.afterPostMessage(msg);
     });
-    // console.log(this.state.chatMessage);
+    console.log(this.props.chatReducer.rooms);
   }
 
   submitChatMessage() {
@@ -82,6 +87,7 @@ const mapStateToProps = (state) => ({
 const mapActionToProps = {
   getChats,
   afterPostMessage,
+  getRooms,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Chat);

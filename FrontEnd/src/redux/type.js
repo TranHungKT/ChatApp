@@ -1,6 +1,7 @@
 export const LOGIN = 'LOGIN';
 export const LOADING = 'LOADING';
 export const LOAD_DATA = 'LOAD_DATA';
+export const LOAD_ROOM = 'LOAD_ROOM';
 
 export const USER_SERVER = '/user/action';
 

@@ -53,4 +53,16 @@ const AuthStack = createDefaultStackNavigator(
   },
 );
 
+// const appContainer = createSwitchNavigator({
+//   AuthStack: {
+//     screen: AuthStack,
+//   },
+//   [RouteNames.Chat]: {
+//     screen: ChatScreen,
+//     // navigationOptions: {
+//     //   headerShown: false,
+//     // },
+//   },
+// });
+
 export default createAppContainer(AuthStack);
