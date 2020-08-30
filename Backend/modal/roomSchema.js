@@ -16,6 +16,7 @@ const roomSchema = mongoose.Schema(
       {
         type: Schema.Types.ObjectId,
         ref: "Chats",
+        require: false,
       },
     ],
   },

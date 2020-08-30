@@ -23,4 +23,15 @@ router.use(
   require("./userAction/getUserChats")
 );
 
+router.use(
+  "/createRoom",
+  (req, res, next) => {
+    if (req.method == "DELETE" || req.method == "PUT") {
+      return res.status(400).json({ message: "Method is not allowed" });
+    }
+    next();
+  },
+  require("./userAction/createRoom")
+);
+
 module.exports = router;

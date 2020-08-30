@@ -120,6 +120,14 @@ userSchema.statics.findByToken = function (token, cb) {
   });
 };
 
+userSchema.statics.findById = function (_id, cb) {
+  var user = this;
+
+  user.findOne({ _id: _id }, function (err, user) {
+    if (err) return cb(err);
+    return cb(null, user);
+  });
+};
 const User = mongoose.model("User", userSchema);
 
 module.exports = { User };

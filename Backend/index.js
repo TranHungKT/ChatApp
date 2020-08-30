@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
           .save()
           .then((doc) => {
             Chats.find({ _id: doc._id })
-              .populate("sender", "name")
+              .populate("sender")
               .exec()
               .then((doc) => {
                 return io.emit("Output chat message", doc);
