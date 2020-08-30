@@ -4,22 +4,54 @@ const { Chats } = require("../../../../modal/chatSchema");
 const { User } = require("../../../../modal/userSchema");
 const { Rooms } = require("../../../../modal/roomSchema");
 const { auth } = require("../../../../middleware/auth");
-
+var mongoose = require("mongoose");
 router.post("/", auth, (req, res) => {
   let _idRequest = req.user._id; // After auth we have req.user;
   let _idReceiver = req.body._id;
-  User.findOne({ _id: _idReceiver }).then((user) => {
-    let rooms = new Rooms({
-      friendsInRoom: [{ _id: _idRequest }, { _id: _idReceiver }],
-      name: user.name,
-    });
-    rooms
-      .save()
-      .then((doc) => {
-        res.send(doc);
+
+  console.log(_idRequest);
+  console.log(_idReceiver);
+  User.findOne({ _id: _idReceiver })
+    .then((user) => {
+      if (!user)
+        return res.status(400).send({ message: "Can not find your friend" });
+      Rooms.find({
+        $and: [
+          { friendsInRoom: `${mongoose.Types.ObjectId(_idRequest)}` },
+          { friendsInRoom: `${mongoose.Types.ObjectId(_idReceiver)}` },
+        ],
       })
-      .catch((err) => console.log(err));
-  });
+        // .and([
+        //   {
+        //     friendsInRoom:
+        //       // mongoose.Types.ObjectId(_idRequest),
+        //       mongoose.Types.ObjectId(_idReceiver),
+        //     friendsInRoom: mongoose.Types.ObjectId(_idRequest),
+        //     // mongoose.Types.ObjectId(_idReceiver),
+        //   },
+        // ])
+        // // .exec()
+        .then((room) => {
+          // return res.send(room);
+          console.log(room.length);
+          if (room.length == 0) {
+            let tempRoom = new Rooms({
+              friendsInRoom: [{ _id: _idRequest }, { _id: _idReceiver }],
+              name: user.name + user.lastname,
+            });
+            tempRoom
+              .save()
+              .then((doc) => {
+                res.send(doc);
+              })
+              .catch((err) => console.log(err));
+          } else {
+            res.status(400).send({ message: "This room was created" });
+          }
+        })
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;

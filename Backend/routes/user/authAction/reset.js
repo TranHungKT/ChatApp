@@ -15,7 +15,7 @@ router.post("/getCode", (req, res) => {
         return res.status(401).json({ message: "Cant send" });
       }
       setTimeout(() => {
-        user.updateOne({ token: undefined }, function (err, doc) {
+        doc.updateOne({ token: undefined }, function (err, doc) {
           if (err) return res.json({ err });
         });
       }, 60000);
