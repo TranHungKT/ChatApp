@@ -1,13 +1,13 @@
 import {LOAD_CHAT, LOADING, AFTER_POST_MESSAGE} from '../type';
 
-export const getChats = () => (dispatch) => {
+export const getChats = (cookie) => (dispatch) => {
   // dispatch({type: LOADING})
   return fetch('http://192.168.1.19:3000/user/action/getChats', {
     method: 'GET',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      // Cookie: cookie,
+      Cookie: cookie,
     },
   })
     .then((response) => {
@@ -15,7 +15,6 @@ export const getChats = () => (dispatch) => {
         return response
           .json()
           .then((data) => {
-            console.log(data);
             return dispatch({
               type: LOAD_CHAT,
               payload: data,

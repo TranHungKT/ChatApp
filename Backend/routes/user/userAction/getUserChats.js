@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { Chat } = require("../../../modal/chatSchema");
+const { Chats } = require("../../../modal/chatSchema");
 const { auth } = require("../../../middleware/auth");
 router.get("/", auth, (req, res) => {
-  Chat.find()
-    .populate("sender")
-    .exec()
+  let _id = req.user._id;
+  Chats.find({ sender: _id })
     .then((chats) => {
       res.status(200).send(chats);
     })

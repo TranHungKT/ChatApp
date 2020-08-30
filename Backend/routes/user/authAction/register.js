@@ -31,7 +31,7 @@ router.post("/", (req, res) => {
         });
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => err);
 });
 
 router.post("/codeConfirm", (req, res) => {

@@ -14,8 +14,9 @@ class Chat extends Component {
   }
 
   componentDidMount() {
+    let {cookie} = this.props.navigation.state.params;
     this.socket = io('http://192.168.1.19:3000');
-    this.props.getChats();
+    this.props.getChats(cookie);
     this.socket.on('Output chat message', (msg) => {
       this.props.afterPostMessage(msg);
     });
@@ -23,10 +24,11 @@ class Chat extends Component {
   }
 
   submitChatMessage() {
-    let {_id, name, lastname, image} = this.props.userReducer;
+    let {_id, name, lastname, image} = this.props.userReducer.userData;
     let {chatMessage} = this.state;
     let type = 'image';
     let nowTime = moment();
+    let to = '5f4711dafafd5608e477c735';
     this.socket.emit('Input chat message', {
       _id,
       name,
@@ -35,6 +37,7 @@ class Chat extends Component {
       chatMessage,
       type,
       nowTime,
+      to,
     });
     this.setState({chatMessage: ''});
   }

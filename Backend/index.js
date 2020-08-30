@@ -4,7 +4,7 @@ const server = require("http").createServer(app);
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const io = require("socket.io").listen(server);
-const { Chat } = require("./modal/chatSchema");
+const { Chats } = require("./modal/chatSchema");
 require("dotenv").config();
 const port = 3000;
 
@@ -24,7 +24,7 @@ io.on("connection", (socket) => {
   socket.on("Input chat message", (msg) => {
     connect.then((db) => {
       try {
-        let chat = new Chat({
+        let chat = new Chats({
           message: msg.chatMessage,
           sender: msg._id,
           type: msg.type,
@@ -32,8 +32,8 @@ io.on("connection", (socket) => {
         chat
           .save()
           .then((doc) => {
-            Chat.find({ _id: doc._id })
-              .populate("sender")
+            Chats.find({ _id: doc._id })
+              .populate("sender", "name")
               .exec()
               .then((doc) => {
                 return io.emit("Output chat message", doc);

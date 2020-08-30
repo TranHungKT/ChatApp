@@ -45,7 +45,9 @@ class Login extends Component {
         if (response.status == 200) {
           let cookie = response.headers.get('set-cookie');
           this.props.getUserData(cookie);
-          this.props.navigation.navigate(RouteNames.Chat);
+          this.props.navigation.navigate(RouteNames.Chat, {
+            cookie: cookie,
+          });
         }
       })
       .catch((err) => console.log(err));
