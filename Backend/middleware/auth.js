@@ -10,7 +10,14 @@ let auth = (req, res, next) => {
         isAuth: false,
         error: true,
       });
-
+    console.log(user);
+    if (user.role !== 1) {
+      return res.json({
+        isAuth: false,
+        error: true,
+        role: "Ront role",
+      });
+    }
     req.token = token;
     req.user = user;
     next();

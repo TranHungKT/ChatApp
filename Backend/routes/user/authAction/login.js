@@ -22,6 +22,13 @@ router.post("/", (req, res) => {
           .status(400)
           .json({ message: "Your email is not registered" });
       }
+      if (user.role !== 1) {
+        return res.json({
+          isAuth: false,
+          error: true,
+          role: "Ront role",
+        });
+      }
       user.comparePassword(password, (err, isMatch) => {
         if (err) return res.status(400).json({ err });
         if (!isMatch) {
