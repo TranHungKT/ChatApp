@@ -25,7 +25,7 @@ router.post("/", auth, (req, res) => {
           if (room.length == 0) {
             let tempRoom = new Rooms({
               friendsInRoom: [{ _id: _idRequest }, { _id: _idReceiver }],
-              name: user.name + user.lastname,
+              name: user.name + " " + user.lastname,
             });
             tempRoom
               .save()
