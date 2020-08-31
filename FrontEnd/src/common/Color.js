@@ -21,4 +21,6 @@ export default {
   headerTitleColor: '#4A4A4A',
   buttonColor: '#A8E490',
   textButtonColor: '#FFF',
+
+  iconColor: '#A8E490',
 };

@@ -16,10 +16,10 @@ import ChatScreen from './ChatScreen';
 import GroupChatScreen from './GroupChatScreen';
 import {RouteNames} from '@common';
 
-import {HeaderAuth} from '@components';
+import {HeaderAuth, Header} from '@components';
 
 const defaultHeaderObject = {
-  header: (props) => <Header typeOfTab={props.typeOfTab} />,
+  header: (props) => <Header type={'group'} />,
 };
 
 const createDefaultStackNavigator = (screensObject, customOptions) =>
@@ -40,11 +40,21 @@ const AuthStack = createDefaultStackNavigator(
     [RouteNames.Login]: {
       screen: LoginScreen,
     },
+  },
+  {
+    defaultNavigationOptions: {
+      header: () => <HeaderAuth />,
+    },
+  },
+);
+
+const AvailableGroupChat = createDefaultStackNavigator(
+  {
     [RouteNames.GroupChat]: {
       screen: GroupChatScreen,
-      navigationOptions: {
-        headerShown: false,
-      },
+      // navigationOptions: {
+      //   headerShown: false,
+      // },
     },
     [RouteNames.Chat]: {
       screen: ChatScreen,
@@ -55,21 +65,24 @@ const AuthStack = createDefaultStackNavigator(
   },
   {
     defaultNavigationOptions: {
-      header: () => <HeaderAuth />,
+      header: () => <Header type={'group'} />,
     },
   },
 );
 
-// const appContainer = createSwitchNavigator({
-//   AuthStack: {
-//     screen: AuthStack,
-//   },
-//   [RouteNames.Chat]: {
-//     screen: ChatScreen,
-//     // navigationOptions: {
-//     //   headerShown: false,
-//     // },
-//   },
-// });
+const appContainer = createDefaultStackNavigator({
+  AuthStack: {
+    screen: AuthStack,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  AvailableGroupChat: {
+    screen: AvailableGroupChat,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+});
 
-export default createAppContainer(AuthStack);
+export default createAppContainer(appContainer);

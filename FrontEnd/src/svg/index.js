@@ -8,6 +8,10 @@ import _Logo from './Auth/Logo';
 import _Facebook from './Login/Facebook';
 import _Twitter from './Login/Twitter';
 import _Google from './Login/Google';
+import _AddGroupIcon from './Header/AddGroupIcon';
+import _NotificationIcon from './Header/NotificationIcon';
+import _InfoIcon from './Header/InfoIcon';
+import _ComposeIcon from './Header/ComposeIcon';
 
 export const SvgAuth1 = _SvgAuth1;
 export const SvgAuth2 = _SvgAuth2;
@@ -19,3 +23,7 @@ export const Logo = _Logo;
 export const Facebook = _Facebook;
 export const Twitter = _Twitter;
 export const Google = _Google;
+export const AddGroupIcon = _AddGroupIcon;
+export const NotificationIcon = _NotificationIcon;
+export const InfoIcon = _InfoIcon;
+export const ComposeIcon = _ComposeIcon;
