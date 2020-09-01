@@ -9,10 +9,11 @@ import {
   Switch,
   KeyboardAvoidingView,
 } from 'react-native';
+import {toast} from '../../common/Setting';
 
 import {Input, Button, LoginWithFTG} from '@components';
 import styles from './styles';
-import {Language, RouteNames} from '@common';
+import {Language, RouteNames, Config} from '@common';
 import {connect} from 'react-redux';
 import {getUserData} from '../../redux/actions/userAction';
 class Login extends Component {
@@ -31,9 +32,10 @@ class Login extends Component {
       this.password && this.password.focus();
     };
   }
+
   login = (email, password) => {
     this.setState({loading: true});
-    return fetch('http://192.168.1.19:3000/user/auth/login', {
+    return fetch(`${Config.server}user/auth/login`, {
       method: 'POST',
       headers: {'content-type': 'application/json'},
       body: JSON.stringify({

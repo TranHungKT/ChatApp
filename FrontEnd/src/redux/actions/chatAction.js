@@ -1,7 +1,8 @@
 import {LOAD_CHAT, LOADING, AFTER_POST_MESSAGE, LOAD_ROOM} from '../type';
+import {Config} from '@common';
 
 export const getRooms = (cookie) => (dispatch) => {
-  return fetch('http://192.168.1.19:3000/user/action/getRoom', {
+  return fetch(`${Config.server}user/action/getRoom`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',
@@ -23,7 +24,7 @@ export const getRooms = (cookie) => (dispatch) => {
 
 export const getChats = (cookie) => (dispatch) => {
   // dispatch({type: LOADING})
-  return fetch('http://192.168.1.19:3000/user/action/getChats', {
+  return fetch(`${Config.server}user/action/getChats`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',

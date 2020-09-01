@@ -20,7 +20,7 @@ class Chat extends Component {
   componentDidMount() {
     console.log('hi');
     let {cookie} = this.props.navigation.state.params;
-    this.socket = io('http://192.168.1.19:3000');
+    this.socket = io('http://192.168.1.5:3000');
     this.props.getRooms(cookie);
     this.socket.on('Output chat message', (msg) => {
       this.props.afterPostMessage(msg);
