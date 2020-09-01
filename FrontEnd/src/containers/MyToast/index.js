@@ -35,7 +35,6 @@ class MyToast extends React.Component {
 
   render() {
     const {toast} = this.props;
-    console.log(toast.list);
     return (
       <View style={styles.container}>{toast.list.map(this.renderToast)}</View>
     );
@@ -43,7 +42,7 @@ class MyToast extends React.Component {
 
   renderToast(msg, index: number) {
     const {removeToast} = this.props;
-    const onPress = () => removeToast(msg.key);
+    const onPress = () => this.props.removeToast(msg.key);
     return (
       <TouchableOpacity key={index} style={styles.textWrap} onPress={onPress}>
         <Text style={styles.text}>{msg.msg}</Text>
@@ -52,10 +51,10 @@ class MyToast extends React.Component {
   }
 
   doToast(msg, duration = 4000) {
-    const {addToast, removeToast} = this.props;
+    // const {addToast, removeToast} = this.props;
     const key = this.nextToastId++; // unique message key
-    addToast(msg, key);
-    Timer.setTimeout(() => removeToast(key), duration);
+    this.props.addToast(msg, key);
+    Timer.setTimeout(() => this.props.removeToast(key), duration);
   }
 }
 

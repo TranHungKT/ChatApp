@@ -5,5 +5,6 @@ import Config from './Config';
 export const EventEmitter = new _EventEmitter();
 export const Timer = _Timer;
 
-export const toast = (msg, duration = 4000) =>
+export const toast = (msg, duration = 4000) => {
   EventEmitter.emit(Config.EmitCode.Toast, msg, duration);
+};

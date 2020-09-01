@@ -5,7 +5,9 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-  switch (action) {
+  const {type, payload} = action;
+  const {list} = state;
+  switch (type) {
     case ADD_TOAST:
       return {
         ...state,

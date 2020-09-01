@@ -34,6 +34,7 @@ class Login extends Component {
   }
 
   login = (email, password) => {
+    toast('Your connection was interupted. Please check it again');
     this.setState({loading: true});
     return fetch(`${Config.server}user/auth/login`, {
       method: 'POST',
