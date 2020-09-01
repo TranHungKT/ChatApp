@@ -1,10 +1,10 @@
 import {LOAD_CHAT, AFTER_POST_MESSAGE, LOAD_ROOM} from '../type';
 
 const initialState = {
-  chats: [],
+  rooms: [{}],
 };
 
-export default function (state = {}, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case LOAD_CHAT:
       return {...state, chats: action.payload};

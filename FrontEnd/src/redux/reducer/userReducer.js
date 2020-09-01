@@ -1,6 +1,10 @@
 import {LOGIN, LOADING, USER_SERVER, LOAD_DATA} from '../type';
 
-export default function (state = {}, action) {
+const initialState = {
+  userData: {},
+};
+
+export default function (state = initialState, action) {
   switch (action.type) {
     case LOAD_DATA:
       return {

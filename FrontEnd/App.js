@@ -4,6 +4,7 @@ import SplashScreen from 'react-native-splash-screen';
 import Router from './src/navigation/index';
 import {Provider} from 'react-redux';
 import store from './src/redux/store';
+import _EventEmitter from 'react-native/Libraries/vendor/emitter/EventEmitter';
 export default class App extends Component {
   constructor(props) {
     super(props);
