@@ -16,6 +16,8 @@ import styles from './styles';
 import {Language, RouteNames, Config} from '@common';
 import {connect} from 'react-redux';
 import {getUserData} from '../../redux/actions/userAction';
+import Network from '@services/Network';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -33,9 +35,12 @@ class Login extends Component {
     };
   }
 
-  login = (email, password) => {
-    toast('Your connection was interupted. Please check it again');
-    this.setState({loading: true});
+  login = async (email, password) => {
+    const netStatus = await Network.checkNetwork();
+    if (!netStatus) {
+      return toast(Language.noConnection);
+    }
+
     return fetch(`${Config.server}user/auth/login`, {
       method: 'POST',
       headers: {'content-type': 'application/json'},
@@ -61,7 +66,7 @@ class Login extends Component {
 
   render() {
     const {email, password} = this.state;
-    // console.log(this.props.navigation);
+
     return (
       <KeyboardAvoidingView
         style={styles.mainView}

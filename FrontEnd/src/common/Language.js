@@ -29,5 +29,7 @@ export default new LocalizedStrings({
       your_contact: 'Your contacts',
       setting: 'Setting',
     },
+    error: 'Error',
+    noConnection: 'Your connect was interupted, please check it again!',
   },
 });

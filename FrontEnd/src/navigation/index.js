@@ -52,9 +52,9 @@ const AvailableGroupChat = createDefaultStackNavigator(
   {
     [RouteNames.GroupChat]: {
       screen: GroupChatScreen,
-      // navigationOptions: {
-      //   headerShown: false,
-      // },
+      navigationOptions: {
+        headerShown: false,
+      },
     },
     [RouteNames.Chat]: {
       screen: ChatScreen,
