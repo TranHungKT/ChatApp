@@ -4,7 +4,13 @@ import {View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Fontisto';
 import styles from './styles';
 import {Language, Color} from '@common';
-import {AddGroupIcon, ComposeIcon, InfoIcon, NotificationIcon} from '@svg';
+import {
+  AddGroupIcon,
+  ComposeIcon,
+  InfoIcon,
+  NotificationIcon,
+  BackIcon,
+} from '@svg';
 
 const Header = (props) => {
   if (props.type === 'group') {
@@ -18,12 +24,6 @@ const Header = (props) => {
   }
 };
 
-const styleIcon = {
-  style1: {
-    fontWeight: 'bold',
-  },
-};
-
 const HeaderGroupChat = (props) => {
   let title =
     props.type === 'group'
@@ -33,14 +33,16 @@ const HeaderGroupChat = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.backButton}>
-        <Icon name={'angle-left'} size={26} color={Color.iconColor} />
+        <BackIcon height={20} width={20} />
       </View>
+      <View style={{flex: 0.1}}></View>
       <View style={styles.title}>
         <Text style={styles.titleText}>{title}</Text>
       </View>
+
       <View style={styles.svgBigView}>
         {/* <View style={styles.svgView}> */}
-        <NotificationIcon />
+        <NotificationIcon style={{marginRight: 10}} />
         <AddGroupIcon />
         {/* </View> */}
       </View>

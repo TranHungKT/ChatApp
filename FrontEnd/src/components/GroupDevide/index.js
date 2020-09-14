@@ -1,20 +1,17 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-
-import Icon from 'react-native-vector-icons/Fontisto';
+import {View, Text} from 'react-native';
 import styles from './styles';
-import {Language, Color} from '@common';
+export default class GroupDevice extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-import {RectButton} from 'react-native-gesture-handler';
-
-const Row = ({item}) => <RectButton style={styles.rectButton}></RectButton>;
-
-class GroupDevice extends React.PureComponent {
   render() {
-    return <Text>Hello</Text>;
+    return (
+      <View style={styles.mainView}>
+        <Text style={styles.text}>{this.props.text}</Text>
+      </View>
+    );
   }
 }
-
-const styles = StyleSheet.create({});
-
-export default GroupDevice;

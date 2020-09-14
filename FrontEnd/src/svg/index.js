@@ -12,7 +12,9 @@ import _AddGroupIcon from './Header/AddGroupIcon';
 import _NotificationIcon from './Header/NotificationIcon';
 import _InfoIcon from './Header/InfoIcon';
 import _ComposeIcon from './Header/ComposeIcon';
-
+import _Search from './Search/Search';
+import _Cursor from './Search/Cursor';
+import _BackIcon from './Header/BackIcon';
 export const SvgAuth1 = _SvgAuth1;
 export const SvgAuth2 = _SvgAuth2;
 export const SvgAuth3 = _SvgAuth3;
@@ -27,3 +29,6 @@ export const AddGroupIcon = _AddGroupIcon;
 export const NotificationIcon = _NotificationIcon;
 export const InfoIcon = _InfoIcon;
 export const ComposeIcon = _ComposeIcon;
+export const Search = _Search;
+export const Cursor = _Cursor;
+export const BackIcon = _BackIcon;

@@ -10,9 +10,12 @@ export default StyleSheet.create({
   },
   backButton: {
     flex: 0.15,
+    marginLeft: Styles.margin.marginLeft,
+    // backgroundColor: 'red',
   },
   title: {
     flex: 0.6,
+    ...Styles.Common.ColumnCenterLeft,
   },
   titleText: {
     fontSize: Styles.FontSize.big,
@@ -24,7 +27,8 @@ export default StyleSheet.create({
   svgBigView: {
     flex: 0.15,
     flexDirection: 'row',
-    ...Styles.Common.RowCenterBetween,
+    marginRight: Styles.margin.marginRight,
+    ...Styles.Common.ColumnCenter,
   },
   svgView: {
     flex: 0.75,

@@ -31,5 +31,10 @@ export default new LocalizedStrings({
     },
     error: 'Error',
     noConnection: 'Your connect was interupted, please check it again!',
+    searchText: 'Search',
+    groupDevice: {
+      recentChat: 'Recent Chats',
+      availableFriends: 'Available Friends',
+    },
   },
 });

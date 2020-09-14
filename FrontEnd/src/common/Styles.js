@@ -60,6 +60,10 @@ const Styles = {
     large: 48,
     xLarge: 64,
   },
+  margin: {
+    marginLeft: 20,
+    marginRight: 20,
+  },
 };
 
 Styles.Common = {

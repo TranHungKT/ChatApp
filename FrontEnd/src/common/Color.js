@@ -23,4 +23,12 @@ export default {
   textButtonColor: '#FFF',
 
   iconColor: '#A8E490',
+  searchBar: {
+    text: '#444444',
+    backgroundColor: '#E7E7E7',
+  },
+  groupDevice: {
+    text: '#4A4A4A',
+    backgroundColor: '#FAFFF2',
+  },
 };
