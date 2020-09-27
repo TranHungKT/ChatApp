@@ -4,14 +4,13 @@ import {Device, Color, Styles} from '@common';
 export default StyleSheet.create({
   container: {
     height: Styles.headerHeight,
-    backgroundColor: Color.backgroundColor,
+    backgroundColor: Color.headerBackgroundColor,
     flexDirection: 'row',
     ...Styles.Common.ColumnCenter,
   },
   backButton: {
     flex: 0.15,
     marginLeft: Styles.margin.marginLeft,
-    // backgroundColor: 'red',
   },
   title: {
     flex: 0.6,

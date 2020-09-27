@@ -5,5 +5,5 @@ export default {
   EmitCode: {
     Toast: 'toast',
   },
-  server: 'http://192.168.1.5:3000/',
+  server: 'http://192.168.1.3:3000/',
 };

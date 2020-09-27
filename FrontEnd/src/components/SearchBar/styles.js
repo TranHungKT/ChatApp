@@ -4,13 +4,12 @@ import {Styles, Color} from '@common';
 export default StyleSheet.create({
   mainView: {
     height: Styles.headerHeight,
-    backgroundColor: Color.backgroundColor,
+    backgroundColor: '#E7E7E7',
     flexDirection: 'row',
     ...Styles.Common.ColumnCenter,
   },
   searchView: {
     flex: 0.15,
-    // backgroundColor: 'red',
     marginLeft: Styles.margin.marginLeft,
   },
   cursorView: {
@@ -21,7 +20,6 @@ export default StyleSheet.create({
   textInputView: {
     flex: 0.75,
     flexDirection: 'row',
-    // backgroundColor: 'red',
     marginRight: Styles.margin.marginRight,
   },
   textInput: {

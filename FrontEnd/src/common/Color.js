@@ -21,6 +21,7 @@ export default {
   headerTitleColor: '#4A4A4A',
   buttonColor: '#A8E490',
   textButtonColor: '#FFF',
+  headerBackgroundColor: '#FFFFFF',
 
   iconColor: '#A8E490',
   searchBar: {
@@ -30,5 +31,12 @@ export default {
   groupDevice: {
     text: '#4A4A4A',
     backgroundColor: '#FAFFF2',
+  },
+  statusComponent: {
+    title: '#1D1D26',
+    lastMessageUnRead: '#3B7ADB',
+    lastMessageRead: '#8E8E92',
+    statusUnread: '#D0021B',
+    statusRead: '#7ED321',
   },
 };

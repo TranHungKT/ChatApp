@@ -33,7 +33,7 @@ const HeaderGroupChat = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.backButton}>
-        <BackIcon height={20} width={20} />
+        <BackIcon height={24} width={24} />
       </View>
       <View style={{flex: 0.1}}></View>
       <View style={styles.title}>

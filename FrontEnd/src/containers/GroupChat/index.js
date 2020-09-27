@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, Text} from 'react-native';
-import {SearchBar, GroupDevice} from '@components';
+import {SearchBar, GroupDevice, ListCommon} from '@components';
 import {Language} from '@common';
 export default class GroupChat extends Component {
   constructor(props) {
@@ -10,9 +10,10 @@ export default class GroupChat extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{backgroundColor: '#FFFFFF'}}>
         <SearchBar />
         <GroupDevice text={Language.groupDevice.recentChat} />
+        <ListCommon />
       </View>
     );
   }
