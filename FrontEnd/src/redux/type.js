@@ -14,3 +14,7 @@ export const LOAD_ROOM = 'LOAD_ROOM';
 //Toast action
 export const ADD_TOAST = 'ADD_TOAST';
 export const REMOVE_TOAST = 'REMOVE_TOAST';
+
+//Room action
+export const GET_ROOM = 'GET_ROOM';
+export const CREATE_ROOM = 'CREATE_ROOM';

@@ -19,7 +19,10 @@ const roomSchema = mongoose.Schema({
   lastMessageId: {
     type: Schema.Types.ObjectId,
     ref: "Chats",
-    require: false,
+    default: "5f47cc6cd7b5001ded9fd7fb",
+  },
+  image: {
+    type: String,
   },
 });
 

@@ -1,8 +1,6 @@
-import {LOAD_CHAT, AFTER_POST_MESSAGE, LOAD_ROOM} from '../type';
+import {LOAD_CHAT, AFTER_POST_MESSAGE} from '../type';
 
-const initialState = {
-  rooms: [{}],
-};
+const initialState = {};
 
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -10,11 +8,6 @@ export default function (state = initialState, action) {
       return {...state, chats: action.payload};
     case AFTER_POST_MESSAGE:
       return {...state, chats: state.chats.concat(action.payload)};
-    case LOAD_ROOM:
-      return {
-        ...state,
-        rooms: action.payload,
-      };
     default:
       return state;
   }

@@ -9,8 +9,6 @@ router.post("/", auth, (req, res) => {
   let _idRequest = req.user._id; // After auth we have req.user;
   let _idReceiver = req.body._id;
 
-  console.log(_idRequest);
-  console.log(_idReceiver);
   User.findOne({ _id: _idReceiver })
     .then((user) => {
       if (!user)
@@ -27,6 +25,7 @@ router.post("/", auth, (req, res) => {
               friendsInRoom: [{ _id: _idRequest }, { _id: _idReceiver }],
               name: user.name + " " + user.lastname,
             });
+            tempRoom.image = user.image;
             tempRoom
               .save()
               .then((doc) => {

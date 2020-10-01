@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import userReducer from './reducer/userReducer';
 import chatReducer from './reducer/chatReducer';
 import toastReducer from './reducer/toastReducer';
+import roomReducer from './reducer/roomReducer';
 const initialState = {};
 
 const middleware = [thunk];
@@ -12,6 +13,7 @@ const reducers = combineReducers({
   userReducer: userReducer,
   chatReducer: chatReducer,
   toastReducer: toastReducer,
+  roomReducer: roomReducer,
 });
 
 const composeEnhancers =
