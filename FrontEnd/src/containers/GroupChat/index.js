@@ -19,14 +19,14 @@ class GroupChat extends Component {
       <View style={{backgroundColor: '#FFFFFF'}}>
         <SearchBar />
         <GroupDevice text={Language.groupDevice.recentChat} />
-        <ListCommon />
+        <ListCommon rooms={this.props.rooms} type={'rooms'} />
       </View>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  room: state.roomReducer,
+  rooms: state.roomReducer,
 });
 const mapActionsToProps = {
   getRooms,

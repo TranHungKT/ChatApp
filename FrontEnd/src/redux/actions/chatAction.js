@@ -1,26 +1,7 @@
 import {LOAD_CHAT, LOADING, AFTER_POST_MESSAGE, LOAD_ROOM} from '../type';
 import {Config} from '@common';
 
-export const getRooms = (cookie) => (dispatch) => {
-  return fetch(`${Config.server}user/action/getRoom`, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Cookie: cookie,
-    },
-  }).then((response) => {
-    return response
-      .json()
-      .then((data) => {
-        return dispatch({
-          type: LOAD_ROOM,
-          payload: data,
-        });
-      })
-      .catch((err) => console.log(err));
-  });
-};
+
 
 export const getChats = (cookie) => (dispatch) => {
   // dispatch({type: LOADING})

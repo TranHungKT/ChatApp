@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
 import styles from './styles';
 import AvatarComponent from '../AvatarComponent';
 import StatusComponent from '../StatusComponent';
@@ -8,15 +8,28 @@ export default class ListRecentChats extends React.PureComponent {
     super(props);
     this.state = {};
   }
-
-  render() {
+  _renderItem = (item) => {
     return (
       <View style={styles.mainView}>
         <View style={styles.avatarView}>
-          <AvatarComponent />
+          <AvatarComponent source={item.item.image} />
         </View>
-        <StatusComponent />
+        <StatusComponent
+          title={item.item.name}
+          lastMessagge={item.item.lastMessagge}
+        />
       </View>
+    );
+  };
+  render() {
+    const {rooms} = this.props;
+    console.log(rooms);
+    return (
+      <FlatList
+        data={rooms.room}
+        renderItem={this._renderItem}
+        keyExtractor={(item) => item._id}
+      />
     );
   }
 }

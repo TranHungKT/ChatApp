@@ -10,7 +10,7 @@ let auth = (req, res, next) => {
         isAuth: false,
         error: true,
       });
-    console.log(user);
+    // console.log(user);
     if (user.role !== 1) {
       return res.json({
         isAuth: false,
