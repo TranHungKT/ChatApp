@@ -7,9 +7,9 @@ const { validateRegister, codeValidate } = require("../../../utils/validator");
 router.post("/", (req, res) => {
   const user = new User(req.body);
 
-  const { valid, errors } = validateRegister(user);
+  // const { valid, errors } = validateRegister(user);
   //Check confirm password in front end
-  if (!valid) return res.status(400).json(errors);
+  // if (!valid) return res.status(400).json(errors);
 
   User.findOne({ email: user.email })
     .then((doc) => {
@@ -17,18 +17,21 @@ router.post("/", (req, res) => {
         // errors = "Your email is registerd";
         return res.status(400).json({ message: "Your email is registerd" });
       } else {
-        user.sendEmail(user.email, (err, isSend) => {
-          if (!isSend) {
-            return res.status(401).json({ message: "Can't sends" });
-          } else {
-            setTimeout(() => {
-              user.updateOne({ token: undefined }, function (err, doc) {
-                if (err) return res.json({ err });
-              });
-            }, 60000);
-            return res.status(200).json({ message: `${user.token}` });
-          }
-        });
+        // user.sendEmail(user.email, (err, isSend) => {
+        //   if (!isSend) {
+        //     return res.status(401).json({ message: "Can't sends" });
+        //   } else {
+        //     setTimeout(() => {
+        //       user.updateOne({ token: undefined }, function (err, doc) {
+        //         if (err) return res.json({ err });
+        //       });
+        //     }, 60000);
+        //     return res.status(200).json({ message: `${user.token}` });
+        user
+          .save()
+          .then()
+          .catch((err) => console.log(err));
+        return res.send("OK");
       }
     })
     .catch((err) => err);

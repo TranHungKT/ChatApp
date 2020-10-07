@@ -64,6 +64,10 @@ const Styles = {
     marginLeft: 20,
     marginRight: 20,
   },
+  avatar: {
+    height: height / 10 - 20,
+    width: height / 10 - 20,
+  },
 };
 
 Styles.Common = {

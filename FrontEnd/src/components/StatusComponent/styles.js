@@ -23,4 +23,14 @@ export default StyleSheet.create({
     textAlign: 'center',
     alignSelf: 'center',
   },
+  text: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: Styles.width - Styles.avatar.width - Styles.margin.marginLeft * 3,
+  },
+  time: {
+    fontSize: Styles.FontSize.medium,
+    fontFamily: Styles.FontFamily.QuicksandMedium,
+    color: Color.statusComponent.lastMessageRead,
+  },
 });

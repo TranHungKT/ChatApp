@@ -9,7 +9,7 @@ router.post("/", auth, (req, res) => {
   let _idRequest = req.user._id; // After auth we have req.user;
   let _idReceiver = req.body._id;
 
-  User.findById({ _id: _idReceiver })
+  User.findOne({ _id: _idReceiver })
     .then((user) => {
       if (!user)
         return res.status(400).send({ message: "Can not find your friend" });
