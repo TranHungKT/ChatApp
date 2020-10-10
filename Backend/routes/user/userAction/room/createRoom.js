@@ -3,6 +3,7 @@ const router = express.Router();
 const { Chats } = require("../../../../modal/chatSchema");
 const { User } = require("../../../../modal/userSchema");
 const { Rooms } = require("../../../../modal/roomSchema");
+const { ChatInRoom } = require("../../../../modal/chatInRoomSchema");
 const { auth } = require("../../../../middleware/auth");
 var mongoose = require("mongoose");
 router.post("/", auth, (req, res) => {
@@ -26,6 +27,15 @@ router.post("/", auth, (req, res) => {
               name: user.name + " " + user.lastname,
             });
             tempRoom.image = user.image;
+            // Create new Chat in room
+            newChatInRoom = new ChatInRoom();
+            newChatInRoom.chats.push(tempRoom.lastMessageId);
+            newChatInRoom
+              .save()
+              .then(() => {})
+              .catch((err) => console.log(err));
+            //------------------------------------------------------
+            tempRoom.chatId = newChatInRoom._id;
             tempRoom
               .save()
               .then((doc) => {

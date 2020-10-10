@@ -33,7 +33,7 @@ const userSchema = mongoose.Schema({
   image: {
     type: String,
     default:
-      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y",
+      "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2190&q=80",
   },
   token: {
     type: String,
