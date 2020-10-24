@@ -7,6 +7,9 @@ import LoginWithFTG from './LoginWithFTG';
 import SearchBar from './SearchBar';
 import GroupDevice from './GroupDevide';
 import ListCommon from './ListCommon';
+import MessageInput from './MessageInput';
+import Message from './Message';
+
 export {
   Header,
   SwiperHandle,
@@ -17,4 +20,6 @@ export {
   SearchBar,
   GroupDevice,
   ListCommon,
+  Message,
+  MessageInput,
 };

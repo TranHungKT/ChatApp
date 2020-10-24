@@ -1,6 +1,8 @@
 import {LOAD_CHAT, AFTER_POST_MESSAGE} from '../type';
 
-const initialState = {};
+const initialState = {
+  chats: [],
+};
 
 export default function (state = initialState, action) {
   switch (action.type) {

@@ -9,6 +9,7 @@ const Styles = {
   height: Platform.OS !== 'ios' ? height : height - 20,
   navBarHeight: Platform.OS !== 'ios' ? height - width : 0,
   headerHeight: Platform.OS === 'ios' ? 40 : 56,
+  messageInputHeight: Platform.OS === 'ios' ? 40 : 56,
 
   thumbnailRatio: 1.2,
 

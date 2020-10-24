@@ -39,4 +39,5 @@ export default {
     statusUnread: '#D0021B',
     statusRead: '#7ED321',
   },
+  inputMessageBackgroundColor: '#FAFFF2',
 };

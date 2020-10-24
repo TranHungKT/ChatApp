@@ -1,8 +1,6 @@
 import {LOAD_CHAT, LOADING, AFTER_POST_MESSAGE, LOAD_ROOM} from '../type';
 import {Config} from '@common';
 
-
-
 export const getChats = (cookie) => (dispatch) => {
   // dispatch({type: LOADING})
   return fetch(`${Config.server}user/action/getChats`, {
@@ -30,7 +28,7 @@ export const getChats = (cookie) => (dispatch) => {
 };
 
 export const afterPostMessage = (data) => (dispatch) => {
-  dispatch({
+  return dispatch({
     type: AFTER_POST_MESSAGE,
     payload: data,
   });

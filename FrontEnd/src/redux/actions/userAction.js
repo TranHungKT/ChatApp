@@ -13,7 +13,7 @@ export const login = (email, password) => (dispatch) => {
     }),
   }).then((response) => {
     if (response.status == 200) {
-      dispatch(getUserData());
+      return dispatch(getUserData());
     }
   });
 };

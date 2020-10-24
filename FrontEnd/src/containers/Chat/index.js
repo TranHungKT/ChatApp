@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import {TextInput, StyleSheet, Text, View} from 'react-native';
-import io from 'socket.io-client';
+import {MessageInput, Message, Header} from '@components';
 import {connect} from 'react-redux';
 import {
   getChats,
   afterPostMessage,
-  getRooms,
+  // getRooms,
 } from '../../redux/actions/chatAction';
+import {Config} from '@common';
+
 import moment from 'moment';
 class Chat extends Component {
   constructor(props) {
@@ -18,53 +20,39 @@ class Chat extends Component {
   }
 
   componentDidMount() {
-    let {cookie} = this.props.navigation.state.params;
-    this.socket = io('http://192.168.1.5:3000');
-    this.props.getRooms(cookie);
-    this.socket.on('Output chat message', (msg) => {
-      this.props.afterPostMessage(msg);
-    });
+    // this.socket.on('Output_chat_message', (msg) => {
+    //   console.log('Out', msg);
+    //   this.props.afterPostMessage(msg);
+    // });
   }
 
   submitChatMessage() {
-    let {_id, name, lastname, image} = this.props.userReducer.userData;
-    let {chatMessage} = this.state;
-    let type = 'image';
-    let nowTime = moment();
-    let to = '5f4711dafafd5608e477c735';
-    this.socket.emit('Input chat message', {
-      _id,
-      name,
-      lastname,
-      image,
-      chatMessage,
-      type,
-      nowTime,
-      to,
-    });
-    this.setState({chatMessage: ''});
+    // let {_id, name, lastname, image} = this.props.userReducer.userData;
+    // let {chatMessage} = this.state;
+    // let type = 'image';
+    // let nowTime = moment();
+    // let to = '5f4711dafafd5608e477c735';
+    // this.socket.emit('Client_send_messages', {
+    //   _id,
+    //   name,
+    //   lastname,
+    //   image,
+    //   chatMessage,
+    //   type,
+    //   nowTime,
+    //   to,
+    // });
+    // this.setState({chatMessage: ''});
   }
 
   render() {
-    const chatMessages =
-      this.props.chatReducer.chats !== undefined &&
-      this.props.chatReducer.chats.map((message) => (
-        <Text key={message._v}>{message.message}</Text>
-      ));
-    // let chatMessages /= <Text>Hello</Text>;
+    const {title} = this.props.navigation.state.params;
 
     return (
       <View style={styles.container}>
-        <TextInput
-          style={{height: 40, borderWidth: 2}}
-          autoCorrect={false}
-          value={this.state.chatMessage}
-          onSubmitEditing={() => this.submitChatMessage()}
-          onChangeText={(chatMessage) => {
-            this.setState({chatMessage});
-          }}
-        />
-        {chatMessages}
+        <Header type={Config.typeOfHeader.chats} title={title} />
+        <Message style={{flex: 0.8, backgroundColor: 'red'}} />
+        <MessageInput style={styles.messInput} />
       </View>
     );
   }
@@ -74,6 +62,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5FCFF',
+  },
+  messInput: {
+    position: 'absolute',
+    bottom: 0,
   },
 });
 
@@ -85,7 +77,7 @@ const mapStateToProps = (state) => ({
 const mapActionToProps = {
   getChats,
   afterPostMessage,
-  getRooms,
+  // getRooms,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Chat);

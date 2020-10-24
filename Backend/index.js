@@ -49,12 +49,37 @@ app.use(cookieParser());
 //   });
 // });
 
-io.on("connection", async (socket) => {
-  let socketObj = new socketHandler();
-  socket.on("Client_send_messages", (inputMessage) => {
-    socketObj.onClientSendMessages(inputMessage, socket);
-  });
-});
+// io.on("connection", async (socket) => {
+//   try {
+//     let socketObj = new socketHandler();
+//     var currentRoom = "asd";
+//     socket.on("Join_room", (room) => {
+//       console.log("JOIN ROOM", room.name);
+//       currentRoom = room.name;
+//       // console.log('cu', currentRoom)
+//       socket.join(currentRoom);
+//     });
+//     socket.on("Client_send_messages", (inputMessage) => {
+//       let { chatMessage, _id, to } = inputMessage;
+//       // console.log("send message");
+//       let newChat = new Chats({
+//         message: chatMessage,
+//         sender: _id,
+//         to: to,
+//       });
+//       io.to(currentRoom).emit("Output_chat_message", newChat);
+
+//       // newChat
+//       //   .save()
+//       //   .then((doc) => {
+
+//       //   })
+//       //   .catch((err) => console.log(err));
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// });
 
 // app.use("/", (req, res) => res.send("WELCOME"));
 app.use("/user", require("./routes/user"));
