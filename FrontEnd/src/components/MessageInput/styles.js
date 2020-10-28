@@ -30,4 +30,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  functionView: {
+    flex: 0.3,
+    flexDirection: 'row',
+  },
 });

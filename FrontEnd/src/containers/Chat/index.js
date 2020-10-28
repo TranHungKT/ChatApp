@@ -26,33 +26,19 @@ class Chat extends Component {
     // });
   }
 
-  submitChatMessage() {
-    // let {_id, name, lastname, image} = this.props.userReducer.userData;
-    // let {chatMessage} = this.state;
-    // let type = 'image';
-    // let nowTime = moment();
-    // let to = '5f4711dafafd5608e477c735';
-    // this.socket.emit('Client_send_messages', {
-    //   _id,
-    //   name,
-    //   lastname,
-    //   image,
-    //   chatMessage,
-    //   type,
-    //   nowTime,
-    //   to,
-    // });
-    // this.setState({chatMessage: ''});
-  }
-
   render() {
-    const {title} = this.props.navigation.state.params;
+    const {title, socket, roomId, userId} = this.props.navigation.state.params;
 
     return (
       <View style={styles.container}>
         <Header type={Config.typeOfHeader.chats} title={title} />
         <Message style={{flex: 0.8, backgroundColor: 'red'}} />
-        <MessageInput style={styles.messInput} />
+        <MessageInput
+          style={styles.messInput}
+          socket={socket}
+          roomId={roomId}
+          userId={userId}
+        />
       </View>
     );
   }
@@ -62,10 +48,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5FCFF',
-  },
-  messInput: {
-    position: 'absolute',
-    bottom: 0,
   },
 });
 

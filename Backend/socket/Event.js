@@ -7,4 +7,5 @@ module.exports = {
   TYPING: "TYPING",
   VERIFY_USER: "VERIFY_USER",
   LOGOUT: "LOGOUT",
+  JOIN_ROOM: "JOIN_ROOM",
 };

@@ -5,6 +5,7 @@ import {Language, Config} from '@common';
 import {getRooms} from '../../redux/actions/roomAction';
 import {connect} from 'react-redux';
 import io from 'socket.io-client';
+
 class GroupChat extends Component {
   constructor(props) {
     super(props);
@@ -19,10 +20,13 @@ class GroupChat extends Component {
   }
 
   initSocket() {
+    const {_id} = this.props.user;
     const socket = io(Config.server);
     socket.on('connect', () => {
       console.log('connected');
     });
+
+    socket.emit(Config.Event.USER_CONNECTED, {_id});
     this.setState({socket});
   }
 
@@ -37,6 +41,7 @@ class GroupChat extends Component {
           type={'rooms'}
           navigation={this.props.navigation}
           socket={socket}
+          userId={this.props.user._id}
         />
       </View>
     );
@@ -45,6 +50,7 @@ class GroupChat extends Component {
 
 const mapStateToProps = (state) => ({
   rooms: state.roomReducer,
+  user: state.userReducer,
 });
 const mapActionsToProps = {
   getRooms,
