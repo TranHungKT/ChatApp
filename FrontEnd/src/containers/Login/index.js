@@ -13,7 +13,7 @@ import {toast} from '../../common/Setting';
 
 import {Input, Button, LoginWithFTG} from '@components';
 import styles from './styles';
-import {Language, RouteNames, Config} from '@common';
+import {Language, RouteNames, Config, Validate} from '@common';
 import {connect} from 'react-redux';
 import {getUserData} from '../../redux/actions/userAction';
 import Network from '@services/Network';
@@ -27,45 +27,83 @@ class Login extends Component {
       press: false,
       loading: false,
       remember: true,
+      errorEmail: '',
+      errorPassword: '',
+      isEnableLoginButton: false,
     };
-    this.oneEmailEditHandle = (email) => this.setState({email});
-    this.onPasswordEditHandle = (password) => this.setState({password});
+    this.oneEmailEditHandle = (email) =>
+      this.setState({email, errorEmail: '', errorPassword: ''});
+    this.onPasswordEditHandle = (password) =>
+      this.setState({password, errorEmail: '', errorPassword: ''});
     this.focusPassword = () => {
       this.password && this.password.focus();
     };
   }
+
+  validateLoginData = () => {
+    const {email, password} = this.state;
+    let isValid = true;
+    let errorEmail = '';
+    let errorPassword = '';
+    if (!email) {
+      errorEmail = Language.login.missEmail;
+      isValid = false;
+    } else if (!Validate.isEmail(email)) {
+      errorEmail = Language.login.loginRontEmail;
+      isValid = false;
+    }
+    if (!password) {
+      errorPassword = Language.login.loginRontPass;
+      isValid = false;
+    }
+    this.setState({errorEmail, errorPassword});
+    return isValid;
+  };
+
+  onLoginPressHandle = () => {
+    const {email, password} = this.state;
+    let isValid = this.validateLoginData();
+    return isValid && this.login(email, password);
+  };
 
   login = async (email, password) => {
     const netStatus = await Network.checkNetwork();
     if (!netStatus) {
       return toast(Language.noConnection);
     }
-
-    return fetch(`${Config.server}user/auth/login`, {
+    const response = await fetch(`${Config.server}user/auth/login`, {
       method: 'POST',
       headers: {'content-type': 'application/json'},
       body: JSON.stringify({
         email: `${email}`,
         password: `${password}`,
       }),
-    })
-      .then((response) => {
-        if (response.status == 200) {
-          let cookie = response.headers.get('set-cookie');
-          this.props.getUserData(cookie);
-          this.props.navigation.navigate(RouteNames.GroupChat, {
-            cookie: cookie,
-          });
-        }
-      })
-      .catch((err) => console.log(err));
+    });
+
+    if (response.status == 200) {
+      let cookie = response.headers.get('set-cookie');
+      this.props.getUserData(cookie);
+      this.props.navigation.navigate(RouteNames.GroupChat, {
+        cookie: cookie,
+      });
+    } else if (response.status == 400) {
+      this.setState({
+        errorEmail: Language.login.loginRontEmail,
+        loading: false,
+      });
+    } else if (response.status == 401) {
+      this.setState({
+        errorPassword: Language.login.loginRontPass,
+        loading: false,
+      });
+    }
   };
   toggleRemmeber = () => {
     this.setState((prevState) => ({remember: !prevState.remember}));
   };
 
   render() {
-    const {email, password} = this.state;
+    const {email, password, errorEmail, errorPassword} = this.state;
 
     return (
       <KeyboardAvoidingView
@@ -82,12 +120,15 @@ class Login extends Component {
             returnKeyType="next"
             value={email}
           />
+          {!!errorEmail && <Text style={styles.error}>{errorEmail}</Text>}
           <Input
             text={'Password'}
             ref={(comp) => (this.password = comp)}
             onChangeText={this.onPasswordEditHandle}
             value={password}
+            onSubmitEditing={this.onLoginPressHandle}
           />
+          {!!errorPassword && <Text style={styles.error}>{errorPassword}</Text>}
           <View style={styles.remmemberView}>
             <Text style={styles.text}>{Language.login.remmeber_me}</Text>
             <Switch
@@ -104,8 +145,9 @@ class Login extends Component {
           <Button
             styleButton={styles.button}
             title={Language.login.login}
-            onPress={() => this.login(email, password)}
-            navigation={this.props.navigation}></Button>
+            onPress={this.onLogi}
+            navigation={this.props.navigation}
+            onPress={this.onLoginPressHandle}></Button>
         </View>
         <View style={styles.FTGview}>
           <LoginWithFTG text={Language.login.login_with_another_api} />
@@ -130,3 +172,17 @@ const mapActionToProps = {
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Login);
+
+//Set error cho Login
+/* 
+Gồm có 2 lỗi, 1 là lỗi email 2 là lỗi login
+Đầu tiên sẽ validate offline theo file validate sau đó set isLoading = false
+Ghi bấm nút login thì isLoading cần phải là false mới có thể load data
+Trong khoảng thời gian load data sẽ hiện lên vòng xoay
+LoginButton chỉ được bật nếu đã điền cả email và password
+
+
+
+
+
+*/

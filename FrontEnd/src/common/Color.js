@@ -40,4 +40,5 @@ export default {
     statusRead: '#7ED321',
   },
   inputMessageBackgroundColor: '#FAFFF2',
+  errorColor: '#FF694B',
 };

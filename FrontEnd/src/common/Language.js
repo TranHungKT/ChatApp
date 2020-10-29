@@ -8,6 +8,10 @@ export default new LocalizedStrings({
       login_with_another_api: 'You can also login with …',
       not_registered: 'Not registered yet?',
       signup: ' Sign up!',
+      loginRontEmail: 'Your email is not registered',
+      loginRontPass: 'Your password is not match',
+      missEmail: 'Please fill your email',
+      missPass: 'Please fill your password',
     },
     signup: {
       signup: 'SIGN UP',

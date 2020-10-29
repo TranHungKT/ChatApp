@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {Styles} from '@common';
+import {Styles, Color} from '@common';
 
 export default StyleSheet.create({
   mainView: {
@@ -34,5 +34,9 @@ export default StyleSheet.create({
     flex: 0.1,
     justifyContent: 'center',
     flexDirection: 'row',
+  },
+  error: {
+    color: Color.errorColor,
+    fontSize: 14,
   },
 });

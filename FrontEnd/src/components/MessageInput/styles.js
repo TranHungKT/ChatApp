@@ -12,15 +12,16 @@ export default StyleSheet.create({
   moreButtonView: {
     flex: 0.1,
     marginLeft: Styles.margin.marginLeft,
-    ...Styles.Common.ColumnCenterLeft,
-    // backgroundColor: 'red',
+    ...Styles.Common.ColumnCenter,
+    // marginHorizontal: Styles.margin.marginLeft
   },
   textInputView: {
-    flex: 0.6,
+    flex: 0.7,
     ...Styles.Common.ColumnCenter,
+    // backgroundColor: 'blue',
   },
   textInput: {
-    width: Styles.width * 0.45,
+    width: Styles.width * 0.55 - 40,
   },
   view: {
     backgroundColor: Color.headerBackgroundColor,
@@ -31,7 +32,11 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   functionView: {
-    flex: 0.3,
+    flex: 0.2,
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginRight: Styles.margin.marginLeft,
+    alignItems: 'center',
+    // backgroundColor: 'red',
   },
 });

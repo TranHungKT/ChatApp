@@ -12,13 +12,21 @@ const {
   TYPING,
   VERIFY_USER,
   LOGOUT,
+  JOIN_ROOM,
 } = require("./Event");
 
-let connectedUser = {};
+let connectedUser = [];
 
 function socketManager(socket) {
   socket.on(USER_CONNECTED, (userId) => {
-    connectedUser = this.addUserConnected(userId);
+    connectedUser = addUserConnected(userId);
+    console.log("connected user", connectedUser);
+  });
+  socket.on(JOIN_ROOM, (roomIds) => {
+    roomIds.forEach((roomId) => {
+      socket.join(roomId);
+      console.log("join room");
+    });
   });
 }
 

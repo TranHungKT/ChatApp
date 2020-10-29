@@ -20,13 +20,19 @@ class GroupChat extends Component {
   }
 
   initSocket() {
-    const {_id} = this.props.user;
+    const {_id} = this.props.user.userData;
+    const rooms = this.props.rooms.room;
     const socket = io(Config.server);
+    let roomIds = [];
     socket.on('connect', () => {
-      console.log('connected');
+      console.log('connected again');
+    });
+    rooms.forEach((room) => {
+      roomIds.push(room._id);
     });
 
-    socket.emit(Config.Event.USER_CONNECTED, {_id});
+    socket.emit(Config.Event.USER_CONNECTED, _id);
+    socket.emit(Config.Event.JOIN_ROOM, roomIds);
     this.setState({socket});
   }
 
