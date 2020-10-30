@@ -13,15 +13,16 @@ class GroupChat extends Component {
       socket: null,
     };
   }
+
   componentDidMount() {
-    let {cookie} = this.props.navigation.state.params;
-    this.props.getRooms(cookie);
     this.initSocket();
   }
 
-  initSocket() {
+  initSocket = async () => {
+    let {cookie} = this.props.navigation.state.params;
+    const getRooms = await this.props.getRooms(cookie);
+    const rooms = getRooms.payload;
     const {_id} = this.props.user.userData;
-    const rooms = this.props.rooms.room;
     const socket = io(Config.server);
     let roomIds = [];
     socket.on('connect', () => {
@@ -31,10 +32,10 @@ class GroupChat extends Component {
       roomIds.push(room._id);
     });
 
-    socket.emit(Config.Event.USER_CONNECTED, _id);
+    socket.emit(Config.Event.USER_CONNECTED, {_id});
     socket.emit(Config.Event.JOIN_ROOM, roomIds);
     this.setState({socket});
-  }
+  };
 
   render() {
     const {socket} = this.state;
