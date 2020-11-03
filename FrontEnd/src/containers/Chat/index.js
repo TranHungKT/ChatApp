@@ -27,16 +27,22 @@ class Chat extends Component {
   }
 
   render() {
-    const {title, socket, roomId, userId} = this.props.navigation.state.params;
+    const {
+      title,
+      socket,
+      roomId,
+      userName,
+      userId,
+    } = this.props.navigation.state.params;
 
     return (
       <View style={styles.container}>
         <Header type={Config.typeOfHeader.chats} title={title} />
-        <Message style={{flex: 0.8, backgroundColor: 'red'}} />
+        <Message socket={socket} />
         <MessageInput
-          style={styles.messInput}
           socket={socket}
           roomId={roomId}
+          userName={userName}
           userId={userId}
         />
       </View>

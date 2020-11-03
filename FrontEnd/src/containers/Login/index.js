@@ -16,7 +16,7 @@ import styles from './styles';
 import {Language, RouteNames, Config, Validate} from '@common';
 import {connect} from 'react-redux';
 import {getUserData} from '../../redux/actions/userAction';
-import {getRooms} from '../../redux/actions/roomAction';
+
 import Network from '@services/Network';
 
 class Login extends Component {
@@ -84,7 +84,6 @@ class Login extends Component {
     if (response.status == 200) {
       let cookie = response.headers.get('set-cookie');
       this.props.getUserData(cookie);
-      this.props.getRooms(cookie);
       this.props.navigation.navigate(RouteNames.GroupChat, {
         cookie: cookie,
       });
@@ -171,7 +170,6 @@ const mapStateToProps = (state) => ({});
 
 const mapActionToProps = {
   getUserData,
-  getRooms,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Login);

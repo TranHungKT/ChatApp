@@ -11,27 +11,66 @@ export default class MessageInput extends Component {
     this.state = {
       message: '',
       height: 0,
+      isTyping: false,
     };
   }
 
   componentDidMount() {
+    console.log(this.props.userId);
     const {socket} = this.props;
     this.initSocket(socket);
   }
 
-  initSocket = (socket) => {
-    socket.on(Config.Event.MESSAGE_RECIEVED, this.addChat);
-  };
+  initSocket = (socket) => {};
+  /*
+   * In this component, userName is sender
+   * onChangeText function will return a onTyping event to server
+   * @param userName {string} // Mean sender like i said
+   * @param roomId {id} get from listcommon chat
+   */
 
   onChangeText = (message) => {
     this.setState({message: message});
+    this.sendTyping();
+  };
+  sendTyping = () => {
+    this.lastUpdateTime = Date.now();
+    if (!this.state.isTyping) {
+      this.setState({isTyping: true});
+      this.emitEventTyping(true);
+      this.startCheckingTyping();
+    }
   };
 
-  /*This function will need  message, sender, and roomId to emit messagesent*/
+  startCheckingTyping = () => {
+    this.typingInterval = setInterval(() => {
+      if (Date.now() - this.lastUpdateTime > 300) {
+        this.setState({isTyping: false});
+        this.stopCheckingTyping();
+      }
+    }, 300);
+  };
+
+  stopCheckingTyping = () => {
+    if (this.typingInterval) {
+      clearInterval(this.typingInterval);
+      this.emitEventTyping(false);
+    }
+  };
+
+  emitEventTyping = (isTyping) => {
+    const {socket, roomId, userName} = this.props;
+    return socket.emit(Config.Event.TYPING, {roomId, userName, isTyping});
+  };
+  /*
+    This function sent message to server
+    @param roomId mean room which will receive the message
+    @param userName mean sender
+    @param message {string}
+  */
   onSentMessage = (message) => {
-    const {socket} = this.props;
-    const {roomId, userId} = this.props;
-    socket.emit(Config.Event.MESSAGE_SENT, {roomId, userId, message});
+    const {socket, roomId, userName, userId} = this.props;
+    socket.emit(Config.Event.MESSAGE_SENT, {roomId, userName, message, userId});
   };
 
   render() {

@@ -4,6 +4,7 @@ import styles from './styles';
 import AvatarComponent from '../AvatarComponent';
 import StatusComponent from '../StatusComponent';
 import {RouteNames, Config} from '@common';
+import {useStore} from 'react-redux';
 
 export default class ListRecentChats extends React.PureComponent {
   constructor(props) {
@@ -11,11 +12,12 @@ export default class ListRecentChats extends React.PureComponent {
     this.state = {};
   }
   navigateToChat = (item) => () => {
-    const {socket, userId} = this.props;
+    const {socket, userName, userId} = this.props;
     this.props.navigation.navigate(RouteNames.Chat, {
       title: item.name,
       socket: socket,
       roomId: item._id,
+      userName: userName,
       userId: userId,
     });
   };

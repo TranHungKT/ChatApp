@@ -21,7 +21,7 @@ class GroupChat extends Component {
   initSocket = async () => {
     let {cookie} = this.props.navigation.state.params;
     const getRooms = await this.props.getRooms(cookie);
-    const rooms = getRooms.payload;
+    let rooms = getRooms.payload;
     const {_id} = this.props.user.userData;
     const socket = io(Config.server);
     let roomIds = [];
@@ -32,13 +32,16 @@ class GroupChat extends Component {
       roomIds.push(room._id);
     });
 
-    socket.emit(Config.Event.USER_CONNECTED, {_id});
+    socket.emit(Config.Event.USER_CONNECTED, _id);
     socket.emit(Config.Event.JOIN_ROOM, roomIds);
     this.setState({socket});
   };
 
   render() {
     const {socket} = this.state;
+
+    const {userData} = this.props.user;
+
     return (
       <View style={{backgroundColor: '#FFFFFF'}}>
         <SearchBar />
@@ -48,7 +51,8 @@ class GroupChat extends Component {
           type={'rooms'}
           navigation={this.props.navigation}
           socket={socket}
-          userId={this.props.user._id}
+          userName={userData.name + ' ' + userData.lastname}
+          userId={userData._id}
         />
       </View>
     );

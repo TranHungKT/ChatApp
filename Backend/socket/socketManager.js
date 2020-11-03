@@ -20,14 +20,16 @@ let connectedUser = [];
 function socketManager(socket) {
   socket.on(USER_CONNECTED, (userId) => {
     connectedUser = addUserConnected(userId);
-    console.log("connected user", connectedUser);
+    // console.log("connected user", connectedUser);
   });
   socket.on(JOIN_ROOM, (roomIds) => {
-    console.log("roomIds", roomIds);
+    // console.log("roomIds", roomIds);
     roomIds.forEach((roomId) => {
       socket.join(roomId);
-      console.log("join room");
     });
+  });
+  socket.on(TYPING, ({ userName, roomId, isTyping }) => {
+    socket.to(roomId).emit(TYPING, { userName, isTyping });
   });
 }
 
