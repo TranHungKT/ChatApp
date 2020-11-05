@@ -17,24 +17,21 @@ export default class Message extends Component {
 
   initSocket = (socket) => {
     socket.on(Config.Event.TYPING, ({userName, isTyping}) => {
-      this.setState({isTyping: true, userIsTyping: userName});
+      this.setState({isTyping: isTyping, userIsTyping: userName});
     });
   };
 
   render() {
     const {isTyping, userIsTyping} = this.state;
-    return (
-      <View style={styles.container}>
-        {isTyping == true ? (
-          <View>
-            <Text style={{color: 'white'}}>{userIsTyping}</Text>
-          </View>
-        ) : (
-          <View>
-            <Text style={{color: 'white'}}>{userIsTyping} stop typing</Text>
-          </View>
-        )}
-      </View>
-    );
+    let annouceTyping =
+      isTyping == true ? (
+        <View style={styles.typingMainView}>
+          <Text style={styles.textIsTyping}>
+            {userIsTyping} is typing messages ...
+          </Text>
+        </View>
+      ) : null;
+
+    return <View style={styles.container}>{annouceTyping}</View>;
   }
 }

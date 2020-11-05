@@ -31,6 +31,7 @@ export default class MessageInput extends Component {
 
   onChangeText = (message) => {
     this.setState({message: message});
+    console.log('message', this.state.message);
     this.sendTyping();
   };
   sendTyping = () => {
@@ -44,7 +45,7 @@ export default class MessageInput extends Component {
 
   startCheckingTyping = () => {
     this.typingInterval = setInterval(() => {
-      if (Date.now() - this.lastUpdateTime > 300) {
+      if (Date.now() - this.lastUpdateTime > 30000) {
         this.setState({isTyping: false});
         this.stopCheckingTyping();
       }
@@ -68,9 +69,15 @@ export default class MessageInput extends Component {
     @param userName mean sender
     @param message {string}
   */
-  onSentMessage = (message) => {
+  onSentMessage = () => {
     const {socket, roomId, userName, userId} = this.props;
-    socket.emit(Config.Event.MESSAGE_SENT, {roomId, userName, message, userId});
+    const message = this.state.message;
+    return socket.emit(Config.Event.MESSAGE_SENT, {
+      roomId,
+      userName,
+      message,
+      userId,
+    });
   };
 
   render() {
@@ -89,8 +96,8 @@ export default class MessageInput extends Component {
           <View style={styles.view}>
             <TextInput
               placeholder="Aa"
-              multiline={true}
-              numberOfLines={10}
+              // multiline={true}
+              // numberOfLines={10}
               onChangeText={this.onChangeText}
               onContentSizeChange={(event) => {
                 this.setState({height: event.nativeEvent.contentSize.height});
@@ -103,12 +110,13 @@ export default class MessageInput extends Component {
               ]}
               autoCorrect={false}
               onSubmitEditing={this.onSentMessage}
+              keyboardType="default"
             />
             <Emoji height={28} width={28} style={{marginRight: 10}} />
           </View>
         </View>
         <View style={styles.functionView}>
-          <Camera height={28} width={28} />
+          <Camera height={28} width={28} onPress={this.onSentMessage} />
           <Voice height={28} width={28} />
         </View>
       </View>
