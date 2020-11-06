@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 import styles from './styles';
 import {Config} from '@common';
-
+import {getChats} from '../../redux/actions/chatAction';
 import {connect} from 'react-redux';
 
 class Message extends Component {
@@ -12,7 +12,6 @@ class Message extends Component {
       isTyping: false,
       userIsTyping: '',
       messageObj: {},
-      chatArray: [],
     };
   }
   componentDidMount() {
@@ -26,31 +25,10 @@ class Message extends Component {
     message need to be format at server
   */
   loadChat = async () => {
-    let tempChat = await this.fetchChat();
-    this.setState({chatArray: tempChat});
+    const {roomId} = this.props;
+    return await this.props.getChats(roomId);
   };
-  fetchChat = async () => {
-    const {chatId} = this.props;
-    let tempChatArray = await fetch(
-      `${Config.server}user/action/getChatsInRoom`,
-      {
-        method: 'POST',
-        headers: {
-          // Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          chatId: chatId,
-        }),
-      },
-    );
-    console.log('tempChatArray', tempChatArray);
-    if (tempChatArray) {
-      return tempChatArray;
-    } else {
-      console.error('Cant fetch chat');
-    }
-  };
+
   initSocket = (socket) => {
     socket.on(Config.Event.TYPING, ({userName, isTyping}) => {
       this.setState({isTyping: isTyping, userIsTyping: userName});
@@ -76,12 +54,14 @@ class Message extends Component {
           </Text>
         </View>
       ) : null;
-    console.log(this.state.chatArray);
+    console.log('temp', this.state.chatArray);
     return <View style={styles.container}>{annouceTyping}</View>;
   }
 }
 
-const mapActionToProps = {};
+const mapActionToProps = {
+  getChats,
+};
 const mapStateToProps = (state) => ({
   user: state.userReducer,
 });

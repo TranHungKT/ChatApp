@@ -16,7 +16,6 @@ export default class MessageInput extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.userId);
     const {socket} = this.props;
     this.initSocket(socket);
   }

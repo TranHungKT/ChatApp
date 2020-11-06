@@ -1,28 +1,29 @@
 import {LOAD_CHAT, LOADING, AFTER_POST_MESSAGE, LOAD_ROOM} from '../type';
 import {Config} from '@common';
 
-export const getChats = (cookie) => (dispatch) => {
-  // dispatch({type: LOADING})
-  return fetch(`${Config.server}user/action/getChats`, {
-    method: 'GET',
+export const getChats = (roomId) => (dispatch) => {
+  console.log('rom', roomId);
+  return fetch(`${Config.server}user/action/getRoom/chatArray`, {
+    method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Cookie: cookie,
     },
+    body: JSON.stringify({
+      roomId: roomId,
+    }),
   })
     .then((response) => {
-      if (response.status == 200) {
-        return response
-          .json()
-          .then((data) => {
-            return dispatch({
-              type: LOAD_CHAT,
-              payload: data,
-            });
-          })
-          .catch((err) => console.log(err));
-      }
+      return response
+        .json()
+        .then((data) => {
+          let chatArr = {data, roomId};
+          return dispatch({
+            type: LOAD_CHAT,
+            payload: chatArr,
+          });
+        })
+        .catch((err) => console.log(err));
     })
     .catch((err) => console.log(err));
 };

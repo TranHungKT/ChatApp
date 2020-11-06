@@ -19,7 +19,6 @@ export default class ListRecentChats extends React.PureComponent {
       roomId: item._id,
       userName: userName,
       userId: userId,
-      chatId: item.chatId,
     });
   };
 

@@ -1,15 +1,15 @@
 mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const chatSchema = mongoose.Schema({
-  chat: {
-    type: Schema.Types.ObjectId,
-    ref: "Chats",
-  },
-});
+const chatSchema = mongoose.Schema({});
 
 const chatInRoomSchema = mongoose.Schema({
-  chats: [chatSchema],
+  chats: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Chats",
+    },
+  ],
 });
 
 const ChatInRoom = mongoose.model("ChatInRoom", chatInRoomSchema);
