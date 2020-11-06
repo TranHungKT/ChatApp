@@ -33,12 +33,13 @@ class Chat extends Component {
       roomId,
       userName,
       userId,
+      chatId,
     } = this.props.navigation.state.params;
 
     return (
       <View style={styles.container}>
         <Header type={Config.typeOfHeader.chats} title={title} />
-        <Message socket={socket} />
+        <Message socket={socket} chatId={chatId} />
         <MessageInput
           socket={socket}
           roomId={roomId}

@@ -32,7 +32,8 @@ function socketManager(socket) {
     socket.to(roomId).emit(TYPING, { userName, isTyping });
   });
   socket.on(MESSAGE_SENT, ({ roomId, userName, message, userId }) => {
-    socket.to(roomId).emit(MESSAGE_SENT, { userName, message, userId });
+    let messageSent = formatMessage({ message, userName, userId });
+    io.to(roomId).emit(MESSAGE_SENT, messageSent);
     const saveChat = saveNewChat(userName, message, roomId);
   });
 }
@@ -59,30 +60,49 @@ async function saveNewChat(userName, message, roomId) {
 async function updateLastMessage(chatId, roomId) {
   const updateLastMess = await Rooms.findOneAndUpdate(
     { _id: roomId },
-    { lastMessageId: chatId },
-    { new: true }
-  );
-  if (updateLastMess) {
-    return addToChatInRoom(updateLastMess.chatId, updateLastMess.lastMessageId);
-  }
-}
-
-async function addToChatInRoom(chatId, lastMessageId) {
-  const addToChatInRoom = await ChatInRoom.findOneAndUpdate(
-    { _id: chatId },
     {
+      lastMessageId: chatId,
       $push: {
-        chats: lastMessageId,
+        chatArray: chatId,
       },
     },
     { new: true }
   );
-  if (addToChatInRoom) {
-    return;
+  if (updateLastMess) {
+    console.log(updateLastMess);
   } else {
-    console.log("Cant add chat");
+    console.error("Cant update mess");
   }
 }
+
+// async function addToChatInRoom(chatId, lastMessageId) {
+//   const addToChatInRoom = await ChatInRoom.findOneAndUpdate(
+//     { _id: chatId },
+//     {
+//       $push: {
+//         chats: lastMessageId,
+//       },
+//     },
+//     { new: true }
+//   );
+//   const addToChatInRoom = await ChatInRoom.find({ _id: chatId });
+
+//   if (addToChatInRoom) {
+//     // addToChatInRoom.chat.push(lastMessageId);
+//     // addToChatInRoom[0].chats.push(lastMessageId);
+//     console.log(addToChatInRoom[0]);
+//   } else {
+//     console.log("Cant add chat");
+//   }
+//   let tempChatInRoom = await ChatInRoom.find({
+//     _id: "5fa4bb6169c71c25c590bf90",
+//   });
+//   // tempChatInRoom.chats.push(lastMessageId.toString());
+
+//   // tempChatInRoom.save().then().catch();
+//   console.log(tempChatInRoom);
+//   return tempChatInRoom;
+// }
 
 function addUserConnected(userId) {
   connectedUser.push(userId);

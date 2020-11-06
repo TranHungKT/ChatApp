@@ -1,3 +1,3 @@
-import More from '../../assets/MessageInput/more.svg';
+import Voice from '../../assets/MessageInput/voice.svg';
 
-export default More;
+export default Voice;

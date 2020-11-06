@@ -13,14 +13,14 @@ router.use(
 );
 
 router.use(
-  "/getChats",
+  "/getChatsInRoom",
   (req, res, next) => {
     if (req.method == "DELETE" || req.method == "PUT") {
       return res.status(400).json({ message: "Method is not allowed" });
     }
     next();
   },
-  require("./userAction/getUserChats")
+  require("./userAction/getChatsInRoom")
 );
 
 router.use(

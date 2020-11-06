@@ -146,7 +146,6 @@ class Login extends Component {
           <Button
             styleButton={styles.button}
             title={Language.login.login}
-            onPress={this.onLogi}
             navigation={this.props.navigation}
             onPress={this.onLoginPressHandle}></Button>
         </View>

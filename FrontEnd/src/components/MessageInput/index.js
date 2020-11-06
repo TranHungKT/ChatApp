@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, TextInput} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import styles from './styles';
 
 import {Emoji, Voice, Camera, More} from '@svg';
@@ -31,7 +31,6 @@ export default class MessageInput extends Component {
 
   onChangeText = (message) => {
     this.setState({message: message});
-    console.log('message', this.state.message);
     this.sendTyping();
   };
   sendTyping = () => {
@@ -45,7 +44,7 @@ export default class MessageInput extends Component {
 
   startCheckingTyping = () => {
     this.typingInterval = setInterval(() => {
-      if (Date.now() - this.lastUpdateTime > 30000) {
+      if (Date.now() - this.lastUpdateTime > 1000) {
         this.setState({isTyping: false});
         this.stopCheckingTyping();
       }
@@ -71,13 +70,14 @@ export default class MessageInput extends Component {
   */
   onSentMessage = () => {
     const {socket, roomId, userName, userId} = this.props;
-    const message = this.state.message;
-    return socket.emit(Config.Event.MESSAGE_SENT, {
+    let message = this.state.message;
+    socket.emit(Config.Event.MESSAGE_SENT, {
       roomId,
       userName,
       message,
       userId,
     });
+    this.setState({message: ''});
   };
 
   render() {
@@ -89,7 +89,9 @@ export default class MessageInput extends Component {
           {height: Math.max(Styles.messageInputHeight, height + 8)},
         ]}>
         <View style={styles.moreButtonView}>
-          <More height={28} width={28} />
+          <TouchableOpacity>
+            <More height={28} width={28} />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.textInputView}>
@@ -111,13 +113,19 @@ export default class MessageInput extends Component {
               autoCorrect={false}
               onSubmitEditing={this.onSentMessage}
               keyboardType="default"
+              value={message}
             />
             <Emoji height={28} width={28} style={{marginRight: 10}} />
           </View>
         </View>
         <View style={styles.functionView}>
-          <Camera height={28} width={28} onPress={this.onSentMessage} />
-          <Voice height={28} width={28} />
+          <TouchableOpacity>
+            <Camera height={28} width={28} />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={this.onSentMessage}>
+            <Voice height={28} width={28} />
+          </TouchableOpacity>
         </View>
       </View>
     );

@@ -11,11 +11,13 @@ const roomSchema = mongoose.Schema({
   name: {
     type: String,
   },
-  chatId: {
-    type: Schema.Types.ObjectId,
-    ref: "ChatInRoom",
-    require: false,
-  },
+  chatArray: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Chats",
+      require: false,
+    },
+  ],
   lastMessageId: {
     type: Schema.Types.ObjectId,
     ref: "Chats",
