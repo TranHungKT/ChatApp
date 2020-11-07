@@ -41,6 +41,7 @@ class GroupChat extends Component {
     const {socket} = this.state;
 
     const {userData} = this.props.user;
+
     return (
       <View style={{backgroundColor: '#FFFFFF'}}>
         <SearchBar />

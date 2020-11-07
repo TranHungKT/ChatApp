@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 import styles from './styles';
 import {Config} from '@common';
-import {getChats} from '../../redux/actions/chatAction';
+import {getChats, afterPostMessage} from '../../redux/actions/chatAction';
 import {connect} from 'react-redux';
-
+import ListMessage from '../ListMessage';
 class Message extends Component {
   constructor(props) {
     super(props);
@@ -12,12 +12,15 @@ class Message extends Component {
       isTyping: false,
       userIsTyping: '',
       messageObj: {},
+      chatArray: [],
     };
   }
   componentDidMount() {
+    this.loadChat();
+  }
+  UNSAFE_componentWillMount() {
     const {socket} = this.props;
     this.initSocket(socket);
-    this.loadChat();
   }
   /*
     username is name of sender
@@ -26,15 +29,23 @@ class Message extends Component {
   */
   loadChat = async () => {
     const {roomId} = this.props;
-    return await this.props.getChats(roomId);
+    const chats = await this.props.getChats(roomId);
+    const tempChatArray = this.props.chats.chats;
+    const temp = tempChatArray.find((element) => element._id == roomId);
+    this.setState({chatArray: temp.chatArray});
   };
 
   initSocket = (socket) => {
+    const {roomId} = this.props;
     socket.on(Config.Event.TYPING, ({userName, isTyping}) => {
       this.setState({isTyping: isTyping, userIsTyping: userName});
     });
-    socket.on(Config.Event.MESSAGE_SENT, (messageSent) => {
+    socket.on(Config.Event.MESSAGE_SENT, ({messageSent}) => {
       this.setState({messageObj: messageSent});
+      const temp = this.props.afterPostMessage(messageSent, roomId);
+      // this.setState({chatArray: temp});
+      let tempChatArray = this.state.chatArray.concat(temp.payload.messageSent);
+      this.setState({chatArray: tempChatArray});
     });
   };
 
@@ -44,7 +55,7 @@ class Message extends Component {
   };
 
   render() {
-    const {isTyping, userIsTyping} = this.state;
+    const {isTyping, userIsTyping, chatArray} = this.state;
     const {userData} = this.props.user;
     let annouceTyping =
       isTyping == true ? (
@@ -54,16 +65,27 @@ class Message extends Component {
           </Text>
         </View>
       ) : null;
-    console.log('temp', this.state.chatArray);
-    return <View style={styles.container}>{annouceTyping}</View>;
+    return (
+      <View style={styles.container}>
+        {annouceTyping}
+        <ListMessage
+          chatArray={chatArray}
+          userId={userData._id}
+          roomId={this.props.roomId}
+          userName={userData.name + ' ' + userData.lastname}
+        />
+      </View>
+    );
   }
 }
 
 const mapActionToProps = {
   getChats,
+  afterPostMessage,
 };
 const mapStateToProps = (state) => ({
   user: state.userReducer,
+  chats: state.chatReducer,
 });
 
 export default connect(mapStateToProps, mapActionToProps)(Message);

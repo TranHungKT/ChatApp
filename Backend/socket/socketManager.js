@@ -33,7 +33,8 @@ function socketManager(socket) {
   });
   socket.on(MESSAGE_SENT, ({ roomId, userName, message, userId }) => {
     let messageSent = formatMessage({ message, userName, userId });
-    io.to(roomId).emit(MESSAGE_SENT, messageSent);
+
+    io.in(roomId).emit(MESSAGE_SENT, { messageSent });
     const saveChat = saveNewChat(userName, message, roomId);
   });
 }
@@ -69,7 +70,6 @@ async function updateLastMessage(chatId, roomId) {
     { new: true }
   );
   if (updateLastMess) {
-    console.log(updateLastMess);
   } else {
     console.error("Cant update mess");
   }

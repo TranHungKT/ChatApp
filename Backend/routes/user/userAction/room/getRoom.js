@@ -11,13 +11,13 @@ router.get("/", auth, (req, res) => {
 
   Rooms.find({ friendsInRoom: mongoose.Types.ObjectId(_idRequest) })
     .populate("lastMessageId")
-    .populate("friendsInRoom")
+    .populate("friendsInRoom", "image name lastname _id")
+    .select("-chatArray")
     .exec()
     .then((room) => {
       if (!room) {
         return res.send("There is no room for you");
       }
-      console.log(room);
       return res.send(room);
     })
     .catch((err) => console.log(err));

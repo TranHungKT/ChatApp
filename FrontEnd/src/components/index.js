@@ -9,6 +9,7 @@ import GroupDevice from './GroupDevide';
 import ListCommon from './ListCommon';
 import MessageInput from './MessageInput';
 import Message from './Message';
+import ListMessage from './ListMessage';
 
 export {
   Header,
@@ -22,4 +23,5 @@ export {
   ListCommon,
   Message,
   MessageInput,
+  ListMessage,
 };

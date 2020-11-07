@@ -4,7 +4,7 @@ import styles from './styles';
 
 import {Emoji, Voice, Camera, More} from '@svg';
 import {Styles, Config} from '@common';
-
+import {afterPostMessage} from '../../redux/actions/chatAction';
 export default class MessageInput extends Component {
   constructor(props) {
     super(props);
