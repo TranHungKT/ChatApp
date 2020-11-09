@@ -51,7 +51,7 @@ class GroupChat extends Component {
           type={'rooms'}
           navigation={this.props.navigation}
           socket={socket}
-          userName={userData.name + ' ' + userData.lastname}
+          sender={userData.name + ' ' + userData.lastname}
           userId={userData._id}
         />
       </View>

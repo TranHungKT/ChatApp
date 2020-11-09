@@ -31,9 +31,8 @@ class Chat extends Component {
       title,
       socket,
       roomId,
-      userName,
+      sender,
       userId,
-      chatArray,
     } = this.props.navigation.state.params;
 
     return (
@@ -43,7 +42,7 @@ class Chat extends Component {
         <MessageInput
           socket={socket}
           roomId={roomId}
-          userName={userName}
+          sender={sender}
           userId={userId}
         />
       </View>

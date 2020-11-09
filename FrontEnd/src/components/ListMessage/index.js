@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
-
+import styles from './styles';
 import {connect} from 'react-redux';
 
 class ListMessage extends Component {
@@ -25,19 +25,43 @@ class ListMessage extends Component {
     return (
       <View>
         {this.isMyMessage(item.sender) ? (
-          <Text>{item.message}</Text>
+          <View style={styles.container}>
+            <View
+              style={[
+                styles.messageBox,
+                {
+                  backgroundColor: '#DCF8C5',
+                  marginLeft: 50,
+                  marginRight: 0,
+                },
+              ]}>
+              <Text style={styles.name}>{item.sender}</Text>
+              <Text>{item.message}</Text>
+            </View>
+          </View>
         ) : (
-          <Text style={{marginLeft: 20, color: 'red'}}>{item.message}</Text>
+          <View style={styles.container}>
+            <View
+              style={[
+                styles.messageBox,
+                {
+                  backgroundColor: 'white',
+                  marginLeft: 0,
+                  marginRight: 50,
+                },
+              ]}>
+              <Text style={styles.name}>{item.sender}</Text>
+              <Text>{item.message}</Text>
+            </View>
+          </View>
         )}
       </View>
     );
   };
 
-  isMyMessage = (sender) => {
-    const {userName} = this.props;
-    // console.log('username', userName);
-    // console.log('sender', sender);
-    return userName === sender;
+  isMyMessage = (senderCheck) => {
+    const {sender} = this.props;
+    return sender === senderCheck;
   };
 
   _keyExtractor = (item, index) => index.toString();

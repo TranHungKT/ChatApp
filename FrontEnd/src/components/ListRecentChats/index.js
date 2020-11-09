@@ -12,12 +12,12 @@ export default class ListRecentChats extends React.PureComponent {
     this.state = {};
   }
   navigateToChat = (item) => () => {
-    const {socket, userName, userId} = this.props;
+    const {sender, userId, socket} = this.props;
     this.props.navigation.navigate(RouteNames.Chat, {
       title: item.name,
       socket: socket,
       roomId: item._id,
-      userName: userName,
+      sender: sender,
       userId: userId,
     });
   };

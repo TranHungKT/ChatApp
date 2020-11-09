@@ -25,7 +25,6 @@ export const getChats = (roomId) => (dispatch) => {
       return response
         .json()
         .then((data) => {
-          let chatArr = {data, roomId};
           return dispatch({
             type: LOAD_CHAT,
             payload: data,

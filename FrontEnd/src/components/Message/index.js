@@ -23,7 +23,7 @@ class Message extends Component {
     this.initSocket(socket);
   }
   /*
-    username is name of sender
+    sender is name of sender
     userId is _id of sender
     message need to be format at server
   */
@@ -37,8 +37,8 @@ class Message extends Component {
 
   initSocket = (socket) => {
     const {roomId} = this.props;
-    socket.on(Config.Event.TYPING, ({userName, isTyping}) => {
-      this.setState({isTyping: isTyping, userIsTyping: userName});
+    socket.on(Config.Event.TYPING, ({sender, isTyping}) => {
+      this.setState({isTyping: isTyping, userIsTyping: sender});
     });
     socket.on(Config.Event.MESSAGE_SENT, ({messageSent}) => {
       this.setState({messageObj: messageSent});
@@ -72,7 +72,7 @@ class Message extends Component {
           chatArray={chatArray}
           userId={userData._id}
           roomId={this.props.roomId}
-          userName={userData.name + ' ' + userData.lastname}
+          sender={userData.name + ' ' + userData.lastname}
         />
       </View>
     );

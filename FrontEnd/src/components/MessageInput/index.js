@@ -22,9 +22,9 @@ export default class MessageInput extends Component {
 
   initSocket = (socket) => {};
   /*
-   * In this component, userName is sender
+   * In this component, sender is sender
    * onChangeText function will return a onTyping event to server
-   * @param userName {string} // Mean sender like i said
+   * @param sender {string} // Mean sender like i said
    * @param roomId {id} get from listcommon chat
    */
 
@@ -58,21 +58,21 @@ export default class MessageInput extends Component {
   };
 
   emitEventTyping = (isTyping) => {
-    const {socket, roomId, userName} = this.props;
-    return socket.emit(Config.Event.TYPING, {roomId, userName, isTyping});
+    const {socket, roomId, sender} = this.props;
+    return socket.emit(Config.Event.TYPING, {roomId, sender, isTyping});
   };
   /*
     This function sent message to server
     @param roomId mean room which will receive the message
-    @param userName mean sender
+    @param sender mean sender
     @param message {string}
   */
   onSentMessage = () => {
-    const {socket, roomId, userName, userId} = this.props;
+    const {socket, roomId, sender, userId} = this.props;
     let message = this.state.message;
     socket.emit(Config.Event.MESSAGE_SENT, {
       roomId,
-      userName,
+      sender,
       message,
       userId,
     });

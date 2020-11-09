@@ -1,7 +1,7 @@
-const formatMessage = ({ message = "", userName = "", userId = "" } = {}) => ({
+const formatMessage = ({ message = "", sender = "", userId = "" } = {}) => ({
   time: getTime(new Date(Date.now())),
   message,
-  userName,
+  sender,
   userId,
 });
 

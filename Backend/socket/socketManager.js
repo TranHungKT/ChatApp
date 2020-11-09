@@ -28,28 +28,28 @@ function socketManager(socket) {
       socket.join(roomId);
     });
   });
-  socket.on(TYPING, ({ userName, roomId, isTyping }) => {
-    socket.to(roomId).emit(TYPING, { userName, isTyping });
+  socket.on(TYPING, ({ sender, roomId, isTyping }) => {
+    socket.to(roomId).emit(TYPING, { sender, isTyping });
   });
-  socket.on(MESSAGE_SENT, ({ roomId, userName, message, userId }) => {
-    let messageSent = formatMessage({ message, userName, userId });
+  socket.on(MESSAGE_SENT, ({ roomId, sender, message, userId }) => {
+    let messageSent = formatMessage({ message, sender, userId });
 
     io.in(roomId).emit(MESSAGE_SENT, { messageSent });
-    const saveChat = saveNewChat(userName, message, roomId);
+    const saveChat = saveNewChat(sender, message, roomId);
   });
 }
 
 /*
   funtion saveNewChat
-  @param userName is sender, type is string
+  @param sender is sender, type is string
   @param message is string
   @param roomId mean to, type _id
 */
 
-async function saveNewChat(userName, message, roomId) {
+async function saveNewChat(sender, message, roomId) {
   let newChat = new Chats();
   newChat.message = message;
-  newChat.sender = userName;
+  newChat.sender = sender;
   newChat.to = roomId;
 
   const saveChat = await newChat.save();
