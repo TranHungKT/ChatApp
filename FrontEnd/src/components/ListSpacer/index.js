@@ -29,7 +29,7 @@ class ListSpacer extends PureComponent {
     Animated.timing(this.state.flatListHeight, {
       toValue: Dimensions.get('window').height - e.endCoordinates.height,
       duration: DURATION,
-      useNativeDriver: true,
+      useNativeDriver: false,
     }).start();
   };
 
@@ -37,7 +37,7 @@ class ListSpacer extends PureComponent {
     Animated.timing(this.state.flatListHeight, {
       toValue: Dimensions.get('window').height,
       duration: DURATION,
-      useNativeDriver: true,
+      useNativeDriver: false,
     }).start();
   };
 

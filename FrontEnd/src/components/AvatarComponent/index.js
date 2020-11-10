@@ -8,14 +8,19 @@ const AvatarComponent = ({
   onLongPress,
   Component = onPress || onLongPress ? TouchableOpacity : View,
   source,
+  isSmallAvatar,
+  style,
   ...attributes
 }) => {
   let tempSource = {
     uri: `${source}`,
   };
   return (
-    <Component>
-      <Image source={tempSource} style={styles.avatar}></Image>
+    <Component
+      style={{alignItems: 'center', justifyContent: 'center', marginRight: 10}}>
+      <Image
+        source={tempSource}
+        style={isSmallAvatar ? styles.smallAvatar : styles.avatar}></Image>
     </Component>
   );
 };

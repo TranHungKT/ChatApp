@@ -5,15 +5,16 @@ export default StyleSheet.create({
   container: {
     paddingBottom: 10,
     paddingTop: 10,
+    flex: 1,
   },
   messageBox: {
     borderRadius: 35,
     padding: 15,
+    width: (Styles.width * 2) / 3,
   },
   myMessage: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    flex: 1,
   },
   name: {
     color: 'black',
@@ -23,8 +24,14 @@ export default StyleSheet.create({
   time: {
     alignSelf: 'flex-end',
     color: 'grey',
+    fontSize: 10,
   },
   message: {
     flex: 0.9,
+    flexDirection: 'column',
+    fontSize: Styles.message.textMessageFontSize,
+    fontFamily: Styles.message.textMessageFontFamily,
+    color: Color.message.textColor,
   },
+  avatar: {},
 });

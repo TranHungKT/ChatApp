@@ -71,14 +71,14 @@ const Styles = {
   },
   message: {
     textMessageFontSize: 15,
-    textMessageFontFamily: 'Quicksand-Light',
+    textMessageFontFamily: 'Quicksand-Medium',
     myMessMargin: {
-      marginLeft: width / 3,
+      marginLeft: 100,
       marginRight: 0,
     },
     notMyMessMargin: {
       marginLeft: 0,
-      marginRight: width / 3,
+      marginRight: 100,
     },
   },
 };

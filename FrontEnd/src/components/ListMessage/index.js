@@ -6,11 +6,15 @@ import {
   FlatList,
   Animated,
 } from 'react-native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {
+  KeyboardAwareFlatList,
+  KeyboardAwareScrollView,
+} from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
 import {connect} from 'react-redux';
 import {Styles, Color} from '@common';
 import ListSpacer from '../ListSpacer';
+import AvatarComponent from '../AvatarComponent';
 import moment from 'moment';
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
@@ -25,6 +29,7 @@ class ListMessage extends Component {
 
   componentDidMount() {
     this.setState({yourFriend: this.props.yourFriend});
+
     this.reverse();
   }
   componentDidUpdate(prevProps, prevState) {
@@ -39,7 +44,6 @@ class ListMessage extends Component {
 
   _renderItem = (items) => {
     const item = items.item;
-    // console.log(item);
     return (
       <View>
         {this.isMyMessage(item.sender) ? (
@@ -49,11 +53,10 @@ class ListMessage extends Component {
                 styles.messageBox,
                 {
                   backgroundColor: Color.message.myMessBackground,
-                  marginLeft: 0,
-                  marginRight: 70,
+                  marginLeft: Styles.message.myMessMargin.marginLeft,
+                  marginRight: Styles.message.myMessMargin.marginRight,
                 },
               ]}>
-              <Text style={styles.name}>{item.sender}</Text>
               <View style={styles.myMessage}>
                 <Text style={styles.message}>{item.message}</Text>
                 <Text style={styles.time}>
@@ -63,23 +66,26 @@ class ListMessage extends Component {
             </View>
           </View>
         ) : (
-          <View style={styles.container}>
+          <View style={[styles.container, {flexDirection: 'row'}]}>
+            <AvatarComponent
+              isSmallAvatar={true}
+              source={this.state.yourFriend.image}
+              style={styles.avatar}
+            />
             <View
               style={[
                 styles.messageBox,
                 {
                   backgroundColor: Color.message.notMyMessBackground,
-                  marginLeft: 70,
-                  marginRight: 0,
+                  marginLeft: Styles.message.notMyMessMargin.marginLeft,
+                  marginRight: Styles.message.notMyMessMargin.marginRight,
+                  flexDirection: 'row',
                 },
               ]}>
-              <Text style={styles.name}>{item.sender}</Text>
-              <View style={styles.myMessage}>
-                <Text style={styles.message}>{item.message}</Text>
-                <Text style={styles.time}>
-                  {moment(item.updatedAt).format('LT')}
-                </Text>
-              </View>
+              <Text style={styles.message}>{item.message}</Text>
+              <Text style={styles.time}>
+                {moment(item.updatedAt).format('LT')}
+              </Text>
             </View>
           </View>
         )}
@@ -95,6 +101,7 @@ class ListMessage extends Component {
   _keyExtractor = (item, index) => index.toString();
 
   render() {
+    const {chatArray} = this.props;
     return (
       <ListSpacer>
         {({flatListHeight}) => (
@@ -105,27 +112,25 @@ class ListMessage extends Component {
               inverted
               data={this.state.chat}
               keyExtractor={this._keyExtractor}
+              style={{height: flatListHeight}}
               renderItem={this._renderItem}
               contentContainerStyle={{
-                paddingTop: Styles.messageInputHeight * 1.5,
+                paddingTop: Styles.messageInputHeight * 2.5,
               }}
             />
           </KeyboardAvoidingView>
         )}
       </ListSpacer>
+      // <KeyboardAwareFlatList
+      //   ref={(ref) => (this.flatList = ref)}
+      //   onContentSizeChange={() => this.flatList.scrollToEnd({animated: true})}
+      //   data={chatArray}
+      //   renderItem={this._renderItem}
+      //   keyExtractor={this._keyExtractor}
+      // />
     );
   }
 }
-
-// class Message extends React.PureComponent{
-//     constructor(props){
-//         super(props)
-//     }
-
-//     render(){
-//         return()
-//     }
-// }
 
 const mapActionToProps = {};
 
