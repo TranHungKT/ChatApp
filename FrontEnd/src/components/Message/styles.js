@@ -5,7 +5,7 @@ export default StyleSheet.create({
   container: {
     height: Styles.height - Styles.messageInputHeight - Styles.headerHeight,
     marginHorizontal: Styles.margin.marginLeft,
-    // backgroundColor: 'red',
+    backgroundColor: 'white',
   },
   typingMainView: {
     backgroundColor: '#BCB9B8',

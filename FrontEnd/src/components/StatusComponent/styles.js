@@ -27,6 +27,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: Styles.width - Styles.avatar.width - Styles.margin.marginLeft * 3,
+    flex: 1,
   },
   time: {
     fontSize: Styles.FontSize.medium,

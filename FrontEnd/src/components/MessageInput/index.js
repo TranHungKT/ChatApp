@@ -4,7 +4,7 @@ import styles from './styles';
 
 import {Emoji, Voice, Camera, More} from '@svg';
 import {Styles, Config} from '@common';
-import {afterPostMessage} from '../../redux/actions/chatAction';
+
 export default class MessageInput extends Component {
   constructor(props) {
     super(props);
@@ -97,8 +97,8 @@ export default class MessageInput extends Component {
           <View style={styles.view}>
             <TextInput
               placeholder="Aa"
-              // multiline={true}
-              // numberOfLines={10}
+              multiline={true}
+              numberOfLines={10}
               onChangeText={this.onChangeText}
               onContentSizeChange={(event) => {
                 this.setState({height: event.nativeEvent.contentSize.height});

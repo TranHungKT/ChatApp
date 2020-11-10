@@ -11,7 +11,7 @@ router.get("/", auth, (req, res) => {
 
   Rooms.find({ friendsInRoom: mongoose.Types.ObjectId(_idRequest) })
     .populate("lastMessageId")
-    .populate("friendsInRoom", "image name lastname _id")
+    .populate("friendsInRoom", "image _id")
     .select("-chatArray")
     .exec()
     .then((room) => {

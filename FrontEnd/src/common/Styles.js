@@ -15,7 +15,7 @@ const Styles = {
 
   app: {
     flexGrow: 1,
-    backgroundColor: Device.isIphoneX ? '#FFF' : '#000',
+    backgroundColor: Device.isIphoneX ? '#FFF' : '#FFF',
     paddingTop: Device.ToolbarHeight,
   },
   bottomNavbarHeight: 60,
@@ -68,6 +68,18 @@ const Styles = {
   avatar: {
     height: height / 10 - 20,
     width: height / 10 - 20,
+  },
+  message: {
+    textMessageFontSize: 15,
+    textMessageFontFamily: 'Quicksand-Light',
+    myMessMargin: {
+      marginLeft: width / 3,
+      marginRight: 0,
+    },
+    notMyMessMargin: {
+      marginLeft: 0,
+      marginRight: width / 3,
+    },
   },
 };
 

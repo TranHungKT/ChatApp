@@ -10,6 +10,7 @@ import ListCommon from './ListCommon';
 import MessageInput from './MessageInput';
 import Message from './Message';
 import ListMessage from './ListMessage';
+import ListSpacer from './ListSpacer';
 
 export {
   Header,
@@ -24,4 +25,5 @@ export {
   Message,
   MessageInput,
   ListMessage,
+  ListSpacer,
 };

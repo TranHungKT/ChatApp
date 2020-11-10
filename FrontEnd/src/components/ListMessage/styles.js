@@ -3,16 +3,28 @@ import {Color, Config, Styles} from '@common';
 
 export default StyleSheet.create({
   container: {
-    padding: 10,
+    paddingBottom: 10,
+    paddingTop: 10,
   },
   messageBox: {
-    borderRadius: 5,
-    padding: 10,
+    borderRadius: 35,
+    padding: 15,
   },
-  myMessage: {},
+  myMessage: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flex: 1,
+  },
   name: {
     color: 'black',
     fontWeight: 'bold',
     marginBottom: 5,
+  },
+  time: {
+    alignSelf: 'flex-end',
+    color: 'grey',
+  },
+  message: {
+    flex: 0.9,
   },
 });

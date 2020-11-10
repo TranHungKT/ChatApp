@@ -1,27 +1,45 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
+import {
+  View,
+  Text,
+  KeyboardAvoidingView,
+  FlatList,
+  Animated,
+} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
 import {connect} from 'react-redux';
+import {Styles, Color} from '@common';
+import ListSpacer from '../ListSpacer';
+import moment from 'moment';
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 class ListMessage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      friendsInRoom: [],
+      yourFriend: {},
+      chat: [],
     };
   }
 
   componentDidMount() {
-    const {roomId} = this.props;
-    let friendsInRoom = this.isCurrentRoom(roomId);
-    this.setState({friendsInRoom: friendsInRoom.friendsInRoom});
+    this.setState({yourFriend: this.props.yourFriend});
+    this.reverse();
   }
-  isCurrentRoom = (roomId) => {
-    return this.props.friendsInRoom.find((element) => element._id == roomId);
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.chatArray !== this.props.chatArray) {
+      this.reverse();
+    }
+  }
+  reverse = () => {
+    let temp = this.props.chatArray.slice().reverse();
+    this.setState({chat: temp});
   };
+
   _renderItem = (items) => {
     const item = items.item;
+    // console.log(item);
     return (
       <View>
         {this.isMyMessage(item.sender) ? (
@@ -30,13 +48,18 @@ class ListMessage extends Component {
               style={[
                 styles.messageBox,
                 {
-                  backgroundColor: '#DCF8C5',
-                  marginLeft: 50,
-                  marginRight: 0,
+                  backgroundColor: Color.message.myMessBackground,
+                  marginLeft: 0,
+                  marginRight: 70,
                 },
               ]}>
               <Text style={styles.name}>{item.sender}</Text>
-              <Text>{item.message}</Text>
+              <View style={styles.myMessage}>
+                <Text style={styles.message}>{item.message}</Text>
+                <Text style={styles.time}>
+                  {moment(item.updatedAt).format('LT')}
+                </Text>
+              </View>
             </View>
           </View>
         ) : (
@@ -45,13 +68,18 @@ class ListMessage extends Component {
               style={[
                 styles.messageBox,
                 {
-                  backgroundColor: 'white',
-                  marginLeft: 0,
-                  marginRight: 50,
+                  backgroundColor: Color.message.notMyMessBackground,
+                  marginLeft: 70,
+                  marginRight: 0,
                 },
               ]}>
               <Text style={styles.name}>{item.sender}</Text>
-              <Text>{item.message}</Text>
+              <View style={styles.myMessage}>
+                <Text style={styles.message}>{item.message}</Text>
+                <Text style={styles.time}>
+                  {moment(item.updatedAt).format('LT')}
+                </Text>
+              </View>
             </View>
           </View>
         )}
@@ -67,13 +95,24 @@ class ListMessage extends Component {
   _keyExtractor = (item, index) => index.toString();
 
   render() {
-    const {chatArray} = this.props;
-    // console.log(this.props.friendsInRoom);
     return (
-      <FlatList
-        data={chatArray}
-        renderItem={this._renderItem}
-        keyExtractor={this._keyExtractor}></FlatList>
+      <ListSpacer>
+        {({flatListHeight}) => (
+          <KeyboardAvoidingView
+            behavior="padding"
+            keyboardVerticalOffset={Styles.messageInputHeight}>
+            <AnimatedFlatList
+              inverted
+              data={this.state.chat}
+              keyExtractor={this._keyExtractor}
+              renderItem={this._renderItem}
+              contentContainerStyle={{
+                paddingTop: Styles.messageInputHeight * 1.5,
+              }}
+            />
+          </KeyboardAvoidingView>
+        )}
+      </ListSpacer>
     );
   }
 }
@@ -92,7 +131,7 @@ const mapActionToProps = {};
 
 const mapStateToProps = (state) => ({
   chats: state.chatReducer,
-  friendsInRoom: state.roomReducer.room,
+  yourFriend: state.roomReducer.yourFriend,
 });
 
 export default connect(mapStateToProps, mapActionToProps)(ListMessage);

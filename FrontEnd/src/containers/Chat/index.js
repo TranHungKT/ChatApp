@@ -1,15 +1,11 @@
 import React, {Component} from 'react';
-import {TextInput, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {MessageInput, Message, Header} from '@components';
 import {connect} from 'react-redux';
-import {
-  getChats,
-  afterPostMessage,
-  // getRooms,
-} from '../../redux/actions/chatAction';
-import {Config} from '@common';
+import {getChats, afterPostMessage} from '../../redux/actions/chatAction';
+import {getAvatarOfFriend} from '../../redux/actions/roomAction';
+import {Config, Styles} from '@common';
 
-import moment from 'moment';
 class Chat extends Component {
   constructor(props) {
     super(props);
@@ -18,12 +14,9 @@ class Chat extends Component {
       chatMessages: [],
     };
   }
-
-  componentDidMount() {
-    // this.socket.on('Output_chat_message', (msg) => {
-    //   console.log('Out', msg);
-    //   this.props.afterPostMessage(msg);
-    // });
+  UNSAFE_componentWillMount() {
+    const {roomId, userId} = this.props.navigation.state.params;
+    this.props.getAvatarOfFriend(roomId, userId);
   }
 
   render() {
@@ -53,7 +46,7 @@ class Chat extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: Styles.app.backgroundColor,
   },
 });
 
@@ -65,7 +58,7 @@ const mapStateToProps = (state) => ({
 const mapActionToProps = {
   getChats,
   afterPostMessage,
-  // getRooms,
+  getAvatarOfFriend,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Chat);

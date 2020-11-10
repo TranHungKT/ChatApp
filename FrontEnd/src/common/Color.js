@@ -41,4 +41,9 @@ export default {
   },
   inputMessageBackgroundColor: '#FAFFF2',
   errorColor: '#FF694B',
+  message: {
+    textColor: '#444444',
+    myMessBackground: '#FAFFF2',
+    notMyMessBackground: '#F0F0F0',
+  },
 };
