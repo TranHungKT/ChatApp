@@ -38,21 +38,19 @@ export default function (state = initialState, action) {
       };
     case UPDATE_LAST_MESSAGE:
       const {sender, message} = action.payload;
-      let aaa = state.room;
-      // console.log('check', action.payload.roomId);
-      aaa.forEach((room) => {
+      let updateRoom = state.room;
+      updateRoom.forEach((room) => {
         if (room._id == action.payload.roomId) {
-          // console.log('room', room._id);
           room.lastMessageId.message = message;
           room.lastMessageId.createdAt = Date.now();
           room.lastMessageId.sender = sender;
         }
       });
-      let b = {...aaa};
-      b = Object.values(b);
+      let tempUpdateRoom = {...updateRoom};
+      tempUpdateRoom = Object.values(tempUpdateRoom);
       return {
         ...state,
-        room: b,
+        room: tempUpdateRoom,
       };
     default:
       return state;
