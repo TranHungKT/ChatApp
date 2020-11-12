@@ -4,8 +4,11 @@ import styles from './styles';
 
 import {Emoji, Voice, Camera, More} from '@svg';
 import {Styles, Config} from '@common';
+import {connect} from 'react-redux';
 
-export default class MessageInput extends Component {
+import {updateLastMessage} from '../../redux/actions/roomAction';
+
+class MessageInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -77,6 +80,7 @@ export default class MessageInput extends Component {
       userId,
     });
     this.setState({message: ''});
+    this.props.updateLastMessage(roomId, sender, message);
   };
 
   render() {
@@ -130,3 +134,10 @@ export default class MessageInput extends Component {
     );
   }
 }
+
+const mapActionToProps = {
+  updateLastMessage,
+};
+const mapStateToProps = (state) => ({});
+
+export default connect(mapStateToProps, mapActionToProps)(MessageInput);

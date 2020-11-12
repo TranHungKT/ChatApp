@@ -1,4 +1,9 @@
-import {CREATE_ROOM, GET_ROOM, AVATAR_OF_FRIEND} from '../type';
+import {
+  CREATE_ROOM,
+  GET_ROOM,
+  AVATAR_OF_FRIEND,
+  UPDATE_LAST_MESSAGE,
+} from '../type';
 import {Config} from '@common';
 export const getRooms = (cookie) => (dispatch) => {
   return fetch(`${Config.server}user/action/getRoom`, {
@@ -46,6 +51,14 @@ export const getAvatarOfFriend = (roomId, userId) => (dispatch) => {
   let data = {roomId, userId};
   return dispatch({
     type: AVATAR_OF_FRIEND,
+    payload: data,
+  });
+};
+
+export const updateLastMessage = (roomId, sender, message) => (dispatch) => {
+  let data = {roomId, sender, message};
+  return dispatch({
+    type: UPDATE_LAST_MESSAGE,
     payload: data,
   });
 };

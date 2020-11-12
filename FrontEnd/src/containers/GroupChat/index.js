@@ -41,13 +41,12 @@ class GroupChat extends Component {
     const {socket} = this.state;
 
     const {userData} = this.props.user;
-
     return (
       <View style={{backgroundColor: '#FFFFFF'}}>
         <SearchBar />
         <GroupDevice text={Language.groupDevice.recentChat} />
         <ListCommon
-          rooms={this.props.rooms}
+          // rooms={this.props.rooms}
           type={'rooms'}
           navigation={this.props.navigation}
           socket={socket}
@@ -60,7 +59,7 @@ class GroupChat extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  rooms: state.roomReducer,
+  // rooms: state.roomReducer,
   user: state.userReducer,
 });
 const mapActionsToProps = {

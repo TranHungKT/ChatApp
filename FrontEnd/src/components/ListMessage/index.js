@@ -29,7 +29,6 @@ class ListMessage extends Component {
 
   componentDidMount() {
     this.setState({yourFriend: this.props.yourFriend});
-
     this.reverse();
   }
   componentDidUpdate(prevProps, prevState) {
@@ -101,7 +100,6 @@ class ListMessage extends Component {
   _keyExtractor = (item, index) => index.toString();
 
   render() {
-    const {chatArray} = this.props;
     return (
       <ListSpacer>
         {({flatListHeight}) => (
@@ -121,13 +119,6 @@ class ListMessage extends Component {
           </KeyboardAvoidingView>
         )}
       </ListSpacer>
-      // <KeyboardAwareFlatList
-      //   ref={(ref) => (this.flatList = ref)}
-      //   onContentSizeChange={() => this.flatList.scrollToEnd({animated: true})}
-      //   data={chatArray}
-      //   renderItem={this._renderItem}
-      //   keyExtractor={this._keyExtractor}
-      // />
     );
   }
 }

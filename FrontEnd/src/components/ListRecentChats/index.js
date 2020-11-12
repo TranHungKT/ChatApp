@@ -4,9 +4,9 @@ import styles from './styles';
 import AvatarComponent from '../AvatarComponent';
 import StatusComponent from '../StatusComponent';
 import {RouteNames, Config} from '@common';
-import {useStore} from 'react-redux';
+import {connect} from 'react-redux';
 
-export default class ListRecentChats extends React.PureComponent {
+class ListRecentChats extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -21,7 +21,13 @@ export default class ListRecentChats extends React.PureComponent {
       userId: userId,
     });
   };
-
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.rooms.room !== this.props.rooms.room) {
+      console.log('His');
+      return true;
+    }
+    return true;
+  }
   _renderItem = (items) => {
     const {item} = items;
     return (
@@ -41,11 +47,12 @@ export default class ListRecentChats extends React.PureComponent {
   };
   _keyExtractor = (item, index) => index.toString();
   render() {
-    const {room} = this.props.rooms;
+    let rooms = this.props.rooms;
+    console.log('rooms', rooms);
     return (
       <View>
         <FlatList
-          data={room}
+          data={this.props.rooms}
           renderItem={this._renderItem}
           keyExtractor={this._keyExtractor}
         />
@@ -53,3 +60,12 @@ export default class ListRecentChats extends React.PureComponent {
     );
   }
 }
+
+const mapActionToProps = {};
+const mapStateToProps = (state) => {
+  return {
+    rooms: state.roomReducer.room,
+  };
+};
+
+export default connect(mapStateToProps, mapActionToProps)(ListRecentChats);

@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import {getChats, afterPostMessage} from '../../redux/actions/chatAction';
 import {getAvatarOfFriend} from '../../redux/actions/roomAction';
 import {Config, Styles} from '@common';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 class Chat extends Component {
   constructor(props) {
     super(props);

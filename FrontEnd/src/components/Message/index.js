@@ -43,7 +43,6 @@ class Message extends Component {
     socket.on(Config.Event.MESSAGE_SENT, ({messageSent}) => {
       this.setState({messageObj: messageSent});
       const temp = this.props.afterPostMessage(messageSent, roomId);
-      // this.setState({chatArray: temp});
       let tempChatArray = this.state.chatArray.concat(temp.payload.messageSent);
       this.setState({chatArray: tempChatArray});
     });

@@ -19,3 +19,4 @@ export const REMOVE_TOAST = 'REMOVE_TOAST';
 export const GET_ROOM = 'GET_ROOM';
 export const CREATE_ROOM = 'CREATE_ROOM';
 export const AVATAR_OF_FRIEND = 'AVATAR_OF_FRIEND';
+export const UPDATE_LAST_MESSAGE = 'UPDATE_LAST_MESSAGE';
