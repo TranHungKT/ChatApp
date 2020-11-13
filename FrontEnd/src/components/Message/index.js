@@ -14,14 +14,13 @@ class Message extends Component {
       messageObj: {},
       chatArray: [],
     };
+    const {socket} = this.props;
+    this.initSocket(socket);
   }
   componentDidMount() {
     this.loadChat();
   }
-  UNSAFE_componentWillMount() {
-    const {socket} = this.props;
-    this.initSocket(socket);
-  }
+
   /*
     sender is name of sender
     userId is _id of sender

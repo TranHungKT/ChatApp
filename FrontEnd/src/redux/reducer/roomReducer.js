@@ -10,13 +10,10 @@ const initialState = {
   room: [],
   yourFriend: {},
 };
-const getTime = (date) => {
-  return `${date.getHours()}:${('0' + date.getMinutes()).slice(-2)}`;
-};
+
 export default function (state = initialState, action) {
   switch (action.type) {
     case GET_ROOM:
-      console.log(action.payload);
       return {
         ...state,
         room: action.payload,
@@ -46,8 +43,7 @@ export default function (state = initialState, action) {
           room.lastMessageId.sender = sender;
         }
       });
-      let tempUpdateRoom = {...updateRoom};
-      tempUpdateRoom = Object.values(tempUpdateRoom);
+      let tempUpdateRoom = [...updateRoom];
       return {
         ...state,
         room: tempUpdateRoom,

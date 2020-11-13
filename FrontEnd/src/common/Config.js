@@ -2,7 +2,7 @@ export default {
   EmitCode: {
     Toast: 'toast',
   },
-  server: 'http://192.168.1.8:3000/',
+  server: 'http://172.16.6.135:3000/',
   Event: {
     COMMUNITY_CHAT: 'COMMUNITY_CHAT',
     USER_CONNECTED: 'USER_CONNECTED',

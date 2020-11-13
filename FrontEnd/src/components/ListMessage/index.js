@@ -28,6 +28,7 @@ class ListMessage extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.yourFriend);
     this.setState({yourFriend: this.props.yourFriend});
     this.reverse();
   }
@@ -68,7 +69,7 @@ class ListMessage extends Component {
           <View style={[styles.container, {flexDirection: 'row'}]}>
             <AvatarComponent
               isSmallAvatar={true}
-              source={this.state.yourFriend.image}
+              source={this.props.yourFriend.image}
               style={styles.avatar}
             />
             <View

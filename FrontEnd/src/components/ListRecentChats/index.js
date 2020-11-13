@@ -21,13 +21,7 @@ class ListRecentChats extends React.Component {
       userId: userId,
     });
   };
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.rooms.room !== this.props.rooms.room) {
-      console.log('His');
-      return true;
-    }
-    return true;
-  }
+
   _renderItem = (items) => {
     const {item} = items;
     return (
@@ -45,10 +39,9 @@ class ListRecentChats extends React.Component {
       </TouchableOpacity>
     );
   };
-  _keyExtractor = (item, index) => index.toString();
+  _keyExtractor = (item, index) => `${index}`;
   render() {
     let rooms = this.props.rooms;
-    console.log('rooms', rooms);
     return (
       <View>
         <FlatList

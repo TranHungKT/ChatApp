@@ -13,7 +13,7 @@ class Chat extends Component {
       chatMessages: [],
     };
   }
-  UNSAFE_componentWillMount() {
+  componentDidMount() {
     const {roomId, userId} = this.props.navigation.state.params;
     this.props.getAvatarOfFriend(roomId, userId);
   }
