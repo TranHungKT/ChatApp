@@ -5,7 +5,7 @@ import {
   AVATAR_OF_FRIEND,
   UPDATE_LAST_MESSAGE,
 } from '../type';
-import moment from 'moment';
+
 const initialState = {
   room: [],
   yourFriend: {},
@@ -41,14 +41,19 @@ export default function (state = initialState, action) {
           room.lastMessageId.message = message;
           room.lastMessageId.createdAt = Date.now();
           room.lastMessageId.sender = sender;
+          updateRoom.unshift(updateRoom.splice(updateRoom.indexOf(room), 1)[0]);
         }
       });
-      let tempUpdateRoom = [...updateRoom];
+
       return {
         ...state,
-        room: tempUpdateRoom,
+        room: [...updateRoom],
+        yourFriend: state.yourFriend,
       };
     default:
       return state;
   }
+}
+function sortRoom(room) {
+  room.sort(function (a, b) {});
 }

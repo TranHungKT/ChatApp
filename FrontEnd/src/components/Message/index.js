@@ -3,6 +3,7 @@ import {View, Text} from 'react-native';
 import styles from './styles';
 import {Config} from '@common';
 import {getChats, afterPostMessage} from '../../redux/actions/chatAction';
+import {updateLastMessage} from '../../redux/actions/roomAction';
 import {connect} from 'react-redux';
 import ListMessage from '../ListMessage';
 class Message extends Component {
@@ -19,6 +20,18 @@ class Message extends Component {
   }
   componentDidMount() {
     this.loadChat();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.messageObj !== this.state.messageObj) {
+      const {roomId} = this.props;
+      const {messageObj} = this.state;
+      this.props.updateLastMessage(
+        roomId,
+        messageObj.sender,
+        messageObj.message,
+      );
+    }
   }
 
   /*
@@ -44,6 +57,11 @@ class Message extends Component {
       const temp = this.props.afterPostMessage(messageSent, roomId);
       let tempChatArray = this.state.chatArray.concat(temp.payload.messageSent);
       this.setState({chatArray: tempChatArray});
+      // this.props.updateLastMessage(
+      //   roomId,
+      //   messageSent.sender,
+      //   messageSent.message,
+      // );
     });
   };
 
@@ -80,6 +98,7 @@ class Message extends Component {
 const mapActionToProps = {
   getChats,
   afterPostMessage,
+  updateLastMessage,
 };
 const mapStateToProps = (state) => ({
   user: state.userReducer,

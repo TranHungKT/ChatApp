@@ -6,10 +6,7 @@ import {
   FlatList,
   Animated,
 } from 'react-native';
-import {
-  KeyboardAwareFlatList,
-  KeyboardAwareScrollView,
-} from 'react-native-keyboard-aware-scroll-view';
+
 import styles from './styles';
 import {connect} from 'react-redux';
 import {Styles, Color} from '@common';
@@ -28,7 +25,6 @@ class ListMessage extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.yourFriend);
     this.setState({yourFriend: this.props.yourFriend});
     this.reverse();
   }

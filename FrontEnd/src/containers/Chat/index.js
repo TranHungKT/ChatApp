@@ -18,6 +18,10 @@ class Chat extends Component {
     this.props.getAvatarOfFriend(roomId, userId);
   }
 
+  componentWillUnmount() {
+    console.log('Turn off');
+  }
+
   render() {
     const {
       title,

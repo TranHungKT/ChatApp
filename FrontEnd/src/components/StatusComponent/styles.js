@@ -17,6 +17,8 @@ export default StyleSheet.create({
     fontFamily: Styles.FontFamily.QuicksandMedium,
     color: Color.statusComponent.lastMessageRead,
     paddingLeft: 5,
+    textAlign: 'center',
+    alignSelf: 'center',
   },
   status: {
     color: Color.statusComponent.statusRead,
@@ -33,5 +35,9 @@ export default StyleSheet.create({
     fontSize: Styles.FontSize.medium,
     fontFamily: Styles.FontFamily.QuicksandMedium,
     color: Color.statusComponent.lastMessageRead,
+  },
+  messageView: {
+    flexDirection: 'row',
+    flex: 0.8,
   },
 });

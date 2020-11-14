@@ -16,7 +16,7 @@ const StatusComponent = ({
     <Component style={styles.mainView}>
       <Text style={styles.textTitle}>{title}</Text>
       <View style={styles.text}>
-        <View style={{flexDirection: 'row', flex: 0.8}}>
+        <View style={styles.messageView}>
           <Text style={styles.status}>{'\u2B24'}</Text>
           <Text style={styles.lastMessage} numberOfLines={1}>
             {lastMessage}

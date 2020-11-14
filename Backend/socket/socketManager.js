@@ -20,10 +20,8 @@ let connectedUser = [];
 function socketManager(socket) {
   socket.on(USER_CONNECTED, (userId) => {
     connectedUser = addUserConnected(userId);
-    // console.log("connected user", connectedUser);
   });
   socket.on(JOIN_ROOM, (roomIds) => {
-    // console.log("roomIds", roomIds);
     roomIds.forEach((roomId) => {
       socket.join(roomId);
     });
