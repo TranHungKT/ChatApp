@@ -57,11 +57,6 @@ class Message extends Component {
       const temp = this.props.afterPostMessage(messageSent, roomId);
       let tempChatArray = this.state.chatArray.concat(temp.payload.messageSent);
       this.setState({chatArray: tempChatArray});
-      // this.props.updateLastMessage(
-      //   roomId,
-      //   messageSent.sender,
-      //   messageSent.message,
-      // );
     });
   };
 

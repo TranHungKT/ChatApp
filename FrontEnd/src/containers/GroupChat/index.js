@@ -46,7 +46,6 @@ class GroupChat extends Component {
         <SearchBar />
         <GroupDevice text={Language.groupDevice.recentChat} />
         <ListCommon
-          // rooms={this.props.rooms}
           type={'rooms'}
           navigation={this.props.navigation}
           socket={socket}

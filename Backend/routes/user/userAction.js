@@ -13,17 +13,6 @@ router.use(
 );
 
 router.use(
-  "/getChatsInRoom",
-  (req, res, next) => {
-    if (req.method == "DELETE" || req.method == "PUT") {
-      return res.status(400).json({ message: "Method is not allowed" });
-    }
-    next();
-  },
-  require("./userAction/getChatsInRoom")
-);
-
-router.use(
   "/createRoom",
   (req, res, next) => {
     if (req.method !== "POST") {
@@ -43,6 +32,28 @@ router.use(
     next();
   },
   require("./userAction/room/getRoom")
+);
+
+router.use(
+  "/getFriend",
+  (req, res, next) => {
+    if (req.method == "DELETE" || req.method == "PUT") {
+      return res.status(400).json({ message: "Method is not allowed" });
+    }
+    next();
+  },
+  require("./userAction/friend/getFriend")
+);
+
+router.use(
+  "/createFriend",
+  (req, res, next) => {
+    if (req.method == "DELETE" || req.method == "PUT") {
+      return res.status(400).json({ message: "Method is not allowed" });
+    }
+    next();
+  },
+  require("./userAction/friend/createFriend")
 );
 
 module.exports = router;
