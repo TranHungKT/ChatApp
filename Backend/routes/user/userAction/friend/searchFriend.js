@@ -11,6 +11,7 @@ router.post("/", auth, async (req, res) => {
     { score: { $meta: "textScore" } }
   )
     .sort({ score: { $meta: "textScore" } })
+    .select("userName image email")
     .exec();
   if (user) {
     return res.status(200).send(user);
