@@ -1,7 +1,7 @@
 const io = require("../index").io;
 
 const { Rooms } = require("../modal/roomSchema");
-const { ChatInRoom } = require("../modal/chatInRoomSchema");
+const { Friends } = require("../modal/friendSchema");
 const { Chats } = require("../modal/chatSchema");
 const { formatMessage } = require("../utils/Factories");
 const {
@@ -13,6 +13,9 @@ const {
   VERIFY_USER,
   LOGOUT,
   JOIN_ROOM,
+  REQUEST_FRIEND,
+  ACCEPT_FRIEND,
+  REFUSE_FRIEND,
 } = require("./Event");
 
 let connectedUser = [];
@@ -34,6 +37,14 @@ function socketManager(socket) {
 
     io.in(roomId).emit(MESSAGE_SENT, { messageSent });
     const saveChat = saveNewChat(sender, message, roomId);
+  });
+  socket.on(REQUEST_FRIEND, ({ _idRequest, _idReceiver, sender }) => {
+    Friends.createRequest(_idRequest, _idReceiver, (err, createSuccess) => {
+      if (err) return;
+      if (createSuccess) {
+        io.to(_idReceiver).emit(REQUEST_FRIEND, { sender });
+      }
+    });
   });
 }
 

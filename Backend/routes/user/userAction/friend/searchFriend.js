@@ -1,17 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const { Users } = require("../../../../modal/userSchema");
+const { User } = require("../../../../modal/userSchema");
 const { Friends } = require("../../../../modal/friendSchema");
 const { auth } = require("../../../../middleware/auth");
 router.post("/", auth, async (req, res) => {
-  let _idRequest = req.user._id;
-  const friends = await Friends.find({ Admin: _idRequest })
-    .select("friendList")
+  let { searchString } = req.body;
+
+  let user = await User.find(
+    { email: { $regex: searchString } },
+    { score: { $meta: "textScore" } }
+  )
+    .sort({ score: { $meta: "textScore" } })
     .exec();
-  if (friends) {
-    res.status(200).send(friends);
+  if (user) {
+    return res.status(200).send(user);
   } else {
-    res.send(400).send("We can not find your friend");
+    return res.status(400).send("Can not find friend");
   }
 });
 
