@@ -15,7 +15,8 @@ const roomSchema = mongoose.Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "Chats",
-      require: false,
+      require: true,
+      default: "5f47cc6cd7b5001ded9fd7fb",
     },
   ],
   lastMessageId: {

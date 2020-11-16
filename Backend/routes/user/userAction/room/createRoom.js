@@ -9,7 +9,7 @@ var mongoose = require("mongoose");
 router.post("/", auth, (req, res) => {
   let _idRequest = req.user._id; // After auth we have req.user;
   let _idReceiver = req.body._id;
-
+  let senderName = req.user.userName;
   User.findOne({ _id: _idReceiver })
     .then((user) => {
       if (!user)
@@ -24,7 +24,7 @@ router.post("/", auth, (req, res) => {
           if (room.length == 0) {
             let tempRoom = new Rooms({
               friendsInRoom: [{ _id: _idRequest }, { _id: _idReceiver }],
-              name: user.name + " " + user.lastname,
+              name: user.userName + " & " + senderName,
             });
             tempRoom.image = user.image;
 

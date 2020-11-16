@@ -9,7 +9,7 @@ const emailTransporter = process.env.emailTransporter;
 emailTransporterPassword = process.env.emailTransporterPassword;
 
 const userSchema = mongoose.Schema({
-  name: {
+  userName: {
     type: String,
     maxlength: 50,
   },
@@ -22,10 +22,7 @@ const userSchema = mongoose.Schema({
     type: String,
     minglength: 5,
   },
-  lastname: {
-    type: String,
-    maxlength: 50,
-  },
+
   role: {
     type: Number,
     default: 0,
@@ -42,6 +39,8 @@ const userSchema = mongoose.Schema({
     type: Number,
   },
 });
+
+userSchema.index({ email: "text" });
 
 userSchema.pre("save", function (next) {
   var user = this;

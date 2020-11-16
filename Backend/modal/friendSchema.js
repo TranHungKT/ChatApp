@@ -4,26 +4,26 @@ const Schema = mongoose.Schema;
 const friendSchema = mongoose.Schema(
   {
     admin: {
-      type: String.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
     },
     //List user request me to become their friend
     request: [
       {
-        type: String.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User",
       },
     ],
     //List user we are waiting to become friend
     waiting: [
       {
-        type: String.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User",
       },
     ],
     friendList: [
       {
-        type: String.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User",
       },
     ],
@@ -50,7 +50,7 @@ friendSchema.statics.createRequest = function (_idRequest, _idReceiver, cb) {
       .catch((err) => console.log("can not save waiting friend"));
   });
 
-  return cb;
+  return cb(null, createSuccess);
 };
 
 const Friends = mongoose.model("Friends", friendSchema);

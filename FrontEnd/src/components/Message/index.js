@@ -83,7 +83,7 @@ class Message extends Component {
           chatArray={chatArray}
           userId={userData._id}
           roomId={this.props.roomId}
-          sender={userData.name + ' ' + userData.lastname}
+          sender={userData.userName}
         />
       </View>
     );

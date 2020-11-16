@@ -64,8 +64,7 @@ module.exports = router;
 // "email": "tranhung26122612@gmail.com",
 // "code" : "631029"
 
-// "name": "Tran",
-// "lastname": "Hung",
+// "userName": "Trần Hưng",
 // "password": "123456",
-// "email": "tranhung26122612@gmail.com",
+// "email": "tranhung@gmail.com",
 // "confirmPassword1": "123456"

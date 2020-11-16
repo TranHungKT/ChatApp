@@ -46,14 +46,14 @@ router.use(
 );
 
 router.use(
-  "/createFriend",
+  "/searchFriend",
   (req, res, next) => {
     if (req.method == "DELETE" || req.method == "PUT") {
       return res.status(400).json({ message: "Method is not allowed" });
     }
     next();
   },
-  require("./userAction/friend/createFriend")
+  require("./userAction/friend/searchFriend")
 );
 
 module.exports = router;

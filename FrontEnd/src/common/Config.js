@@ -13,6 +13,9 @@ export default {
     VERIFY_USER: 'VERIFY_USER',
     LOGOUT: 'LOGOUT',
     JOIN_ROOM: 'JOIN_ROOM',
+    REQUEST_FRIEND: 'REQUEST_FRIEND',
+    ACCEPT_FRIEND: 'ACCEPT_FRIEND',
+    REFUSE_FRIEND: 'REFUSE_FRIEND',
   },
   typeOfHeader: {
     group: 'group',
