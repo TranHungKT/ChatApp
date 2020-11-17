@@ -12,9 +12,12 @@ const roomSchema = mongoose.Schema({
     type: String,
   },
   chatArray: {
-    type: [Schema.Types.ObjectId],
-    ref: "Chats",
-    require: true,
+    type: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Chats",
+      },
+    ],
     default: ["5f47cc6cd7b5001ded9fd7fb"],
   },
 

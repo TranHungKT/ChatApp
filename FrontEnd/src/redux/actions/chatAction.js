@@ -11,6 +11,7 @@ export const getChats = (roomId) => (dispatch) => {
     return;
   }
   loadedChat.push(roomId);
+
   return fetch(`${Config.server}user/action/getRoom/chatArray`, {
     method: 'POST',
     headers: {

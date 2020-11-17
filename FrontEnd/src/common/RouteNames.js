@@ -4,4 +4,5 @@ export default {
   SignUp: 'SignUp',
   Chat: 'Chat',
   GroupChat: 'GroupChat',
+  Search: 'Search',
 };

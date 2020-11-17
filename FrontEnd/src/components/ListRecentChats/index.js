@@ -25,25 +25,26 @@ class ListRecentChats extends React.Component {
   _renderItem = (items) => {
     const {item} = items;
     return (
-      <TouchableOpacity
-        style={styles.mainView}
-        onPress={this.navigateToChat(item)}>
-        <View style={styles.avatarView}>
-          <AvatarComponent source={item.image} />
-        </View>
-        <StatusComponent
-          title={item.name}
-          lastMessage={!!item.lastMessageId ? item.lastMessageId.message : ''}
-          createdAt={!!item.lastMessageId ? item.lastMessageId.createdAt : ''}
-        />
-      </TouchableOpacity>
+      <View style={styles.itemView}>
+        <TouchableOpacity
+          style={styles.mainView}
+          onPress={this.navigateToChat(item)}>
+          <View style={styles.avatarView}>
+            <AvatarComponent source={item.image} />
+          </View>
+          <StatusComponent
+            title={item.name}
+            lastMessage={!!item.lastMessageId ? item.lastMessageId.message : ''}
+            createdAt={!!item.lastMessageId ? item.lastMessageId.createdAt : ''}
+          />
+        </TouchableOpacity>
+      </View>
     );
   };
   _keyExtractor = (item, index) => `${index}`;
   render() {
-    let rooms = this.props.rooms;
     return (
-      <View>
+      <View style={{zIndex: 0}}>
         <FlatList
           data={this.props.rooms}
           renderItem={this._renderItem}

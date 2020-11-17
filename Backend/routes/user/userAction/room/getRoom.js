@@ -28,7 +28,7 @@ router.post("/chatArray", async (req, res) => {
     _id: req.body.roomId,
   })
     .populate("chatArray")
-    .select("chatArray")
+    // .select("chatArray")
     .exec();
   if (chatArray) {
     return res.status(200).json(chatArray);

@@ -5,10 +5,14 @@ export default StyleSheet.create({
     height: Styles.height / 10,
     width: Styles.width,
     flexDirection: 'row',
-    marginLeft: Styles.margin.marginLeft,
+    marginHorizontal: Styles.margin.marginLeft,
     marginRight: Styles.margin.marginRight,
   },
   avatarView: {
     ...Styles.Common.ColumnCenter,
+  },
+  itemView: {
+    borderBottomWidth: 1,
+    borderBottomColor: Color.seperateLineColor,
   },
 });

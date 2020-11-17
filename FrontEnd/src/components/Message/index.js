@@ -76,6 +76,7 @@ class Message extends Component {
           </Text>
         </View>
       ) : null;
+
     return (
       <View style={styles.container}>
         {annouceTyping}

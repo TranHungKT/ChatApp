@@ -1,20 +1,26 @@
-import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import React from 'react';
+import {View, Text, processColor} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Fontisto';
 import styles from './styles';
-import {Language, Color, Config} from '@common';
+import {Language, Color, Config, RouteNames} from '@common';
 import {
   AddGroupIcon,
   ComposeIcon,
   InfoIcon,
   NotificationIcon,
   BackIcon,
+  Search,
 } from '@svg';
 
 const Header = (props) => {
   if (props.type === Config.typeOfHeader.group) {
-    return <HeaderGroupChat type={Config.typeOfHeader.group} />;
+    return (
+      <HeaderGroupChat
+        type={Config.typeOfHeader.group}
+        navigation={props.navigation}
+      />
+    );
   } else if (props.type === Config.typeOfHeader.chats) {
     return <HeaderChat {...props} />;
   } else if (props.type === Config.typeOfHeader.detail) {
@@ -40,8 +46,12 @@ const HeaderGroupChat = (props) => {
         <Text style={styles.titleText}>{title}</Text>
       </View>
       <View style={styles.svgBigView}>
-        <NotificationIcon style={{marginRight: 10}} />
-        <AddGroupIcon />
+        <NotificationIcon style={{marginRight: 10}} fill="#FFF" />
+        <Search
+          height={24}
+          width={24}
+          onPress={() => props.navigation.navigate(RouteNames.Search)}
+        />
       </View>
     </View>
   );

@@ -42,8 +42,8 @@ class GroupChat extends Component {
 
     const {userData} = this.props.user;
     return (
-      <View style={{backgroundColor: '#FFFFFF'}}>
-        <SearchBar />
+      <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
+        {/* <SearchBar /> */}
         <GroupDevice text={Language.groupDevice.recentChat} />
         <ListCommon
           type={'rooms'}

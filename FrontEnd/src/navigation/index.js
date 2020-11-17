@@ -15,7 +15,7 @@ import LoginScreen from './LoginScreen';
 import ChatScreen from './ChatScreen';
 import GroupChatScreen from './GroupChatScreen';
 import {RouteNames} from '@common';
-
+import SearchScreen from './SearchScreen';
 import {HeaderAuth, Header} from '@components';
 
 const defaultHeaderObject = {
@@ -59,10 +59,18 @@ const AvailableGroupChat = createDefaultStackNavigator(
         headerShown: false,
       },
     },
+    [RouteNames.Search]: {
+      screen: SearchScreen,
+      navigationOptions: {
+        headerShown: false,
+      },
+    },
   },
   {
     defaultNavigationOptions: {
-      header: () => <Header type={'group'} />,
+      header: ({navigation}) => (
+        <Header type={'group'} navigation={navigation} />
+      ),
     },
   },
 );

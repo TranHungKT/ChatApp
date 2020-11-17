@@ -8,6 +8,7 @@ export default StyleSheet.create({
     backgroundColor: Color.groupDevice.backgroundColor,
     flexDirection: 'row',
     alignItems: 'center',
+    zIndex: 0,
   },
   text: {
     fontSize: Styles.FontSize.medium,

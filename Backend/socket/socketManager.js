@@ -84,35 +84,6 @@ async function updateLastMessage(chatId, roomId) {
   }
 }
 
-// async function addToChatInRoom(chatId, lastMessageId) {
-//   const addToChatInRoom = await ChatInRoom.findOneAndUpdate(
-//     { _id: chatId },
-//     {
-//       $push: {
-//         chats: lastMessageId,
-//       },
-//     },
-//     { new: true }
-//   );
-//   const addToChatInRoom = await ChatInRoom.find({ _id: chatId });
-
-//   if (addToChatInRoom) {
-//     // addToChatInRoom.chat.push(lastMessageId);
-//     // addToChatInRoom[0].chats.push(lastMessageId);
-//     console.log(addToChatInRoom[0]);
-//   } else {
-//     console.log("Cant add chat");
-//   }
-//   let tempChatInRoom = await ChatInRoom.find({
-//     _id: "5fa4bb6169c71c25c590bf90",
-//   });
-//   // tempChatInRoom.chats.push(lastMessageId.toString());
-
-//   // tempChatInRoom.save().then().catch();
-//   console.log(tempChatInRoom);
-//   return tempChatInRoom;
-// }
-
 function addUserConnected(userId) {
   connectedUser.push(userId);
   return connectedUser;

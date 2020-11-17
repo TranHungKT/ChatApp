@@ -22,7 +22,7 @@ export default {
   buttonColor: '#A8E490',
   textButtonColor: '#FFF',
   headerBackgroundColor: '#FFFFFF',
-
+  seperateLineColor: '#8E8E92',
   iconColor: '#A8E490',
   searchBar: {
     text: '#444444',
