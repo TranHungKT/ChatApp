@@ -33,18 +33,4 @@ export default StyleSheet.create({
     backgroundColor: '#FFFFFF',
     zIndex: 99,
   },
-  itemView: {
-    marginHorizontal: Styles.margin.marginLeft,
-    height: 50,
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    padding: 4,
-    zIndex: 999,
-    justifyContent: 'flex-start',
-    // justifyContent: 'space-between',
-  },
-  itemName: {
-    fontSize: Styles.FontSize.medium,
-    fontFamily: Styles.FontFamily.QuicksandBold,
-  },
 });

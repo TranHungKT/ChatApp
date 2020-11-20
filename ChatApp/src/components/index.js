@@ -11,6 +11,7 @@ import MessageInput from './MessageInput';
 import Message from './Message';
 import ListMessage from './ListMessage';
 import ListSpacer from './ListSpacer';
+import FriendSearch from './FriendSearch';
 
 export {
   Header,
@@ -26,4 +27,5 @@ export {
   MessageInput,
   ListMessage,
   ListSpacer,
+  FriendSearch,
 };

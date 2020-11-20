@@ -4,6 +4,7 @@ import {View, TextInput, FlatList, Text} from 'react-native';
 import styles from './styles';
 import {Language, Config} from '@common';
 import AvatarComponent from '../AvatarComponent';
+import FriendSearch from '../FriendSearch';
 export default class SearchBar extends Component {
   constructor(props) {
     super(props);
@@ -39,17 +40,7 @@ export default class SearchBar extends Component {
   _renderItem = (items) => {
     let {item} = items;
 
-    return (
-      <View style={styles.itemView}>
-        <AvatarComponent isSmallAvatar={true} source={item.image} />
-        <Text style={styles.itemName}>{item.userName}</Text>
-      </View>
-    );
-  };
-  _keyExtractor = (data) => {
-    console.log('item', data);
-    // console.log(index);
-    // return index.toString();
+    return <FriendSearch item={item} />;
   };
   render() {
     let {searchString} = this.state;
