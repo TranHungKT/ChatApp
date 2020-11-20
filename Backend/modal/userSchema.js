@@ -40,7 +40,7 @@ const userSchema = mongoose.Schema({
   },
 });
 
-userSchema.index({ email: "text" });
+userSchema.index({ userName: "text" });
 
 userSchema.pre("save", function (next) {
   var user = this;

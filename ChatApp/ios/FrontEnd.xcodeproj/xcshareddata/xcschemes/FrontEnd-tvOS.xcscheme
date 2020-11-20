@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "FrontEnd-tvOS.app"
-               BlueprintName = "FrontEnd-tvOS"
-               ReferencedContainer = "container:FrontEnd.xcodeproj">
+               BuildableName = "ChatApp-tvOS.app"
+               BlueprintName = "ChatApp-tvOS"
+               ReferencedContainer = "container:ChatApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "FrontEnd-tvOSTests.xctest"
-               BlueprintName = "FrontEnd-tvOSTests"
-               ReferencedContainer = "container:FrontEnd.xcodeproj">
+               BuildableName = "ChatApp-tvOSTests.xctest"
+               BlueprintName = "ChatApp-tvOSTests"
+               ReferencedContainer = "container:ChatApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "FrontEnd-tvOS.app"
-            BlueprintName = "FrontEnd-tvOS"
-            ReferencedContainer = "container:FrontEnd.xcodeproj">
+            BuildableName = "ChatApp-tvOS.app"
+            BlueprintName = "ChatApp-tvOS"
+            ReferencedContainer = "container:ChatApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "FrontEnd-tvOS.app"
-            BlueprintName = "FrontEnd-tvOS"
-            ReferencedContainer = "container:FrontEnd.xcodeproj">
+            BuildableName = "ChatApp-tvOS.app"
+            BlueprintName = "ChatApp-tvOS"
+            ReferencedContainer = "container:ChatApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

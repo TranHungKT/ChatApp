@@ -5,9 +5,9 @@ const { Friends } = require("../../../../modal/friendSchema");
 const { auth } = require("../../../../middleware/auth");
 router.post("/", auth, async (req, res) => {
   let { searchString } = req.body;
-
+  //Search theo tên có dấu
   let user = await User.find(
-    { email: { $regex: searchString } },
+    { userName: { $regex: searchString } },
     { score: { $meta: "textScore" } }
   )
     .sort({ score: { $meta: "textScore" } })

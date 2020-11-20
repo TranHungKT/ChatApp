@@ -2,7 +2,7 @@
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 platform :ios, '9.0'
 
-target 'FrontEnd' do
+target 'ChatApp' do
  
 
   # use_react_native!(:path => config["reactNativePath"])
@@ -37,7 +37,7 @@ target 'FrontEnd' do
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
-  target 'FrontEndTests' do
+  target 'ChatAppTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -52,10 +52,10 @@ target 'FrontEnd' do
   # end
 end
 
-target 'FrontEnd-tvOS' do
-  # Pods for FrontEnd-tvOS
+target 'ChatApp-tvOS' do
+  # Pods for ChatApp-tvOS
 
-  target 'FrontEnd-tvOSTests' do
+  target 'ChatApp-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end
