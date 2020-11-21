@@ -39,10 +39,11 @@ function socketManager(socket) {
     const saveChat = saveNewChat(sender, message, roomId);
   });
   socket.on(REQUEST_FRIEND, ({ _idRequest, _idReceiver, sender }) => {
+    console.log("I can hear ");
     Friends.createRequest(_idRequest, _idReceiver, (err, createSuccess) => {
       if (err) return;
       if (createSuccess) {
-        io.to(_idReceiver).emit(REQUEST_FRIEND, { sender });
+        io.to(_idReceiver).emit(REQUEST_FRIEND, { _idRequest, sender });
       }
     });
   });

@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity, Alert} from 'react-native';
 import styles from './styles';
 import AvatarComponent from '../AvatarComponent';
 import {connect} from 'react-redux';
-import {Language} from '@common';
+import {Config, Language} from '@common';
 class FriendSearch extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +26,7 @@ class FriendSearch extends Component {
   };
   makeFriend = (_idRequest, _idReceiver, sender) => {
     const {socket} = this.props.socket;
+    socket.emit(Config.Event.REQUEST_FRIEND, {_idRequest, _idReceiver, sender});
   };
   render() {
     const {item} = this.props;

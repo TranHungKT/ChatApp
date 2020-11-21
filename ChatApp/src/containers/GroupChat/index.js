@@ -36,7 +36,14 @@ class GroupChat extends Component {
 
     socket.emit(Config.Event.USER_CONNECTED, _id);
     socket.emit(Config.Event.JOIN_ROOM, roomIds);
+    this.listenFriendRequest(socket);
     this.setState({socket});
+  };
+
+  listenFriendRequest = (socket) => {
+    socket.on(Config.Event.REFUSE_FRIEND, ({_idRequest, sender}) => {
+      console.log('Friend Request', sender);
+    });
   };
 
   render() {
