@@ -3,6 +3,7 @@ import {View, Text} from 'react-native';
 import {SearchBar, GroupDevice, ListCommon} from '@components';
 import {Language, Config} from '@common';
 import {getRooms} from '../../redux/actions/roomAction';
+import {initSocket} from '../../redux/actions/socketAction';
 import {connect} from 'react-redux';
 import io from 'socket.io-client';
 
@@ -24,6 +25,7 @@ class GroupChat extends Component {
     let rooms = getRooms.payload;
     const {_id} = this.props.user.userData;
     const socket = io(Config.server);
+    this.props.initSocket(socket);
     let roomIds = [];
     socket.on('connect', () => {
       console.log('connected again');
@@ -63,6 +65,7 @@ const mapStateToProps = (state) => ({
 });
 const mapActionsToProps = {
   getRooms,
+  initSocket,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(GroupChat);

@@ -40,5 +40,11 @@ export default new LocalizedStrings({
       recentChat: 'Recent Chats',
       availableFriends: 'Available Friends',
     },
+    requestFriend: {
+      confirmRequest: 'Confirm Request',
+      content: 'Do you want to make friend with this person?',
+      OK: 'OK',
+      Cancel: 'Cancel',
+    },
   },
 });
