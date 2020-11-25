@@ -5,8 +5,11 @@ const { Friends } = require("../../../../modal/friendSchema");
 const { auth } = require("../../../../middleware/auth");
 router.get("/", auth, async (req, res) => {
   let _idRequest = req.user._id;
-  const friends = await Friends.find({ Admin: _idRequest })
-    .select("friendList")
+  const friends = await Friends.findOne({
+    admin: `${mongoose.Types.ObjectId(_idRequest)}`,
+  })
+    .select("friendList request waiting")
+    .populate("friendList")
     .exec();
   if (friends) {
     res.status(200).send(friends);

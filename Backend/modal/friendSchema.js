@@ -1,41 +1,38 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const friendSchema = mongoose.Schema(
-  {
-    admin: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-    //List user request me to become their friend
-    request: {
-      type: [
-        {
-          type: Schema.Types.ObjectId,
-          ref: "Users",
-        },
-      ],
-    },
-    //List user we are waiting to become friend
-    waiting: {
-      type: [
-        {
-          type: Schema.Types.ObjectId,
-          ref: "Users",
-        },
-      ],
-    },
-    friendList: {
-      type: [
-        {
-          type: Schema.Types.ObjectId,
-          ref: "Users",
-        },
-      ],
-    },
+const friendSchema = mongoose.Schema({
+  admin: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
   },
-  { timestamps: true }
-);
+  //List user request me to become their friend
+  request: {
+    type: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+  },
+  //List user we are waiting to become friend
+  waiting: {
+    type: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+  },
+  friendList: {
+    type: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+  },
+});
 
 friendSchema.statics.createRequest = async function (
   _idRequest,
