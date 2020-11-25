@@ -3,6 +3,7 @@ import {View, Text} from 'react-native';
 import {SearchBar, GroupDevice, ListCommon} from '@components';
 import {Language, Config} from '@common';
 import {getRooms} from '../../redux/actions/roomAction';
+import {getFriend} from '../../redux/actions/friendAction';
 import {initSocket} from '../../redux/actions/socketAction';
 import {connect} from 'react-redux';
 import io from 'socket.io-client';
@@ -27,7 +28,9 @@ class GroupChat extends Component {
     });
     this.annouceConnectedUser(socket);
     this.joinRoom(socket);
+    this.getListFriend();
     this.listenFriendRequest(socket);
+
     this.setState({socket});
   };
 
@@ -56,13 +59,18 @@ class GroupChat extends Component {
     });
   };
 
+  getListFriend = async () => {
+    let {cookie} = this.props.navigation.state.params;
+    const listFriend = await this.props.getFriend(cookie);
+    console.log('listFriend', listFriend.payload.friendList);
+  };
+
   render() {
     const {socket} = this.state;
 
     const {userData} = this.props.user;
     return (
       <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
-        {/* <SearchBar /> */}
         <GroupDevice text={Language.groupDevice.recentChat} />
         <ListCommon
           type={'rooms'}
@@ -83,6 +91,7 @@ const mapStateToProps = (state) => ({
 const mapActionsToProps = {
   getRooms,
   initSocket,
+  getFriend,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(GroupChat);
