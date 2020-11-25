@@ -23,3 +23,6 @@ export const UPDATE_LAST_MESSAGE = 'UPDATE_LAST_MESSAGE';
 
 //Socket action
 export const INIT_SOCKET = 'INIT_SOCKET';
+
+//Friend action
+export const GET_FRIENDS = 'GET_FRIENDS';
