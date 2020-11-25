@@ -8,25 +8,31 @@ const friendSchema = mongoose.Schema(
       ref: "User",
     },
     //List user request me to become their friend
-    request: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
+    request: {
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "Users",
+        },
+      ],
+    },
     //List user we are waiting to become friend
-    waiting: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
-    friendList: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
+    waiting: {
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "Users",
+        },
+      ],
+    },
+    friendList: {
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "Users",
+        },
+      ],
+    },
   },
   { timestamps: true }
 );
@@ -37,49 +43,35 @@ friendSchema.statics.createRequest = async function (
   cb
 ) {
   var friends = this;
-  // friends.find(
-  //   { admin: `${mongoose.Types.ObjectId(_idReceiver)}` },
-  //   function (err, friend) {
-  //     if (err) return err;
-  //     if (friend == []) {
-  //       return cb(null, (createSuccess = false));
-  //     }
-  //     // friend.request.push(_idRequest);
-  //     console.log("request", friend);
-  //     // friend
-  //     //   .save()
-  //     //   .then()
-  //     //   .catch((err) => console.log("can not save request friend"));
-  //   }
-  // );
-  const friendReceiver = await friends.find({
-    admin: `${mongoose.Types.ObjectId(_idReceiver)}`,
-  });
-  if (friendReceiver) {
-    console.log("friend receiver", friendReceiver);
-  } else {
-    console.log("No Friend receiver");
+  //Save friend are waiting yourself to confirm
+  const friendReceiver = await friends.findOneAndUpdate(
+    {
+      admin: `${mongoose.Types.ObjectId(_idReceiver)}`,
+    },
+    {
+      $push: { waiting: _idRequest },
+    }
+  );
+  if (!friendReceiver) {
+    let err = "Can not";
+    return cb(err, null);
   }
-  // friends.find(
-  //   { admin: `${mongoose.Types.ObjectId(_idRequest)}` },
-  //   function (err, friend) {
-  //     if (err) return err;
-  //     // friend.waiting.concat(_idReceiver);
-  //     // friend
-  //     //   .save()
-  //     //   .then()
-  //     //   .catch((err) => console.log("can not save waiting friend"));
-  //   }
-  // );
-  // let createSuccess = true;
-  const friendRequest = await friends.find({
-    admin: `${mongoose.Types.ObjectId(_idRequest)}`,
-  });
-  if (friendRequest) {
-    console.log("Friend Request", friendRequest);
-  } else {
-    console.log("No friend request");
+  console.log(friendReceiver);
+  console.log("request", _idRequest);
+  //Save friend you are request and wait for confirm
+  const friendRequest = await friends.findOneAndUpdate(
+    {
+      admin: `${mongoose.Types.ObjectId(_idRequest)}`,
+    },
+    {
+      $push: { request: _idReceiver },
+    }
+  );
+  if (!friendRequest) {
+    let err = "Can not";
+    return cb(err, null);
   }
+  console.log(friendRequest);
   return cb(null, (createSuccess = true));
 };
 
