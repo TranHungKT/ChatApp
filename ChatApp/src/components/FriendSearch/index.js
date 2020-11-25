@@ -9,6 +9,7 @@ class FriendSearch extends Component {
     super(props);
     this.state = {};
   }
+
   createFriend = (_idRequest, _idReceiver, sender) => () => {
     Alert.alert(
       `${Language.requestFriend.confirmRequest}`,
@@ -26,13 +27,19 @@ class FriendSearch extends Component {
   };
   makeFriend = (_idRequest, _idReceiver, sender) => {
     const {socket} = this.props.socket;
-    socket.emit(Config.Event.REQUEST_FRIEND, {_idRequest, _idReceiver, sender});
+    const socketID = socket.id;
+    socket.emit(Config.Event.REQUEST_FRIEND, {
+      _idRequest,
+      _idReceiver,
+      sender,
+      socketID,
+    });
   };
   render() {
     const {item} = this.props;
     let _idRequest = this.props.user.userData._id;
     let sender = this.props.user.userData.userName;
-    let _idReceiver;
+    let _idReceiver = item._id;
     return (
       <TouchableOpacity
         onPress={this.createFriend(_idRequest, _idReceiver, sender)}>

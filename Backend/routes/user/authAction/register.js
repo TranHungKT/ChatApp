@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { User } = require("../../../modal/userSchema");
-
+const { Friends } = require("../../../modal/friendSchema");
 const { validateRegister, codeValidate } = require("../../../utils/validator");
 
 router.post("/", (req, res) => {
@@ -27,6 +27,11 @@ router.post("/", (req, res) => {
         //       });
         //     }, 60000);
         //     return res.status(200).json({ message: `${user.token}` });
+        //Create new friend list
+        let friend = new Friends();
+        friend.initialFriendList(user._id);
+
+        // Save user
         user
           .save()
           .then()

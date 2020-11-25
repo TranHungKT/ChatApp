@@ -44,6 +44,9 @@ class GroupChat extends Component {
     socket.on(Config.Event.REFUSE_FRIEND, ({_idRequest, sender}) => {
       console.log('Friend Request', sender);
     });
+    socket.on(Config.Event.REQUEST_FRIEND, ({_idRequest, sender}) => {
+      console.log('Listen to request success');
+    });
   };
 
   render() {

@@ -38,12 +38,16 @@ function socketManager(socket) {
     io.in(roomId).emit(MESSAGE_SENT, { messageSent });
     const saveChat = saveNewChat(sender, message, roomId);
   });
-  socket.on(REQUEST_FRIEND, ({ _idRequest, _idReceiver, sender }) => {
+  socket.on(REQUEST_FRIEND, ({ _idRequest, _idReceiver, sender, socketID }) => {
     console.log("I can hear ");
+    console.log("_id request", _idRequest);
+    console.log("_idREceiver", _idReceiver);
+    console.log("sender", sender);
     Friends.createRequest(_idRequest, _idReceiver, (err, createSuccess) => {
       if (err) return;
+      console.log("createSuccess", createSuccess);
       if (createSuccess) {
-        io.to(_idReceiver).emit(REQUEST_FRIEND, { _idRequest, sender });
+        io.to(socketID).emit(REQUEST_FRIEND, { _idRequest, sender });
       }
     });
   });
