@@ -41,10 +41,9 @@ function socketManager(socket) {
   socket.on(REQUEST_FRIEND, ({ _idRequest, _idReceiver, sender, socketID }) => {
     Friends.createRequest(_idRequest, _idReceiver, (err, createSuccess) => {
       if (err) {
-        console.log("HI");
+        console.log(err);
         return;
       }
-      console.log("createSuccess", createSuccess);
       if (createSuccess) {
         io.to(socketID).emit(REQUEST_FRIEND, { _idRequest, sender });
       }

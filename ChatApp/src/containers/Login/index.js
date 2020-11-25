@@ -1,14 +1,5 @@
 import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  Dimensions,
-  TouchableOpacity,
-  Switch,
-  KeyboardAvoidingView,
-} from 'react-native';
+import {View, Text, Switch, KeyboardAvoidingView} from 'react-native';
 import {toast} from '../../common/Setting';
 
 import {Input, Button, LoginWithFTG} from '@components';
