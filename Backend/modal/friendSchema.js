@@ -43,56 +43,36 @@ friendSchema.statics.createRequest = async function (
   cb
 ) {
   var friends = this;
-  //Save friend are waiting yourself to confirm
-  const friendReceiver = await friends.findOneAndUpdate(
-    {
-      admin: `${mongoose.Types.ObjectId(_idReceiver)}`,
-    },
-    {
-      $push: { waiting: _idRequest },
-    }
-  );
 
-  if (!friendReceiver) {
-    let err = "Can not";
+  const friendRequest = await friends
+    .findOne({
+      admin: `${mongoose.Types.ObjectId(_idReceiver)}`,
+    })
+    .select("request")
+    .exec();
+
+  if (!friendRequest) {
+    let err = "Can not find this friend";
     return cb(err, null);
   }
-  //Save friend you are request and wait for confirm
-  // const friendRequest = await friends.findOneAndUpdate(
-  //   {
-  //     admin: `${mongoose.Types.ObjectId(_idRequest)}`,
-  //   },
-  //   {
-  //     $push: { request: _idReceiver },
-  //   }
-  // );
-  const friendWaiting = await friends.findOne({
-    admin: `${mongoose.Types.ObjectId(_idReceiver)}`,
-  });
-  if (checkId(_idRequest, friendWaiting.waiting)) {
+
+  if (checkId(_idRequest, friendRequest.request)) {
     err = "You requested for this friend before";
     return cb(err, null);
   }
 
-  friendWaiting.waiting.push(_idRequest);
-  friendWaiting.save();
-  const friendRequest = await friends.findOne({
-    admin: `${mongoose.Types.ObjectId(_idRequest)}`,
-  });
-
-  if (checkId(_idReceiver, friendRequest.request)) {
-    err = "You are waiting for this friend";
-    return cb(err, null);
-  }
-  friendRequest.request.push(_idReceiver);
+  friendRequest.request.push(_idRequest);
   friendRequest.save();
+  const friendWaiting = await friends
+    .findOne({
+      admin: `${mongoose.Types.ObjectId(_idRequest)}`,
+    })
+    .select("waiting")
+    .exec();
 
-  if (!friendRequest) {
-    let err = "Can not save";
-    return cb(err, null);
-  }
-
-  console.log(friendList);
+  friendWaiting.waiting.push(_idReceiver);
+  friendWaiting.save();
+  console.log("hello", friendWaiting);
 
   return cb(null, (createSuccess = true));
 };

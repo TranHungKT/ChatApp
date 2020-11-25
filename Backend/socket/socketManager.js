@@ -36,7 +36,7 @@ function socketManager(socket) {
     let messageSent = formatMessage({ message, sender, userId });
 
     io.in(roomId).emit(MESSAGE_SENT, { messageSent });
-    const saveChat = saveNewChat(sender, message, roomId);
+    saveNewChat(sender, message, roomId);
   });
   socket.on(REQUEST_FRIEND, ({ _idRequest, _idReceiver, sender, socketID }) => {
     Friends.createRequest(_idRequest, _idReceiver, (err, createSuccess) => {
