@@ -20,24 +20,31 @@ class GroupChat extends Component {
   }
 
   initSocket = async () => {
-    let {cookie} = this.props.navigation.state.params;
-    const getRooms = await this.props.getRooms(cookie);
-    let rooms = getRooms.payload;
-    const {_id} = this.props.user.userData;
     const socket = io(Config.server);
     this.props.initSocket(socket);
-    let roomIds = [];
     socket.on('connect', () => {
       console.log('connected again');
     });
+    this.annouceConnectedUser(socket);
+    this.joinRoom(socket);
+    this.listenFriendRequest(socket);
+    this.setState({socket});
+  };
+
+  annouceConnectedUser = (socket) => {
+    const {_id} = this.props.user.userData;
+    socket.emit(Config.Event.USER_CONNECTED, _id);
+  };
+
+  joinRoom = async (socket) => {
+    let {cookie} = this.props.navigation.state.params;
+    const getRooms = await this.props.getRooms(cookie);
+    let rooms = getRooms.payload;
+    let roomIds = [];
     rooms.forEach((room) => {
       roomIds.push(room._id);
     });
-
-    socket.emit(Config.Event.USER_CONNECTED, _id);
     socket.emit(Config.Event.JOIN_ROOM, roomIds);
-    this.listenFriendRequest(socket);
-    this.setState({socket});
   };
 
   listenFriendRequest = (socket) => {
