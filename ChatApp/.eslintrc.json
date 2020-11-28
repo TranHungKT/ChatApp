@@ -1,0 +1,20 @@
+{
+	"env": {
+		"es6": true
+	},
+	"parser": "babel-eslint",
+	"rules": {
+		"semi": "error",
+		"indent": "off",
+		"no-multi-spaces": "error",
+		"space-in-parens": "error",
+		"no-multiple-empty-lines": "error",
+		"prefer-const": "error",
+		"no-use-before-define": "error",
+		"no-useless-call": "error"
+	},
+
+	"parserOptions": {
+		"sourceType": "module"
+}
+}
