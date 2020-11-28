@@ -23,8 +23,8 @@ let connectedUser = [];
 
 function socketManager(socket) {
   socket.on(USER_CONNECTED, (_id) => {
-    console.log("id server", _id);
-    connectedUser = addUserConnected(_id);
+    addUserConnected(_id);
+    console.log("con", connectedUser);
   });
   socket.on(JOIN_ROOM, (roomIds) => {
     roomIds.forEach((roomId) => {
@@ -58,8 +58,6 @@ function socketManager(socket) {
       }
       return "false";
     });
-    console.log("connected", connectedUser);
-    console.log("friend", connectedFriends);
   });
 }
 /*
@@ -112,6 +110,9 @@ async function updateLastMessage(chatId, roomId) {
 }
 
 function addUserConnected(userId) {
+  if (checkID(userId, connectedUser)) {
+    return;
+  }
   connectedUser.push(userId);
   return connectedUser;
 }

@@ -3,7 +3,7 @@ import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import AvatarComponent from '../AvatarComponent';
 import StatusComponent from '../StatusComponent';
-import {RouteNames, Config} from '@common';
+import {RouteNames, Config, Language} from '@common';
 import {connect} from 'react-redux';
 
 class ListFriends extends React.Component {
@@ -21,6 +21,7 @@ class ListFriends extends React.Component {
             <AvatarComponent source={item.image} />
           </View>
           <StatusComponent
+            type={Language.type.friends}
             title={item.userName}
             lastMessage={!!item.lastMessageId ? item.lastMessageId.message : ''}
             createdAt={!!item.lastMessageId ? item.lastMessageId.createdAt : ''}

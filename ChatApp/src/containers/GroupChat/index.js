@@ -23,14 +23,10 @@ class GroupChat extends Component {
   initSocket = async () => {
     const socket = io(Config.server);
     this.props.initSocket(socket);
-    socket.on('connect', () => {
-      console.log('connected again');
-    });
     this.annouceConnectedUser(socket);
     this.joinRoom(socket);
     this.getListFriend(socket);
     this.listenFriendRequest(socket);
-
     this.setState({socket});
   };
 
