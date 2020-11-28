@@ -11,7 +11,6 @@ export const getFriend = (cookie) => async (dispatch) => {
     },
   });
   const data = await friends.json();
-  console.log('data', data);
   return dispatch({
     type: GET_FRIENDS,
     payload: data,

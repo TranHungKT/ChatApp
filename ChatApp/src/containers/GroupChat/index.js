@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 import {SearchBar, GroupDevice, ListCommon} from '@components';
-import {Language, Config} from '@common';
+import {Language, Config, Styles} from '@common';
 import {getRooms} from '../../redux/actions/roomAction';
 import {getFriend} from '../../redux/actions/friendAction';
 import {initSocket} from '../../redux/actions/socketAction';
@@ -62,6 +62,7 @@ class GroupChat extends Component {
   getListFriend = async () => {
     let {cookie} = this.props.navigation.state.params;
     const listFriend = await this.props.getFriend(cookie);
+    // console.log(listFriend.payload.friendList);
   };
 
   render() {
@@ -77,8 +78,10 @@ class GroupChat extends Component {
           socket={socket}
           sender={userData.userName}
           userId={userData._id}
+          style={{flex: 0.4}}
         />
-        <ListCommon type={Language.type.friends} />
+        <GroupDevice text={Language.groupDevice.availableFriends} />
+        <ListCommon type={Language.type.friends} style={{flex: 0.4}} />
       </View>
     );
   }

@@ -44,7 +44,7 @@ class ListRecentChats extends React.Component {
   _keyExtractor = (item, index) => `${index}`;
   render() {
     return (
-      <View style={{zIndex: 0}}>
+      <View style={this.props.style}>
         <FlatList
           data={this.props.rooms}
           renderItem={this._renderItem}

@@ -14,7 +14,6 @@ class ListFriends extends React.Component {
 
   _renderItem = (items) => {
     const item = items.item;
-    console.log('item', item);
     return (
       <View style={styles.itemView}>
         <TouchableOpacity style={styles.mainView}>
@@ -34,7 +33,7 @@ class ListFriends extends React.Component {
   render() {
     const {friends} = this.props.friends;
     return (
-      <View style={{zIndex: 0}}>
+      <View style={this.props.style}>
         <FlatList
           data={friends.friendList}
           renderItem={(items) => this._renderItem(items)}

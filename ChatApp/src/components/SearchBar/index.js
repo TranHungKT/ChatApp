@@ -34,7 +34,7 @@ export default class SearchBar extends Component {
     if (friends) {
       this.setState({friends: friends});
     } else {
-      console.log('errroe');
+      console.log('error');
     }
   };
   _renderItem = (items) => {
