@@ -9,7 +9,7 @@ router.get("/", auth, async (req, res) => {
     admin: `${mongoose.Types.ObjectId(_idRequest)}`,
   })
     .select("friendList request waiting")
-    .populate("friendList")
+    .populate("friendList", "userName email image")
     .exec();
   if (friends) {
     res.status(200).send(friends);
