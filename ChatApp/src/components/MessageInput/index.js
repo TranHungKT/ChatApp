@@ -23,7 +23,6 @@ class MessageInput extends Component {
     this.initSocket(socket);
   }
 
-  initSocket = (socket) => {};
   /*
    * In this component, sender is sender
    * onChangeText function will return a onTyping event to server

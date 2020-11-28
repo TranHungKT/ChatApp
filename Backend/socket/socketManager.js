@@ -16,13 +16,15 @@ const {
   REQUEST_FRIEND,
   ACCEPT_FRIEND,
   REFUSE_FRIEND,
+  CHECK_CONNECTED,
 } = require("./Event");
 
 let connectedUser = [];
 
 function socketManager(socket) {
-  socket.on(USER_CONNECTED, (userId) => {
-    connectedUser = addUserConnected(userId);
+  socket.on(USER_CONNECTED, (_id) => {
+    console.log("id server", _id);
+    connectedUser = addUserConnected(_id);
   });
   socket.on(JOIN_ROOM, (roomIds) => {
     roomIds.forEach((roomId) => {
@@ -49,6 +51,28 @@ function socketManager(socket) {
       }
     });
   });
+  socket.on(CHECK_CONNECTED, ({ friendIds }) => {
+    let connectedFriends = friendIds.map((friendId) => {
+      if (checkID(friendId, connectedUser)) {
+        return "true";
+      }
+      return "false";
+    });
+    console.log("connected", connectedUser);
+    console.log("friend", connectedFriends);
+  });
+}
+/*
+  function checkID 
+  @param id is ID in list friend
+  return true if is online
+*/
+function checkID(id, array) {
+  if (array.includes(id)) {
+    console.log("yes");
+    return true;
+  }
+  return false;
 }
 
 /*

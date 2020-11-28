@@ -28,7 +28,7 @@ class GroupChat extends Component {
     });
     this.annouceConnectedUser(socket);
     this.joinRoom(socket);
-    this.getListFriend();
+    this.getListFriend(socket);
     this.listenFriendRequest(socket);
 
     this.setState({socket});
@@ -36,6 +36,7 @@ class GroupChat extends Component {
 
   annouceConnectedUser = (socket) => {
     const {_id} = this.props.user.userData;
+    console.log('id client', _id);
     socket.emit(Config.Event.USER_CONNECTED, _id);
   };
 
@@ -59,12 +60,16 @@ class GroupChat extends Component {
     });
   };
 
-  getListFriend = async () => {
+  getListFriend = async (socket) => {
     let {cookie} = this.props.navigation.state.params;
     const listFriend = await this.props.getFriend(cookie);
-    // console.log(listFriend.payload.friendList);
+    let friendIds = listFriend.payload.friendList.map((friend) => friend._id);
+    this.checkFriendConnected(socket, friendIds);
   };
 
+  checkFriendConnected = (socket, friendIds) => {
+    socket.emit(Config.Event.CHECK_CONNECTED, {friendIds});
+  };
   render() {
     const {socket} = this.state;
 
@@ -78,10 +83,10 @@ class GroupChat extends Component {
           socket={socket}
           sender={userData.userName}
           userId={userData._id}
-          style={{flex: 0.4}}
+          style={{flex: 0.5}}
         />
         <GroupDevice text={Language.groupDevice.availableFriends} />
-        <ListCommon type={Language.type.friends} style={{flex: 0.4}} />
+        <ListCommon type={Language.type.friends} style={{flex: 0.5}} />
       </View>
     );
   }

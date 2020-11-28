@@ -14,7 +14,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'Dong@gmail.com',
+      email: 'hung@gmail.com',
       password: '123456',
       press: false,
       loading: false,
@@ -74,7 +74,7 @@ class Login extends Component {
 
     if (response.status == 200) {
       let cookie = response.headers.get('set-cookie');
-      this.props.getUserData(cookie);
+      await this.props.getUserData(cookie);
       this.props.navigation.navigate(RouteNames.GroupChat, {
         cookie: cookie,
       });

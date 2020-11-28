@@ -16,6 +16,7 @@ export default {
     REQUEST_FRIEND: 'REQUEST_FRIEND',
     ACCEPT_FRIEND: 'ACCEPT_FRIEND',
     REFUSE_FRIEND: 'REFUSE_FRIEND',
+    CHECK_CONNECTED: 'CHECK_CONNECTED',
   },
   typeOfHeader: {
     group: 'group',
