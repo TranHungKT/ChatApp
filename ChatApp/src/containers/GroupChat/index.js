@@ -62,7 +62,6 @@ class GroupChat extends Component {
   getListFriend = async () => {
     let {cookie} = this.props.navigation.state.params;
     const listFriend = await this.props.getFriend(cookie);
-    console.log('listFriend', listFriend.payload.friendList);
   };
 
   render() {
@@ -73,12 +72,13 @@ class GroupChat extends Component {
       <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
         <GroupDevice text={Language.groupDevice.recentChat} />
         <ListCommon
-          type={'rooms'}
+          type={Language.type.rooms}
           navigation={this.props.navigation}
           socket={socket}
           sender={userData.userName}
           userId={userData._id}
         />
+        <ListCommon type={Language.type.friends} />
       </View>
     );
   }

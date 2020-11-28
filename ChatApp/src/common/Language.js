@@ -46,5 +46,9 @@ export default new LocalizedStrings({
       OK: 'OK',
       Cancel: 'Cancel',
     },
+    type: {
+      friends: 'friends',
+      rooms: 'rooms',
+    },
   },
 });
