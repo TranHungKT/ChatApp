@@ -34,6 +34,13 @@ const friendSchema = mongoose.Schema({
   },
 });
 
+function checkId(id, list) {
+  if (!list.includes(id)) {
+    return false;
+  }
+  return true;
+}
+
 friendSchema.statics.createRequest = async function (
   _idRequest,
   _idReceiver,
@@ -49,7 +56,7 @@ friendSchema.statics.createRequest = async function (
     .exec();
 
   if (!friendRequest) {
-    let err = "Can not find this friend";
+    const err = "Can not find this friend";
     return cb(err, null);
   }
 
@@ -86,11 +93,5 @@ friendSchema.methods.initialFriendList = function (_idAdmin) {
     .catch(() => console.log("Can not save init friend"));
 };
 
-function checkId(id, list) {
-  if (!list.includes(id)) {
-    return false;
-  }
-  return true;
-}
 const Friends = mongoose.model("Friends", friendSchema);
 module.exports = { Friends };

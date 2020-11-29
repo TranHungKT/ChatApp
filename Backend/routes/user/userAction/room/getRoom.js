@@ -7,7 +7,7 @@ const { Rooms } = require("../../../../modal/roomSchema");
 const { auth } = require("../../../../middleware/auth");
 
 router.get("/", auth, (req, res) => {
-  let _idRequest = req.user._id; // After auth we have req.user;
+  const _idRequest = req.user._id; // After auth we have req.user;
 
   Rooms.find({ friendsInRoom: mongoose.Types.ObjectId(_idRequest) })
     .populate("lastMessageId")
@@ -24,7 +24,7 @@ router.get("/", auth, (req, res) => {
 });
 
 router.post("/chatArray", async (req, res) => {
-  let chatArray = await Rooms.find({
+  const chatArray = await Rooms.find({
     _id: req.body.roomId,
   })
     .populate("chatArray")

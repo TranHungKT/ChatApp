@@ -81,7 +81,7 @@ userSchema.methods.generateToken = function (cb) {
 
 userSchema.methods.sendEmail = function (mailReceive, cb) {
   var user = this;
-  let transpoter = nodemailer.createTransport({
+  const transpoter = nodemailer.createTransport({
     service: "gmail",
     auth: {
       user: `${emailTransporter}`,
@@ -91,7 +91,7 @@ userSchema.methods.sendEmail = function (mailReceive, cb) {
 
   user.token = Math.floor(100000 + Math.random() * 900000);
 
-  let mailOptions = {
+  const mailOptions = {
     from: `${emailTransporter}`,
     to: `${mailReceive}`,
     subject: "Login chat app",

@@ -7,9 +7,9 @@ const { ChatInRoom } = require("../../../../modal/chatInRoomSchema");
 const { auth } = require("../../../../middleware/auth");
 var mongoose = require("mongoose");
 router.post("/", auth, (req, res) => {
-  let _idRequest = req.user._id; // After auth we have req.user;
-  let _idReceiver = req.body._id;
-  let senderName = req.user.userName;
+  const _idRequest = req.user._id; // After auth we have req.user;
+  const _idReceiver = req.body._id;
+  const senderName = req.user.userName;
   User.findOne({ _id: _idReceiver })
     .then((user) => {
       if (!user)
@@ -22,7 +22,7 @@ router.post("/", auth, (req, res) => {
       })
         .then((room) => {
           if (room.length == 0) {
-            let tempRoom = new Rooms({
+            const tempRoom = new Rooms({
               friendsInRoom: [{ _id: _idRequest }, { _id: _idReceiver }],
               name: user.userName + " & " + senderName,
             });

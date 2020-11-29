@@ -4,7 +4,7 @@ const { Users } = require("../../../../modal/userSchema");
 const { Friends } = require("../../../../modal/friendSchema");
 router.post("/", (req, res) => {
   // let _idRequest = req.user._id;
-  let _idReceiver = req.body._id;
+  const _idReceiver = req.body._id;
   Friends.createRequest(_idRequest, _idReceiver, (err, createSuccess) => {
     if (err) return;
     if (createSuccess) {

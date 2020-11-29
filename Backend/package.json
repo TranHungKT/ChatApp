@@ -5,14 +5,17 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "lint": "eslint ."
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-eslint": "^10.1.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
+    "eslint": "^7.14.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.27.0",

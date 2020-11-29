@@ -14,7 +14,7 @@ isNotFull = (string) => {
   else return false;
 };
 exports.validateRegister = (data) => {
-  let errors = {};
+  const errors = {};
 
   if (isEmpty(data.email)) {
     errors.email = "Must not be empty";
@@ -33,7 +33,7 @@ exports.validateRegister = (data) => {
 };
 
 exports.validateLogin = (data) => {
-  let errors = {};
+  const errors = {};
 
   if (!isEmail(data.email)) errors.email = "Must be a valid email address";
   if (isEmpty(data.email)) errors.email = "Must not be empty";
@@ -46,7 +46,7 @@ exports.validateLogin = (data) => {
 };
 
 exports.codeValidate = (data) => {
-  let errors = {};
+  const errors = {};
 
   if (data.code && isNotFull(data.code)) errors.code = "Must have 6 digits";
   return {

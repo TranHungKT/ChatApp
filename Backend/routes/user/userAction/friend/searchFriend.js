@@ -4,9 +4,9 @@ const { User } = require("../../../../modal/userSchema");
 const { Friends } = require("../../../../modal/friendSchema");
 const { auth } = require("../../../../middleware/auth");
 router.post("/", auth, async (req, res) => {
-  let { searchString } = req.body;
+  const { searchString } = req.body;
   //Search theo tên có dấu
-  let user = await User.find(
+  const user = await User.find(
     { userName: { $regex: searchString } },
     { score: { $meta: "textScore" } }
   )

@@ -28,7 +28,7 @@ router.post("/", (req, res) => {
         //     }, 60000);
         //     return res.status(200).json({ message: `${user.token}` });
         //Create new friend list
-        let friend = new Friends();
+        const friend = new Friends();
         friend.initialFriendList(user._id);
 
         // Save user
