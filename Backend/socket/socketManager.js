@@ -77,6 +77,10 @@ function addUserConnected(userId) {
   return connectedUser;
 }
 
+/*
+Main socket goes here
+*/
+
 function socketManager(socket) {
   socket.on(USER_CONNECTED, (_id) => {
     addUserConnected(_id);
@@ -109,11 +113,12 @@ function socketManager(socket) {
   });
   socket.on(CHECK_CONNECTED, ({ friendIds }) => {
     friendIds.map((friendId) => {
-      if (checkID(friendId, connectedUser)) {
-        return "true";
+      if (!checkID(friendId, connectedUser)) {
+        ("false");
       }
-      return "false";
+      ("true");
     });
+    socket.emit(CHECK_CONNECTED, friendIds);
   });
 }
 
