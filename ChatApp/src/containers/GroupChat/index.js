@@ -32,7 +32,6 @@ class GroupChat extends Component {
 
 	annouceConnectedUser = (socket) => {
 		const { _id } = this.props.user.userData;
-		console.log('id client', _id);
 		socket.emit(Config.Event.USER_CONNECTED, _id);
 	};
 
@@ -80,7 +79,11 @@ class GroupChat extends Component {
 					style={{ flex: 0.5 }}
 				/>
 				<GroupDevice text={Language.groupDevice.availableFriends} />
-				<ListCommon type={Language.type.friends} style={{ flex: 0.5 }} />
+				<ListCommon
+					type={Language.type.friends}
+					style={{ flex: 0.5 }}
+					socket={socket}
+				/>
 			</View>
 		);
 	}

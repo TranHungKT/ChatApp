@@ -112,13 +112,16 @@ function socketManager(socket) {
     });
   });
   socket.on(CHECK_CONNECTED, ({ friendIds }) => {
+    const connectedFriend = [];
     friendIds.map((friendId) => {
       if (!checkID(friendId, connectedUser)) {
-        ("false");
+        connectedFriend.push(0);
+      } else {
+        connectedFriend.push(1);
       }
-      ("true");
     });
-    socket.emit(CHECK_CONNECTED, friendIds);
+    console.log("connectedFriend", connectedFriend);
+    io.emit(CHECK_CONNECTED, connectedFriend);
   });
 }
 

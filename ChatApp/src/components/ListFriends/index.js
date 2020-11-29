@@ -3,23 +3,31 @@ import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import AvatarComponent from '../AvatarComponent';
 import StatusComponent from '../StatusComponent';
-import { RouteNames, Config, Language } from '@common';
+import { Config, Language } from '@common';
 import { connect } from 'react-redux';
 
 class ListFriends extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			friendIds: [],
+		};
 	}
-	componentDidMount = () => {
-		const { socket } = this.props.socket;
-		this.listenConnected(socket);
+
+	UNSAFE_componentWillReceiveProps(nextProps) {
+		if (nextProps.socket != this.props.socket) {
+			this.listenConnected(nextProps.socket);
+		}
+	}
+
+	listenConnected = (socket) => {
+		socket.on(Config.Event.CHECK_CONNECTED, (friendIds) => {
+			this.setState({ friendIds });
+		});
 	};
 
-	listenConnected = (socket) => {};
-
-	_renderItem = (items) => {
-		const item = items.item;
+	_renderItem = ({ item, index }) => {
+		const { friendIds } = this.state;
 		return (
 			<View style={styles.itemView}>
 				<TouchableOpacity style={styles.mainView}>
@@ -29,8 +37,9 @@ class ListFriends extends React.Component {
 					<StatusComponent
 						type={Language.type.friends}
 						title={item.userName}
-						lastMessage={!!item.lastMessageId ? item.lastMessageId.message : ''}
-						createdAt={!!item.lastMessageId ? item.lastMessageId.createdAt : ''}
+						// lastMessage={!!item.lastMessageId ? item.lastMessageId.message : ''}
+						// createdAt={!!item.lastMessageId ? item.lastMessageId.createdAt : ''}
+						status={friendIds[index]}
 					/>
 				</TouchableOpacity>
 			</View>
@@ -55,7 +64,6 @@ const mapActionToProps = {};
 const mapStateToProps = (state) => {
 	return {
 		friends: state.friendReducer,
-		socket: state.socketReducer,
 	};
 };
 
