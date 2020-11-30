@@ -6,12 +6,8 @@ const { Chats } = require("../modal/chatSchema");
 const { formatMessage } = require("../utils/Factories");
 const {
   USER_CONNECTED,
-  MESSAGE_RECIEVED,
   MESSAGE_SENT,
-  USER_DISCONNECTED,
   TYPING,
-  VERIFY_USER,
-  LOGOUT,
   JOIN_ROOM,
   REQUEST_FRIEND,
   ACCEPT_FRIEND,
@@ -28,7 +24,6 @@ const connectedUser = [];
 */
 function checkID(id, array) {
   if (array.includes(id)) {
-    console.log("yes");
     return true;
   }
   return false;
@@ -84,7 +79,6 @@ Main socket goes here
 function socketManager(socket) {
   socket.on(USER_CONNECTED, (_id) => {
     addUserConnected(_id);
-    console.log("con", connectedUser);
   });
   socket.on(JOIN_ROOM, (roomIds) => {
     roomIds.forEach((roomId) => {
@@ -111,7 +105,7 @@ function socketManager(socket) {
       }
     });
   });
-  socket.on(CHECK_CONNECTED, ({ friendIds }) => {
+  socket.on(CHECK_CONNECTED, ({ friendIds, socketID }) => {
     const connectedFriend = [];
     friendIds.map((friendId) => {
       if (!checkID(friendId, connectedUser)) {
@@ -121,7 +115,7 @@ function socketManager(socket) {
       }
     });
     console.log("connectedFriend", connectedFriend);
-    io.emit(CHECK_CONNECTED, connectedFriend);
+    io.to(socketID).emit(CHECK_CONNECTED, connectedFriend);
   });
 }
 

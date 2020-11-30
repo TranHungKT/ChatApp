@@ -18,7 +18,8 @@ class ListFriends extends React.Component {
 		if (nextProps.socket != this.props.socket) {
 			this.listenConnected(nextProps.socket);
 		}
-	}
+  }
+  
 
 	listenConnected = (socket) => {
 		socket.on(Config.Event.CHECK_CONNECTED, (friendIds) => {

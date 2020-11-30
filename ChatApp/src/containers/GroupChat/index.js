@@ -53,16 +53,27 @@ class GroupChat extends Component {
 			console.log('Listen to request success');
 		});
 	};
-
+	/*
+	Because we dont want to emit list user connected to all user in socket so we need to check every 20s with user
+	*/
 	getListFriend = async (socket) => {
 		const listFriend = await this.props.getFriend();
+		const socketID = socket.id;
 		const friendIds = listFriend.payload.friendList.map((friend) => friend._id);
-		this.checkFriendConnected(socket, friendIds);
+		this.checkFriendConnected(socket, friendIds, socketID);
+		this.interval = setInterval(() => {
+			this.checkFriendConnected(socket, friendIds, socketID);
+		}, 20000);
 	};
 
-	checkFriendConnected = (socket, friendIds) => {
-		socket.emit(Config.Event.CHECK_CONNECTED, { friendIds });
+	checkFriendConnected = (socket, friendIds, socketID) => {
+		socket.emit(Config.Event.CHECK_CONNECTED, { friendIds, socketID });
 	};
+
+	componentWillUnmount() {
+		clearInterval(this.interval);
+		console.log('HI');
+	}
 	render() {
 		const { socket } = this.state;
 
