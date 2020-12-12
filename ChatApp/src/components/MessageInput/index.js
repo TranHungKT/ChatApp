@@ -7,6 +7,7 @@ import { Styles, Config } from '@common';
 import { connect } from 'react-redux';
 
 import { updateLastMessage } from '../../redux/actions/roomAction';
+import ImagePicker from 'react-native-image-picker';
 
 class MessageInput extends Component {
 	constructor(props) {
@@ -81,6 +82,19 @@ class MessageInput extends Component {
 		this.props.updateLastMessage(roomId, sender, message);
 	};
 
+	selectImage = () => {
+		ImagePicker.launchImageLibrary(
+			{
+				mediaType: 'photo',
+				includeBase64: false,
+				maxHeight: 200,
+				maxWidth: 200,
+			},
+			(response) => {
+				console.log(response.uri);
+			}
+		);
+	};
 	render() {
 		const { height, message } = this.state;
 		return (
@@ -122,7 +136,7 @@ class MessageInput extends Component {
 				</View>
 				<View style={styles.functionView}>
 					<TouchableOpacity>
-						<Camera height={28} width={28} />
+						<Camera height={28} width={28} onPress={this.selectImage} />
 					</TouchableOpacity>
 
 					<TouchableOpacity onPress={this.onSentMessage}>
