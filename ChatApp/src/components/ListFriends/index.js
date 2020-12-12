@@ -18,8 +18,7 @@ class ListFriends extends React.Component {
 		if (nextProps.socket != this.props.socket) {
 			this.listenConnected(nextProps.socket);
 		}
-  }
-  
+	}
 
 	listenConnected = (socket) => {
 		socket.on(Config.Event.CHECK_CONNECTED, (friendIds) => {
@@ -38,8 +37,6 @@ class ListFriends extends React.Component {
 					<StatusComponent
 						type={Language.type.friends}
 						title={item.userName}
-						// lastMessage={!!item.lastMessageId ? item.lastMessageId.message : ''}
-						// createdAt={!!item.lastMessageId ? item.lastMessageId.createdAt : ''}
 						status={friendIds[index]}
 					/>
 				</TouchableOpacity>

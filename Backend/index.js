@@ -7,7 +7,7 @@ var io = (module.exports.io = require("socket.io").listen(server));
 const { Chats } = require("./modal/chatSchema");
 const socketManager = require("./socket/socketManager");
 require("dotenv").config();
-const port = 3000;
+const port = 3001;
 
 const mongoose = require("mongoose");
 

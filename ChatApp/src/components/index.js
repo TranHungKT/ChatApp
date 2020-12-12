@@ -13,21 +13,23 @@ import ListMessage from './ListMessage';
 import ListSpacer from './ListSpacer';
 import FriendSearch from './FriendSearch';
 import ListFriends from './ListFriends';
+import HeaderGroupChat from './HeaderGroupChat';
 
 export {
-  Header,
-  SwiperHandle,
-  Button,
-  HeaderAuth,
-  Input,
-  LoginWithFTG,
-  SearchBar,
-  GroupDevice,
-  ListCommon,
-  Message,
-  MessageInput,
-  ListMessage,
-  ListSpacer,
-  FriendSearch,
-  ListFriends,
+	Header,
+	SwiperHandle,
+	Button,
+	HeaderAuth,
+	Input,
+	LoginWithFTG,
+	SearchBar,
+	GroupDevice,
+	ListCommon,
+	Message,
+	MessageInput,
+	ListMessage,
+	ListSpacer,
+	FriendSearch,
+	ListFriends,
+	HeaderGroupChat,
 };

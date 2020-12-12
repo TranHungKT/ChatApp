@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import moment from 'moment';
@@ -27,7 +26,11 @@ const StatusComponent = ({
 					)}
 
 					<Text style={styles.lastMessage} numberOfLines={1}>
-						{type == Language.type.rooms ? lastMessage : 'Online'}
+						{type == Language.type.rooms
+							? lastMessage
+							: status == 1
+							? Language.status.Online
+							: Language.status.Offline}
 					</Text>
 				</View>
 				<View>

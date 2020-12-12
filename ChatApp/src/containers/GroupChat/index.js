@@ -72,7 +72,6 @@ class GroupChat extends Component {
 
 	componentWillUnmount() {
 		clearInterval(this.interval);
-		console.log('HI');
 	}
 	render() {
 		const { socket } = this.state;

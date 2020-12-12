@@ -20,7 +20,6 @@ class MessageInput extends Component {
 
 	componentDidMount() {
 		const { socket } = this.props;
-		this.initSocket(socket);
 	}
 
 	/*
