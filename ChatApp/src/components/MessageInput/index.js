@@ -7,8 +7,8 @@ import { Styles, Config } from '@common';
 import { connect } from 'react-redux';
 
 import { updateLastMessage } from '../../redux/actions/roomAction';
-// import ImagePicker from 'react-native-image-picker';
-// import axios from 'axios';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+
 class MessageInput extends Component {
 	constructor(props) {
 		super(props);
@@ -81,41 +81,36 @@ class MessageInput extends Component {
 		this.setState({ message: '' });
 		this.props.updateLastMessage(roomId, sender, message);
 	};
-	// return fetch(`${Config.server}user/action/getRoom/chatArray`, {
-	// 	method: 'POST',
-	// 	headers: {
-	// 		Accept: 'application/json',
-	// 		'Content-Type': 'application/json',
-	// 	},
-	// 	body: JSON.stringify({
-	// 		roomId: roomId,
-	// 	}),
-	selectImage = async () => {
-		ImagePicker.launchImageLibrary(
+
+	selectImage = () => {
+		launchImageLibrary(
 			{
 				mediaType: 'photo',
-				includeBase64: false,
 				maxHeight: 200,
 				maxWidth: 200,
 			},
 			async (response) => {
-				// console.log(response.uri);
-				// const formData = new FormData();
-
-				// const config = {
-				// 	header: { 'content-type': 'multipart/form-data' },
-				// };
-
-				// formData.append('file', response.uri);
-
-				// axios
-				// 	.post('api/chat/uploadfiles', formData, config)
-				// 	.then((response) => {
-				// 		if (response.data.success) {
-				// 			console.log(response.data);
-				// 		}
-				// 	})
-				// 	.catch((err) => console.log(err));
+				console.log(response.uri);
+				const formData = new FormData();
+				formData.append('file', {
+					uri: response.uri,
+					name: response.fileName,
+					type: response.type,
+				});
+				try {
+					const response = await fetch(`${Config.server}user/upload/image`, {
+						method: 'POST',
+						headers: {
+							Accept: 'application/json',
+							'Content-type': 'multipart/form-data',
+						},
+						body: formData,
+					});
+					const data = await response.json();
+					console.log({ data });
+				} catch (error) {
+					console.log('err', error);
+				}
 			}
 		);
 	};
@@ -159,8 +154,8 @@ class MessageInput extends Component {
 					</View>
 				</View>
 				<View style={styles.functionView}>
-					<TouchableOpacity>
-						<Camera height={28} width={28} onPress={this.selectImage} />
+					<TouchableOpacity onPress={this.selectImage}>
+						<Camera height={28} width={28} />
 					</TouchableOpacity>
 
 					<TouchableOpacity onPress={this.onSentMessage}>
