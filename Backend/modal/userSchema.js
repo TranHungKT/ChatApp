@@ -13,6 +13,10 @@ const userSchema = mongoose.Schema({
     type: String,
     maxlength: 50,
   },
+  fullName: {
+    type: String,
+    unique: 1,
+  },
   email: {
     type: String,
     trim: true,
@@ -22,7 +26,6 @@ const userSchema = mongoose.Schema({
     type: String,
     minglength: 5,
   },
-
   role: {
     type: Number,
     default: 0,

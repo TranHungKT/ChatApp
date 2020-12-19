@@ -7,8 +7,8 @@ import { Styles, Config } from '@common';
 import { connect } from 'react-redux';
 
 import { updateLastMessage } from '../../redux/actions/roomAction';
-import ImagePicker from 'react-native-image-picker';
-
+// import ImagePicker from 'react-native-image-picker';
+// import axios from 'axios';
 class MessageInput extends Component {
 	constructor(props) {
 		super(props);
@@ -81,8 +81,16 @@ class MessageInput extends Component {
 		this.setState({ message: '' });
 		this.props.updateLastMessage(roomId, sender, message);
 	};
-
-	selectImage = () => {
+	// return fetch(`${Config.server}user/action/getRoom/chatArray`, {
+	// 	method: 'POST',
+	// 	headers: {
+	// 		Accept: 'application/json',
+	// 		'Content-Type': 'application/json',
+	// 	},
+	// 	body: JSON.stringify({
+	// 		roomId: roomId,
+	// 	}),
+	selectImage = async () => {
 		ImagePicker.launchImageLibrary(
 			{
 				mediaType: 'photo',
@@ -90,8 +98,24 @@ class MessageInput extends Component {
 				maxHeight: 200,
 				maxWidth: 200,
 			},
-			(response) => {
-				console.log(response.uri);
+			async (response) => {
+				// console.log(response.uri);
+				// const formData = new FormData();
+
+				// const config = {
+				// 	header: { 'content-type': 'multipart/form-data' },
+				// };
+
+				// formData.append('file', response.uri);
+
+				// axios
+				// 	.post('api/chat/uploadfiles', formData, config)
+				// 	.then((response) => {
+				// 		if (response.data.success) {
+				// 			console.log(response.data);
+				// 		}
+				// 	})
+				// 	.catch((err) => console.log(err));
 			}
 		);
 	};

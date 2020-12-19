@@ -14,30 +14,32 @@ router.post("/", (req, res) => {
   User.findOne({ email: user.email })
     .then((doc) => {
       if (doc) {
-        // errors = "Your email is registerd";
+        errors = "Your email is registerd";
         return res.status(400).json({ message: "Your email is registerd" });
       } else {
-        // user.sendEmail(user.email, (err, isSend) => {
-        //   if (!isSend) {
-        //     return res.status(401).json({ message: "Can't sends" });
-        //   } else {
-        //     setTimeout(() => {
-        //       user.updateOne({ token: undefined }, function (err, doc) {
-        //         if (err) return res.json({ err });
-        //       });
-        //     }, 60000);
-        //     return res.status(200).json({ message: `${user.token}` });
-        //Create new friend list
-        const friend = new Friends();
-        friend.initialFriendList(user._id);
-
-        // Save user
-        user
-          .save()
-          .then()
-          .catch((err) => console.log(err));
-        return res.send("OK");
+        user.sendEmail(user.email, (err, isSend) => {
+          if (!isSend) {
+            return res.status(401).json({ message: "Can't sends" });
+          } else {
+            setTimeout(() => {
+              user.updateOne({ token: undefined }, function (err, doc) {
+                if (err) return res.json({ err });
+              });
+            }, 60000);
+            return res.status(200).json({ message: `${user.token}` });
+          }
+        });
       }
+      //Create new friend list
+      const friend = new Friends();
+      friend.initialFriendList(user._id);
+
+      // Save user
+      user
+        .save()
+        .then()
+        .catch((err) => console.log(err));
+      return res.send("OK");
     })
     .catch((err) => err);
 });

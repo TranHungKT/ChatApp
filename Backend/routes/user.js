@@ -3,4 +3,5 @@ const router = express.Router();
 
 router.use("/auth", require("./user/auth"));
 router.use("/action", require("./user/userAction"));
+router.use("/uploads", require("./user/upload"));
 module.exports = router;
