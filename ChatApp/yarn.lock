@@ -4640,7 +4640,7 @@ jest@25.5.4:
     import-local "^3.0.2"
     jest-cli "^25.5.4"
 
-jetifier@^1.6.2, jetifier@^1.6.6:
+jetifier@^1.6.2:
   version "1.6.6"
   resolved "https://registry.yarnpkg.com/jetifier/-/jetifier-1.6.6.tgz#fec8bff76121444c12dc38d2dad6767c421dab68"
   integrity sha512-JNAkmPeB/GS2tCRqUzRPsTOHpGDah7xP18vGJfIjZC+W2sxEHbxgJxetIjIqhjQ3yYbYNEELkM/spKLtwoOSUQ==
@@ -6107,10 +6107,10 @@ react-native-gesture-handler@^1.7.0:
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
-react-native-image-picker@^0.26.7:
-  version "0.26.10"
-  resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.26.10.tgz#0bb9ab928984948c67aee0b9e64216bee007a9fc"
-  integrity sha512-z6gAbru2E6SyGWm4ZTbiM9hPHZ5Tsl9kXGfRxW6YQXf9us7zybKoS7dKE1fQPsssv/OSvpPDKannJNncE+ATRA==
+react-native-image-picker@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-3.0.1.tgz#2b361904793ea108b61342ee25fab898de19bbdf"
+  integrity sha512-jVWiKT24jxr7K8dAixlsfHURZd+eDA4WWYeZhhKeJDGITCtFPphcTuFomTMtaWYE/gJgNTEL8TiLedcfeqJ9qw==
 
 react-native-iphone-x-helper@^1.0.3:
   version "1.3.1"
