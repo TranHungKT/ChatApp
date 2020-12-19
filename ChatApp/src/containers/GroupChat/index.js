@@ -7,7 +7,7 @@ import { getFriend } from '../../redux/actions/friendAction';
 import { initSocket } from '../../redux/actions/socketAction';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
-import { Picker } from '@react-native-picker/picker';
+
 class GroupChat extends Component {
 	constructor(props) {
 		super(props);
@@ -94,16 +94,6 @@ class GroupChat extends Component {
 					style={{ flex: 0.5 }}
 					socket={socket}
 				/>
-				<Picker
-					selectedValue={this.state.language}
-					style={{ height: 50, width: 100 }}
-					onValueChange={(itemValue, itemIndex) =>
-						this.setState({ language: itemValue })
-					}
-				>
-					<Picker.Item label='Java' value='java' />
-					<Picker.Item label='JavaScript' value='js' />
-				</Picker>
 			</View>
 		);
 	}

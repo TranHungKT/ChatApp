@@ -69,14 +69,14 @@ const AvailableGroupChat = createDefaultStackNavigator(
 );
 
 const appContainer = createDefaultStackNavigator({
-	AvailableGroupChat: {
-		screen: AvailableGroupChat,
+	AuthStack: {
+		screen: AuthStack,
 		navigationOptions: {
 			headerShown: false,
 		},
 	},
-	AuthStack: {
-		screen: AuthStack,
+	AvailableGroupChat: {
+		screen: AvailableGroupChat,
 		navigationOptions: {
 			headerShown: false,
 		},
