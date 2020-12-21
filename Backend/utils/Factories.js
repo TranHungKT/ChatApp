@@ -9,6 +9,14 @@ const formatMessage = ({ message = "", sender = "", userId = "" } = {}) => ({
   userId,
 });
 
+const formatImage = ({ url = "", sender = "", userId = "" } = {}) => ({
+  time: getTime(new Date(Date.now())),
+  url,
+  sender,
+  userId,
+});
+
 module.exports = {
   formatMessage,
+  formatImage,
 };

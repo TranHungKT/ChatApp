@@ -3,7 +3,7 @@ const io = require("../index").io;
 const { Rooms } = require("../modal/roomSchema");
 const { Friends } = require("../modal/friendSchema");
 const { Chats } = require("../modal/chatSchema");
-const { formatMessage } = require("../utils/Factories");
+const { formatMessage, formatImage } = require("../utils/Factories");
 const {
   USER_CONNECTED,
   MESSAGE_SENT,
@@ -13,6 +13,7 @@ const {
   ACCEPT_FRIEND,
   REFUSE_FRIEND,
   CHECK_CONNECTED,
+  MESSAGE_SENT_IMAGE,
 } = require("./Event");
 
 const connectedUser = [];
@@ -116,6 +117,12 @@ function socketManager(socket) {
     });
     console.log("connectedFriend", connectedFriend);
     io.to(socketID).emit(CHECK_CONNECTED, connectedFriend);
+  });
+
+  socket.on(MESSAGE_SENT_IMAGE, ({ roomId, sender, url, userId }) => {
+    console.log("????");
+    const imageSent = formatImage({ url, sender, userId });
+    io.in(roomId).emit(MESSAGE_SENT_IMAGE, { imageSent });
   });
 }
 

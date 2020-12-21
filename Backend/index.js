@@ -3,12 +3,13 @@ const app = express();
 const server = require("http").createServer(app);
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 var io = (module.exports.io = require("socket.io").listen(server));
 const { Chats } = require("./modal/chatSchema");
 const socketManager = require("./socket/socketManager");
 require("dotenv").config();
 const port = 3000;
-
+app.use(cors());
 // const multer = require("multer");
 // const fs = require("fs");
 
@@ -52,7 +53,7 @@ const connect = initDb;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-
+app.use("/uploads", express.static("uploads"));
 io.on("connection", socketManager);
 
 app.use("/user", require("./routes/user"));

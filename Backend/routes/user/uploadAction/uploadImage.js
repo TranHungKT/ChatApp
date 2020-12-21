@@ -6,7 +6,7 @@ const multer = require("multer");
 const path = require("path");
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname + "/uploads"));
+    cb(null, "./uploads");
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
@@ -29,7 +29,8 @@ router.post("/", auth, (req, res) => {
       console.log("err", err);
       return res.json({ success: false, err });
     }
-    return res.json({ success: true, url: res.req.file.path });
+    console.log(req.file.path);
+    return res.send({ success: true, url: req.file });
   });
 });
 

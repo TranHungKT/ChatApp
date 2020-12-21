@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import styles from './styles';
 
 import { Emoji, Voice, Camera, More } from '@svg';
@@ -16,6 +16,7 @@ class MessageInput extends Component {
 			message: '',
 			height: 0,
 			isTyping: false,
+			image: '',
 		};
 	}
 
@@ -82,6 +83,17 @@ class MessageInput extends Component {
 		this.props.updateLastMessage(roomId, sender, message);
 	};
 
+	onSentImage = (url) => {
+		const { socket, roomId, sender, userId } = this.props;
+		socket.emit(Config.Event.MESSAGE_SENT_IMAGE, {
+			roomId,
+			sender,
+			url,
+			userId,
+		});
+		// this.props.updateLastMessage(roomId, sender, message);
+	};
+
 	selectImage = () => {
 		launchImageLibrary(
 			{
@@ -90,8 +102,8 @@ class MessageInput extends Component {
 				maxWidth: 200,
 			},
 			async (response) => {
-				console.log(response.uri);
 				const formData = new FormData();
+				// this.setState({ image: response.uri });
 				formData.append('file', {
 					uri: response.uri,
 					name: response.fileName,
@@ -107,7 +119,7 @@ class MessageInput extends Component {
 						body: formData,
 					});
 					const data = await response.json();
-					console.log({ data });
+					this.onSentImage(data.url);
 				} catch (error) {
 					console.log('err', error);
 				}
@@ -128,6 +140,12 @@ class MessageInput extends Component {
 						<More height={28} width={28} />
 					</TouchableOpacity>
 				</View>
+				<Image
+					source={{
+						uri: this.state.image,
+					}}
+					style={{ height: 50, width: 50 }}
+				></Image>
 
 				<View style={styles.textInputView}>
 					<View style={styles.view}>

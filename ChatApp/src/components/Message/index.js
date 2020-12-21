@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import styles from './styles';
 import { Config } from '@common';
 import { getChats, afterPostMessage } from '../../redux/actions/chatAction';
@@ -14,6 +14,7 @@ class Message extends Component {
 			userIsTyping: '',
 			messageObj: {},
 			chatArray: [],
+			image: '',
 		};
 		const { socket } = this.props;
 		this.initSocket(socket);
@@ -60,6 +61,11 @@ class Message extends Component {
 			);
 			this.setState({ chatArray: tempChatArray });
 		});
+
+		socket.on(Config.Event.MESSAGE_SENT_IMAGE, ({ imageSent }) => {
+			console.log('sss', imageSent.url);
+			this.setState({ image: imageSent.url });
+		});
 	};
 
 	isMyMessage = () => {
@@ -78,16 +84,27 @@ class Message extends Component {
 					</Text>
 				</View>
 			) : null;
-
+		console.log('test', this.state.image);
+		const a = this.state.image;
 		return (
-			<View style={styles.container}>
-				{annouceTyping}
-				<ListMessage
-					chatArray={chatArray}
-					userId={userData._id}
-					roomId={this.props.roomId}
-					sender={userData.userName}
+			<View style={{ flex: 1 }}>
+				<Image
+					source={{
+						uri: `${Config.server}uploads/rn_image_picker_lib_temp_0f2cf6d3-310d-4193-8d2a-e29ce220e47c.jpg`,
+					}}
+					style={{ height: 200, width: 200 }}
 				/>
+				<View style={styles.container}>
+					{annouceTyping}
+
+					<ListMessage
+						chatArray={chatArray}
+						userId={userData._id}
+						roomId={this.props.roomId}
+						sender={userData.userName}
+						image
+					/>
+				</View>
 			</View>
 		);
 	}
