@@ -4,4 +4,5 @@ import Chat from './Chat';
 import GroupChat from './GroupChat';
 import MyToast from './MyToast';
 import Search from './Search';
-export {Auth, Login, Chat, GroupChat, MyToast, Search};
+import Profile from './Profile';
+export { Auth, Login, Chat, GroupChat, MyToast, Search, Profile };

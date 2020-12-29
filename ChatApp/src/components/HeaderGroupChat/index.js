@@ -10,6 +10,7 @@ class HeaderGroupChat extends Component {
 			this.props.type === Config.typeOfHeader.group
 				? Language.title.your_group_chat
 				: Language.title.your_contact;
+
 		return (
 			<View style={styles.container}>
 				<View style={styles.backButton}>

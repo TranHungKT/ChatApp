@@ -18,7 +18,12 @@ const Header = (props) => {
 	} else if (props.type === Config.typeOfHeader.detail) {
 		return <HeaderDetail {...props} />;
 	} else if (props.type === Config.typeOfHeader.contact) {
-		return <HeaderGroupChat type={Config.typeOfHeader.contact} />;
+		return (
+			<HeaderGroupChat
+				type={Config.typeOfHeader.contact}
+				navigation={props.navigation}
+			/>
+		);
 	}
 };
 
