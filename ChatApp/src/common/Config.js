@@ -2,7 +2,7 @@ export default {
 	EmitCode: {
 		Toast: 'toast',
 	},
-	server: 'http://192.168.1.8:3000/',
+	server: 'http://192.168.1.7:3000/',
 	Event: {
 		COMMUNITY_CHAT: 'COMMUNITY_CHAT',
 		USER_CONNECTED: 'USER_CONNECTED',
@@ -17,7 +17,6 @@ export default {
 		ACCEPT_FRIEND: 'ACCEPT_FRIEND',
 		REFUSE_FRIEND: 'REFUSE_FRIEND',
 		CHECK_CONNECTED: 'CHECK_CONNECTED',
-		MESSAGE_SENT_IMAGE: 'MESSAGE_SENT_IMAGE',
 	},
 	typeOfHeader: {
 		group: 'group',

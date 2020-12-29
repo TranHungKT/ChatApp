@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import styles from './styles';
 import { Config } from '@common';
 import { getChats, afterPostMessage } from '../../redux/actions/chatAction';
@@ -42,7 +42,7 @@ class Message extends Component {
   */
 	loadChat = async () => {
 		const { roomId } = this.props;
-		const chats = await this.props.getChats(roomId);
+		await this.props.getChats(roomId);
 		const tempChatArray = this.props.chats.chats;
 		const temp = tempChatArray.find((element) => element._id == roomId);
 		this.setState({ chatArray: temp.chatArray });
@@ -60,11 +60,6 @@ class Message extends Component {
 				temp.payload.messageSent
 			);
 			this.setState({ chatArray: tempChatArray });
-		});
-
-		socket.on(Config.Event.MESSAGE_SENT_IMAGE, ({ imageSent }) => {
-			console.log('sss', imageSent.url);
-			this.setState({ image: imageSent.url });
 		});
 	};
 
@@ -84,16 +79,9 @@ class Message extends Component {
 					</Text>
 				</View>
 			) : null;
-		console.log('test', this.state.image);
-		const a = this.state.image;
+
 		return (
 			<View style={{ flex: 1 }}>
-				<Image
-					source={{
-						uri: `${Config.server}uploads/rn_image_picker_lib_temp_0f2cf6d3-310d-4193-8d2a-e29ce220e47c.jpg`,
-					}}
-					style={{ height: 200, width: 200 }}
-				/>
 				<View style={styles.container}>
 					{annouceTyping}
 
@@ -102,7 +90,6 @@ class Message extends Component {
 						userId={userData._id}
 						roomId={this.props.roomId}
 						sender={userData.userName}
-						image
 					/>
 				</View>
 			</View>

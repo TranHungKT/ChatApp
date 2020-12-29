@@ -5,11 +5,12 @@ import {
 	KeyboardAvoidingView,
 	FlatList,
 	Animated,
+	Image,
 } from 'react-native';
 
 import styles from './styles';
 import { connect } from 'react-redux';
-import { Styles, Color } from '@common';
+import { Styles, Color, Config } from '@common';
 import ListSpacer from '../ListSpacer';
 import AvatarComponent from '../AvatarComponent';
 import moment from 'moment';
@@ -44,21 +45,30 @@ class ListMessage extends Component {
 			<View>
 				{this.isMyMessage(item.sender) ? (
 					<View style={styles.container}>
-						<View
-							style={[
-								styles.messageBox,
-								{
-									backgroundColor: Color.message.myMessBackground,
-									marginLeft: Styles.message.myMessMargin.marginLeft,
-									marginRight: Styles.message.myMessMargin.marginRight,
-								},
-							]}
-						>
+						<View style={[styles.messageBox, styles.myMess]}>
 							<View style={styles.myMessage}>
-								<Text style={styles.message}>{item.message}</Text>
-								<Text style={styles.time}>
-									{moment(item.updatedAt).format('LT')}
-								</Text>
+								{item.type === 'image' ? (
+									<View
+										style={[styles.imageView, { flexDirection: 'row-reverse' }]}
+									>
+										<Image
+											source={{
+												uri: `${Config.server}${item.message}`,
+											}}
+											style={styles.image}
+										/>
+										<Text style={styles.time}>
+											{moment(item.updatedAt).format('LT')}
+										</Text>
+									</View>
+								) : (
+									<>
+										<Text style={styles.message}>{item.message}</Text>
+										<Text style={styles.time}>
+											{moment(item.updatedAt).format('LT')}
+										</Text>
+									</>
+								)}
 							</View>
 						</View>
 					</View>
@@ -69,21 +79,27 @@ class ListMessage extends Component {
 							source={this.props.yourFriend.image}
 							style={styles.avatar}
 						/>
-						<View
-							style={[
-								styles.messageBox,
-								{
-									backgroundColor: Color.message.notMyMessBackground,
-									marginLeft: Styles.message.notMyMessMargin.marginLeft,
-									marginRight: Styles.message.notMyMessMargin.marginRight,
-									flexDirection: 'row',
-								},
-							]}
-						>
-							<Text style={styles.message}>{item.message}</Text>
-							<Text style={styles.time}>
-								{moment(item.updatedAt).format('LT')}
-							</Text>
+						<View style={[styles.messageBox, styles.notMyMess]}>
+							{item.type === 'image' ? (
+								<View style={styles.imageView}>
+									<Image
+										source={{
+											uri: `${Config.server}${item.message}`,
+										}}
+										style={styles.notMyImage}
+									/>
+									<Text style={styles.time}>
+										{moment(item.updatedAt).format('LT')}
+									</Text>
+								</View>
+							) : (
+								<>
+									<Text style={styles.message}>{item.message}</Text>
+									<Text style={styles.time}>
+										{moment(item.updatedAt).format('LT')}
+									</Text>
+								</>
+							)}
 						</View>
 					</View>
 				)}

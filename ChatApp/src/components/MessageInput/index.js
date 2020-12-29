@@ -78,6 +78,7 @@ class MessageInput extends Component {
 			sender,
 			message,
 			userId,
+			type: 'text',
 		});
 		this.setState({ message: '' });
 		this.props.updateLastMessage(roomId, sender, message);
@@ -85,13 +86,14 @@ class MessageInput extends Component {
 
 	onSentImage = (url) => {
 		const { socket, roomId, sender, userId } = this.props;
-		socket.emit(Config.Event.MESSAGE_SENT_IMAGE, {
+		console.log(url);
+		socket.emit(Config.Event.MESSAGE_SENT, {
 			roomId,
 			sender,
-			url,
+			message: url,
 			userId,
+			type: 'image',
 		});
-		// this.props.updateLastMessage(roomId, sender, message);
 	};
 
 	selectImage = () => {
@@ -103,7 +105,6 @@ class MessageInput extends Component {
 			},
 			async (response) => {
 				const formData = new FormData();
-				// this.setState({ image: response.uri });
 				formData.append('file', {
 					uri: response.uri,
 					name: response.fileName,
@@ -140,12 +141,6 @@ class MessageInput extends Component {
 						<More height={28} width={28} />
 					</TouchableOpacity>
 				</View>
-				<Image
-					source={{
-						uri: this.state.image,
-					}}
-					style={{ height: 50, width: 50 }}
-				></Image>
 
 				<View style={styles.textInputView}>
 					<View style={styles.view}>

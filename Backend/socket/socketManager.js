@@ -53,12 +53,12 @@ async function updateLastMessage(chatId, roomId) {
   }
 }
 
-async function saveNewChat(sender, message, roomId) {
+async function saveNewChat(sender, message, roomId, type) {
   const newChat = new Chats();
   newChat.message = message;
   newChat.sender = sender;
   newChat.to = roomId;
-
+  newChat.type = type;
   const saveChat = await newChat.save();
   if (saveChat) {
     return updateLastMessage(saveChat._id, roomId);
@@ -81,20 +81,24 @@ function socketManager(socket) {
   socket.on(USER_CONNECTED, (_id) => {
     addUserConnected(_id);
   });
+
   socket.on(JOIN_ROOM, (roomIds) => {
     roomIds.forEach((roomId) => {
       socket.join(roomId);
     });
   });
+
   socket.on(TYPING, ({ sender, roomId, isTyping }) => {
     socket.to(roomId).emit(TYPING, { sender, isTyping });
   });
-  socket.on(MESSAGE_SENT, ({ roomId, sender, message, userId }) => {
-    const messageSent = formatMessage({ message, sender, userId });
+
+  socket.on(MESSAGE_SENT, ({ roomId, sender, message, userId, type }) => {
+    const messageSent = formatMessage({ message, sender, userId, type });
 
     io.in(roomId).emit(MESSAGE_SENT, { messageSent });
-    saveNewChat(sender, message, roomId);
+    saveNewChat(sender, message, roomId, type);
   });
+
   socket.on(REQUEST_FRIEND, ({ _idRequest, _idReceiver, sender, socketID }) => {
     Friends.createRequest(_idRequest, _idReceiver, (err, createSuccess) => {
       if (err) {
@@ -106,6 +110,7 @@ function socketManager(socket) {
       }
     });
   });
+
   socket.on(CHECK_CONNECTED, ({ friendIds, socketID }) => {
     const connectedFriend = [];
     friendIds.map((friendId) => {
@@ -117,12 +122,6 @@ function socketManager(socket) {
     });
     console.log("connectedFriend", connectedFriend);
     io.to(socketID).emit(CHECK_CONNECTED, connectedFriend);
-  });
-
-  socket.on(MESSAGE_SENT_IMAGE, ({ roomId, sender, url, userId }) => {
-    console.log("????");
-    const imageSent = formatImage({ url, sender, userId });
-    io.in(roomId).emit(MESSAGE_SENT_IMAGE, { imageSent });
   });
 }
 
