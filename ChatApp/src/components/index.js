@@ -14,6 +14,7 @@ import ListSpacer from './ListSpacer';
 import FriendSearch from './FriendSearch';
 import ListFriends from './ListFriends';
 import HeaderGroupChat from './HeaderGroupChat';
+import ListImage from './ListImage';
 
 export {
 	Header,
@@ -32,4 +33,5 @@ export {
 	FriendSearch,
 	ListFriends,
 	HeaderGroupChat,
+	ListImage,
 };

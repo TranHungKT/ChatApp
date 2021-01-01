@@ -2,7 +2,7 @@ import { LOAD_DATA, ADD_IMAGE } from '../type';
 import { Config } from '@common';
 
 export const getUserData = () => (dispatch) => {
-	return fetch(`${Config.server}user/action/auth`, {
+	return fetch(`${Config.server}user/action/meData`, {
 		method: 'GET',
 		headers: {
 			Accept: 'application/json',

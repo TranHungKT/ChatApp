@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import { SearchBar, GroupDevice, ListCommon } from '@components';
+import { SearchBar, GroupDevice, ListCommon, Header } from '@components';
 import { Language, Config, Styles } from '@common';
 import { getRooms } from '../../redux/actions/roomAction';
 import { getFriend } from '../../redux/actions/friendAction';
@@ -77,12 +77,14 @@ class GroupChat extends Component {
 		const { socket } = this.state;
 
 		const { userData } = this.props.user;
+		const { navigation } = this.props;
 		return (
 			<View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
+				<Header navigation={navigation} type={'group'} />
 				<GroupDevice text={Language.groupDevice.recentChat} />
 				<ListCommon
 					type={Language.type.rooms}
-					navigation={this.props.navigation}
+					navigation={navigation}
 					socket={socket}
 					sender={userData.userName}
 					userId={userData._id}

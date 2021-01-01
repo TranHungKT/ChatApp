@@ -58,4 +58,5 @@ router.post("/gallery", auth, (req, res) => {
     }
   });
 });
+
 module.exports = router;

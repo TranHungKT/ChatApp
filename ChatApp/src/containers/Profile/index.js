@@ -3,7 +3,7 @@ import { View, Text, Image } from 'react-native';
 
 // Components
 import HeaderProfile from './Component/HeaderProfile';
-import ListImage from './Component/ListImage';
+import { ListImage } from '@components';
 
 // Redux
 import { connect } from 'react-redux';
@@ -86,7 +86,7 @@ class Profile extends Component {
 							Your Request: {friends.request.length} |
 						</Text>
 						<Text style={styles.textFriend}>
-							Your Request: {friends.waiting.length}
+							Your Waiting: {friends.waiting.length}
 						</Text>
 					</View>
 				</View>

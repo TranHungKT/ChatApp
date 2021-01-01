@@ -37,6 +37,7 @@ const userSchema = mongoose.Schema({
   },
   gallery: [
     {
+      require: true,
       type: String,
     },
   ],

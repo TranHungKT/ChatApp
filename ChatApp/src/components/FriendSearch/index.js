@@ -3,13 +3,44 @@ import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import styles from './styles';
 import AvatarComponent from '../AvatarComponent';
 import { connect } from 'react-redux';
-import { Config, Language } from '@common';
+import { Config, Language, RouteNames } from '@common';
 class FriendSearch extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
 	}
+	goToFriendProfile = async () => {
+		const { item } = this.props;
+		const _idRequest = this.props.user.userData._id;
+		const sender = this.props.user.userData.userName;
+		const _idFriend = item._id;
+		try {
+			const responseFriend = await fetch(
+				`${Config.server}user/action/friendData`,
+				{
+					method: 'POST',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						_idFriend: _idFriend,
+					}),
+				}
+			);
 
+			const friendData = await responseFriend.json();
+
+			this.props.navigation.navigate(RouteNames.FriendProfile, {
+				friendData: friendData,
+				_idFriend: _idFriend,
+				_idRequest: _idRequest,
+				sender: sender,
+			});
+		} catch (err) {
+			console.log('get friend data FE', err);
+		}
+	};
 	createFriend = (_idRequest, _idReceiver, sender) => () => {
 		Alert.alert(
 			`${Language.requestFriend.confirmRequest}`,
@@ -37,12 +68,10 @@ class FriendSearch extends Component {
 	};
 	render() {
 		const { item } = this.props;
-		const _idRequest = this.props.user.userData._id;
-		const sender = this.props.user.userData.userName;
-		const _idReceiver = item._id;
 		return (
 			<TouchableOpacity
-				onPress={this.createFriend(_idRequest, _idReceiver, sender)}
+				// onPress={this.createFriend(_idRequest, _idReceiver, sender)}
+				onPress={this.goToFriendProfile}
 			>
 				<View style={styles.itemView}>
 					<AvatarComponent isSmallAvatar={true} source={item.image} />

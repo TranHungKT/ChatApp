@@ -10,8 +10,9 @@ import ChatScreen from './ChatScreen';
 import GroupChatScreen from './GroupChatScreen';
 import SearchScreen from './SearchScreen';
 import ProfileScreen from './ProfileScreen';
+import FriendProfileScreen from './FriendProfileScreen';
 
-import { HeaderAuth, Header } from '@components';
+import { HeaderAuth } from '@components';
 
 // Styles
 import { Color, RouteNames } from '@common';
@@ -35,46 +36,22 @@ const AuthStack = createStackNavigator(
 		},
 	}
 );
-
-const AvailableGroupChat = createStackNavigator({
-	[RouteNames.GroupChat]: {
-		screen: GroupChatScreen,
-		navigationOptions: {
-			header: ({ navigation }) => (
-				<Header navigation={navigation} type={'group'} />
-			),
-		},
-	},
-	[RouteNames.Chat]: {
-		screen: ChatScreen,
-		navigationOptions: {
-			headerShown: false,
-		},
-	},
-	[RouteNames.Search]: {
-		screen: SearchScreen,
-		navigationOptions: {
-			headerShown: false,
-		},
-	},
-});
 const tabContainer = createBottomTabNavigator(
 	{
-		AvailableGroupChat: {
-			screen: AvailableGroupChat,
+		[RouteNames.GroupChat]: {
+			screen: GroupChatScreen,
 			navigationOptions: {
-				headerShown: false,
 				tabBarIcon: () => (
-					<Icon name='user' color={Color.activeBackgroundColor} size={22} />
+					<Icon name='users' color={Color.activeBackgroundColor} size={22} />
 				),
 			},
 		},
-		Profile: {
+		[RouteNames.Profile]: {
 			screen: ProfileScreen,
 			navigationOptions: {
 				headerShown: false,
 				tabBarIcon: () => (
-					<Icon name='users' color={Color.activeBackgroundColor} size={22} />
+					<Icon name='user' color={Color.activeBackgroundColor} size={22} />
 				),
 			},
 		},
@@ -87,6 +64,36 @@ const tabContainer = createBottomTabNavigator(
 		},
 	}
 );
+
+const AvailableGroupChat = createStackNavigator({
+	tabContainer: {
+		screen: tabContainer,
+		navigationOptions: {
+			headerShown: false,
+			tabBarVisible: false,
+		},
+	},
+	[RouteNames.Chat]: {
+		screen: ChatScreen,
+		navigationOptions: {
+			headerShown: false,
+			tabBarVisible: false,
+		},
+	},
+	[RouteNames.Search]: {
+		screen: SearchScreen,
+		navigationOptions: {
+			headerShown: false,
+		},
+	},
+	[RouteNames.FriendProfile]: {
+		screen: FriendProfileScreen,
+		navigationOptions: {
+			headerShown: false,
+		},
+	},
+});
+
 const groupContainer = createStackNavigator({
 	AuthStack: {
 		screen: AuthStack,
@@ -94,8 +101,8 @@ const groupContainer = createStackNavigator({
 			headerShown: false,
 		},
 	},
-	tabContainer: {
-		screen: tabContainer,
+	AvailableGroupChat: {
+		screen: AvailableGroupChat,
 		navigationOptions: {
 			headerShown: false,
 		},

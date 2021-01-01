@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { View, TextInput, FlatList, Text } from 'react-native';
 import styles from './styles';
 import { Language, Config } from '@common';
-import AvatarComponent from '../AvatarComponent';
+
 import FriendSearch from '../FriendSearch';
 export default class SearchBar extends Component {
 	constructor(props) {
@@ -40,7 +40,7 @@ export default class SearchBar extends Component {
 	_renderItem = (items) => {
 		const { item } = items;
 
-		return <FriendSearch item={item} />;
+		return <FriendSearch item={item} navigation={this.props.navigation} />;
 	};
 	render() {
 		const { searchString } = this.state;
