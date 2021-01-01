@@ -9,6 +9,7 @@ export default StyleSheet.create({
 		flex: 0.4,
 		justifyContent: 'center',
 		alignItems: 'center',
+		marginHorizontal: Styles.margin.marginLeft,
 	},
 	avatar: {
 		width: 150,
@@ -30,5 +31,10 @@ export default StyleSheet.create({
 		fontSize: 14,
 		fontWeight: 'bold',
 		marginRight: 5,
+	},
+	galleryView: {
+		flex: 0.6,
+		alignContent: 'center',
+		marginHorizontal: Styles.margin.marginLeft,
 	},
 });

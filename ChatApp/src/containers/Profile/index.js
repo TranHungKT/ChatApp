@@ -3,13 +3,14 @@ import { View, Text, Image } from 'react-native';
 
 // Components
 import HeaderProfile from './Component/HeaderProfile';
+import ListImage from './Component/ListImage';
 
 // Redux
 import { connect } from 'react-redux';
 import { addImage } from '../../redux/actions/userAction';
 
 // Library
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 // Styles
 import styles from './styles';
@@ -27,8 +28,8 @@ class Profile extends Component {
 		launchImageLibrary(
 			{
 				mediaType: 'photo',
-				maxHeight: 1000,
-				maxWidth: 1000,
+				maxHeight: 2000,
+				maxWidth: 2000,
 			},
 			async (response) => {
 				const formData = new FormData();
@@ -88,6 +89,9 @@ class Profile extends Component {
 							Your Request: {friends.waiting.length}
 						</Text>
 					</View>
+				</View>
+				<View style={styles.galleryView}>
+					<ListImage gallery={userData.gallery} />
 				</View>
 			</View>
 		);

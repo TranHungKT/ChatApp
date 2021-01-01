@@ -6,7 +6,7 @@ const { User } = require("../../../modal/userSchema");
 
 const multer = require("multer");
 
-var storage = multer.diskStorage({
+var storageImage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./uploads/Image");
   },
@@ -15,8 +15,17 @@ var storage = multer.diskStorage({
   },
 });
 
-var uploadImage = multer({ storage: storage }).single("file");
-var uploadGallery = multer({ storage: storage }).single("file");
+var storageGallery = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./uploads/Gallery");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+var uploadImage = multer({ storage: storageImage }).single("file");
+var uploadGallery = multer({ storage: storageGallery }).single("file");
 
 router.post("/", auth, (req, res) => {
   uploadImage(req, res, (err) => {
