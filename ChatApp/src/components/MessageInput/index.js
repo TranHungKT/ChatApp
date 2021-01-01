@@ -100,8 +100,8 @@ class MessageInput extends Component {
 		launchImageLibrary(
 			{
 				mediaType: 'photo',
-				maxHeight: 200,
-				maxWidth: 200,
+				maxHeight: 1500,
+				maxWidth: 1500,
 			},
 			async (response) => {
 				const formData = new FormData();

@@ -1,22 +1,25 @@
 const express = require("express");
 const router = express.Router();
 const { auth } = require("../../../middleware/auth");
-const fs = require("fs");
+
+const { User } = require("../../../modal/userSchema");
+
 const multer = require("multer");
-const path = require("path");
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./uploads");
+    cb(null, "./uploads/Image");
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
   },
 });
 
-var upload = multer({ storage: storage }).single("file");
+var uploadImage = multer({ storage: storage }).single("file");
+var uploadGallery = multer({ storage: storage }).single("file");
 
 router.post("/", auth, (req, res) => {
-  upload(req, res, (err) => {
+  uploadImage(req, res, (err) => {
     if (err) {
       console.log("err", err);
       return res.json({ success: false, err });
@@ -26,4 +29,24 @@ router.post("/", auth, (req, res) => {
   });
 });
 
+router.post("/gallery", auth, (req, res) => {
+  const userId = req.user._id;
+  console.log("userId", userId);
+  uploadGallery(req, res, async (err) => {
+    if (err) {
+      console.log("err", err);
+      return res.json({ success: false, err });
+    }
+
+    try {
+      const user = await User.findOne({ _id: userId });
+      user.gallery.push(res.req.file.path);
+      user.save();
+
+      return res.send({ success: true, url: res.req.file.path });
+    } catch (err) {
+      console.log(err);
+    }
+  });
+});
 module.exports = router;

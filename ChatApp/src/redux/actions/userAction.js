@@ -1,4 +1,4 @@
-import { LOGIN, LOADING, USER_SERVER, LOAD_DATA } from '../type';
+import { LOAD_DATA, ADD_IMAGE } from '../type';
 import { Config } from '@common';
 
 export const getUserData = () => (dispatch) => {
@@ -14,6 +14,7 @@ export const getUserData = () => (dispatch) => {
 				return response
 					.json()
 					.then((data) => {
+						console.log('data', data);
 						return dispatch({
 							type: LOAD_DATA,
 							payload: data,
@@ -40,5 +41,12 @@ export const login = (email, password) => (dispatch) => {
 		if (response.status == 200) {
 			return dispatch(getUserData());
 		}
+	});
+};
+
+export const addImage = (url) => (dispatch) => {
+	return dispatch({
+		type: ADD_IMAGE,
+		payload: url,
 	});
 };
