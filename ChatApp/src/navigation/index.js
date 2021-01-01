@@ -17,17 +17,6 @@ import { HeaderAuth, Header } from '@components';
 import { Color, RouteNames } from '@common';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const defaultHeaderObject = {
-	header: (props) => <Header type={'group'} />,
-};
-
-const createDefaultStackNavigator = (screensObject, customOptions) =>
-	createStackNavigator(screensObject, {
-		defaultNavigationOptions: { ...defaultHeaderObject },
-		headerMode: 'screen',
-		...customOptions,
-	});
-
 const AuthStack = createStackNavigator(
 	{
 		[RouteNames.Auth]: {
@@ -99,14 +88,14 @@ const tabContainer = createBottomTabNavigator(
 	}
 );
 const groupContainer = createStackNavigator({
-	tabContainer: {
-		screen: tabContainer,
+	AuthStack: {
+		screen: AuthStack,
 		navigationOptions: {
 			headerShown: false,
 		},
 	},
-	AuthStack: {
-		screen: AuthStack,
+	tabContainer: {
+		screen: tabContainer,
 		navigationOptions: {
 			headerShown: false,
 		},

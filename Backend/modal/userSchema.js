@@ -35,6 +35,11 @@ const userSchema = mongoose.Schema({
     default:
       "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2190&q=80",
   },
+  gallery: [
+    {
+      type: String,
+    },
+  ],
   token: {
     type: String,
   },
