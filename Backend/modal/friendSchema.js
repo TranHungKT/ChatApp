@@ -43,14 +43,14 @@ function checkId(id, list) {
 
 friendSchema.statics.createRequest = async function (
   _idRequest,
-  _idReceiver,
+  _idFriend,
   cb
 ) {
   var friends = this;
 
   const friendRequest = await friends
     .findOne({
-      admin: `${mongoose.Types.ObjectId(_idReceiver)}`,
+      admin: `${mongoose.Types.ObjectId(_idFriend)}`,
     })
     .select("request")
     .exec();
@@ -74,9 +74,8 @@ friendSchema.statics.createRequest = async function (
     .select("waiting")
     .exec();
 
-  friendWaiting.waiting.push(_idReceiver);
+  friendWaiting.waiting.push(_idFriend);
   friendWaiting.save();
-  console.log("hello", friendWaiting);
 
   return cb(null, (createSuccess = true));
 };

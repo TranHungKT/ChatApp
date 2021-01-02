@@ -10,7 +10,7 @@ class FriendSearch extends Component {
 		this.state = {};
 	}
 	goToFriendProfile = async () => {
-		const { item } = this.props;
+		const { item, socket } = this.props;
 		const _idRequest = this.props.user.userData._id;
 		const sender = this.props.user.userData.userName;
 		const _idFriend = item._id;
@@ -36,43 +36,17 @@ class FriendSearch extends Component {
 				_idFriend: _idFriend,
 				_idRequest: _idRequest,
 				sender: sender,
+				socket: socket,
 			});
 		} catch (err) {
 			console.log('get friend data FE', err);
 		}
 	};
-	createFriend = (_idRequest, _idReceiver, sender) => () => {
-		Alert.alert(
-			`${Language.requestFriend.confirmRequest}`,
-			`${Language.requestFriend.content}`,
-			[
-				{
-					text: `${Language.requestFriend.Cancel}`,
-				},
-				{
-					text: `${Language.requestFriend.OK}`,
-					onPress: () => this.makeFriend(_idRequest, _idReceiver, sender),
-				},
-			]
-		);
-	};
-	makeFriend = (_idRequest, _idReceiver, sender) => {
-		const { socket } = this.props.socket;
-		const socketID = socket.id;
-		socket.emit(Config.Event.REQUEST_FRIEND, {
-			_idRequest,
-			_idReceiver,
-			sender,
-			socketID,
-		});
-	};
+
 	render() {
 		const { item } = this.props;
 		return (
-			<TouchableOpacity
-				// onPress={this.createFriend(_idRequest, _idReceiver, sender)}
-				onPress={this.goToFriendProfile}
-			>
+			<TouchableOpacity onPress={this.goToFriendProfile}>
 				<View style={styles.itemView}>
 					<AvatarComponent isSmallAvatar={true} source={item.image} />
 					<Text style={styles.itemName}>{item.userName}</Text>

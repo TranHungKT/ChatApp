@@ -99,8 +99,8 @@ function socketManager(socket) {
     saveNewChat(sender, message, roomId, type);
   });
 
-  socket.on(REQUEST_FRIEND, ({ _idRequest, _idReceiver, sender, socketID }) => {
-    Friends.createRequest(_idRequest, _idReceiver, (err, createSuccess) => {
+  socket.on(REQUEST_FRIEND, ({ _idRequest, _idFriend, sender, socketID }) => {
+    Friends.createRequest(_idRequest, _idFriend, (err, createSuccess) => {
       if (err) {
         console.log(err);
         return;

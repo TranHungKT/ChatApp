@@ -15,7 +15,7 @@ export default StyleSheet.create({
 		...Styles.Common.ColumnCenterLeft,
 	},
 	title: {
-		flex: 0.7,
+		flex: 0.65,
 		...Styles.Common.ColumnCenter,
 	},
 	titleText: {
@@ -26,12 +26,19 @@ export default StyleSheet.create({
 		color: Color.headerTitleColor,
 	},
 	svgBigView: {
-		flex: 0.15,
+		flex: 0.3,
 		flexDirection: 'row',
 		marginRight: Styles.margin.marginRight,
 		...Styles.Common.RowCenterRight,
 	},
 	svgView: {
 		flex: 0.75,
+	},
+	responseRequest: {
+		// padding: 10,
+		backgroundColor: Color.activeBackgroundColor,
+	},
+	responseRequestText: {
+		fontSize: 16,
 	},
 });

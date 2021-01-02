@@ -1,22 +1,48 @@
 import React, { Component } from 'react';
-import { View, Text, Image, Modal } from 'react-native';
+import { View, Text, Image } from 'react-native';
 
 import { ListImage } from '@components';
+
+import { connect } from 'react-redux';
+
+import Modal from 'react-native-modal';
+import QRCode from 'react-native-qrcode-svg';
 
 import Header from './Component/Header/Header';
 
 import styles from './styles';
 
-export default class FriendProfile extends Component {
+class FriendProfile extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			toogleModal: false,
+			isShowModal: false,
+			isFriend: 0, // enum with 0 : not friend, 1 : waiting Friend, 2 : request friend, 3: friend
 		};
 	}
 
+	componentDidMount() {
+		const { _idFriend } = this.props.navigation.state.params;
+		this.checkIsFriend(_idFriend);
+	}
+
 	toogleModal = () => {
-		this.setState((prevState) => ({ toogleModal: !prevState.toogleModal }));
+		this.setState((prevState) => ({ isShowModal: !prevState.isShowModal }));
+	};
+
+	checkIsFriend = (_idFriend) => {
+		const { friend } = this.props;
+
+		friend.friendList.forEach((element) => {
+			if (element._id == _idFriend) {
+				return this.setState({ isFriend: 3 });
+			}
+		});
+		if (friend.request.includes(_idFriend)) {
+			return this.setState({ isFriend: 2 });
+		} else if (friend.waiting.includes(_idFriend)) {
+			return this.setState({ isFriend: 1 });
+		}
 	};
 
 	render() {
@@ -25,10 +51,21 @@ export default class FriendProfile extends Component {
 			sender,
 			_idRequest,
 			friendData,
+			socket,
 		} = this.props.navigation.state.params;
+		const { isShowModal, isFriend } = this.state;
+
 		return (
 			<View style={styles.container}>
-				<Header toogleModal={this.toogleModal} />
+				<Header
+					toogleModal={this.toogleModal}
+					userName={friendData.userName}
+					sender={sender}
+					_idRequest={_idRequest}
+					_idFriend={_idFriend}
+					isFriend={isFriend}
+					socket={socket}
+				/>
 
 				<View style={styles.profileView}>
 					<Image source={{ uri: friendData.image }} style={styles.avatar} />
@@ -40,8 +77,28 @@ export default class FriendProfile extends Component {
 				<View style={styles.galleryView}>
 					<ListImage gallery={friendData.gallery} />
 				</View>
-				<Modal></Modal>
+				<Modal
+					isVisible={isShowModal}
+					animationIn='slideInUp'
+					backdropOpacity={0.5}
+					useNativeDriver={true}
+					backdropTransitionInTiming={0}
+					backdropTransitionOutTiming={0}
+					onBackdropPress={this.toogleModal}
+					style={styles.modalView}
+				>
+					<QRCode
+						value={friendData.userName + ': ' + _idFriend}
+						size={250}
+					></QRCode>
+				</Modal>
 			</View>
 		);
 	}
 }
+
+const mapStateToProps = (state) => ({
+	friend: state.friendReducer.friends,
+});
+
+export default connect(mapStateToProps)(FriendProfile);

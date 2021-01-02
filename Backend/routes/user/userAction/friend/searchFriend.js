@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
+
 const { User } = require("../../../../modal/userSchema");
-const { Friends } = require("../../../../modal/friendSchema");
 const { auth } = require("../../../../middleware/auth");
+
 router.post("/", auth, async (req, res) => {
   const { searchString } = req.body;
   //Search theo tên có dấu

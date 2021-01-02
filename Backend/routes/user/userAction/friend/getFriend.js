@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Users } = require("../../../../modal/userSchema");
+
 const { Friends } = require("../../../../modal/friendSchema");
 const { auth } = require("../../../../middleware/auth");
 router.get("/", auth, async (req, res) => {

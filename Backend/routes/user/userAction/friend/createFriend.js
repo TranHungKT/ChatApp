@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Users } = require("../../../../modal/userSchema");
+
 const { Friends } = require("../../../../modal/friendSchema");
 router.post("/", (req, res) => {
   // let _idRequest = req.user._id;

@@ -38,4 +38,8 @@ export default StyleSheet.create({
 		alignContent: 'center',
 		marginHorizontal: Styles.margin.marginLeft,
 	},
+	modalView: {
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 });
