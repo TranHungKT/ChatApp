@@ -5,8 +5,15 @@ const { auth } = require("../../../middleware/auth");
 
 router.get("/", auth, async (req, res) => {
   const userId = req.user._id;
-  const transfer = await Transfer.findOne({ admin: userId });
-  return res.status(200).send(transfer);
+  try {
+    const transfer = await Transfer.findOne({ admin: userId })
+      .populate("sent.receiver", "image userName")
+      .populate("receive.sender", "image userName")
+      .exec();
+    return res.status(200).send(transfer);
+  } catch (err) {
+    console.log("get transfer err", err);
+  }
 });
 
 module.exports = router;
