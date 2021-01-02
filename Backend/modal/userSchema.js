@@ -47,6 +47,10 @@ const userSchema = mongoose.Schema({
   tokenExp: {
     type: Number,
   },
+  accout: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Transfer",
+  },
 });
 
 userSchema.index({ userName: "text" });
