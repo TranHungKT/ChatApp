@@ -7,4 +7,5 @@ export default {
 	Search: 'Search',
 	Profile: 'Profile',
 	FriendProfile: 'FriendProfile',
+	Wallet: 'Wallet',
 };

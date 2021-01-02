@@ -29,3 +29,7 @@ export const GET_FRIENDS = 'GET_FRIENDS';
 
 // User action
 export const ADD_IMAGE = 'ADD_IMAGE';
+
+// Transfer action
+export const SENT_MONEY = 'SENT_MONEY';
+export const GET_TRANSFER = 'GET_TRANSFER';

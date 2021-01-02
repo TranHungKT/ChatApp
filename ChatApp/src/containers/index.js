@@ -6,7 +6,7 @@ import MyToast from './MyToast';
 import Search from './Search';
 import Profile from './Profile';
 import FriendProfile from './FriendProfile';
-
+import Wallet from './Wallet';
 export {
 	Auth,
 	Login,
@@ -16,4 +16,5 @@ export {
 	Search,
 	Profile,
 	FriendProfile,
+	Wallet,
 };

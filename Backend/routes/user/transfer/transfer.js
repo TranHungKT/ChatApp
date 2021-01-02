@@ -6,6 +6,7 @@ const { auth } = require("../../../middleware/auth");
 const sentMoney = async (from, to, amount, description) => {
   try {
     const userSent = await Transfer.findOne({ admin: from });
+
     userSent.balance -= amount;
     userSent.sent.push({
       receiver: to,
@@ -31,7 +32,7 @@ router.post("/", auth, async (req, res) => {
   const { toFriend, amount, description } = req.body;
   sentMoney(userId, toFriend, amount, description);
 
-  return res.status(200).send(success);
+  return res.status(200).send("success");
 });
 
 module.exports = router;

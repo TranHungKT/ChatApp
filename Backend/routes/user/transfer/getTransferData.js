@@ -7,6 +7,7 @@ router.get("/", auth, async (req, res) => {
   const userId = req.user._id;
   try {
     const transfer = await Transfer.findOne({ admin: userId })
+      .populate("admin", "userName image")
       .populate("sent.receiver", "image userName")
       .populate("receive.sender", "image userName")
       .exec();

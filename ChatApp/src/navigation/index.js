@@ -11,13 +11,14 @@ import GroupChatScreen from './GroupChatScreen';
 import SearchScreen from './SearchScreen';
 import ProfileScreen from './ProfileScreen';
 import FriendProfileScreen from './FriendProfileScreen';
+import WalletScreen from './WalletScreen';
 
 import { HeaderAuth } from '@components';
 
 // Styles
 import { Color, RouteNames } from '@common';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import Icon5 from 'react-native-vector-icons/FontAwesome5';
 const AuthStack = createStackNavigator(
 	{
 		[RouteNames.Auth]: {
@@ -52,6 +53,15 @@ const tabContainer = createBottomTabNavigator(
 				headerShown: false,
 				tabBarIcon: () => (
 					<Icon name='user' color={Color.activeBackgroundColor} size={22} />
+				),
+			},
+		},
+		[RouteNames.Wallet]: {
+			screen: WalletScreen,
+			navigationOptions: {
+				headerShown: false,
+				tabBarIcon: () => (
+					<Icon5 name='wallet' color={Color.activeBackgroundColor} size={22} />
 				),
 			},
 		},
