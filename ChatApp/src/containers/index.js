@@ -7,6 +7,7 @@ import Search from './Search';
 import Profile from './Profile';
 import FriendProfile from './FriendProfile';
 import Wallet from './Wallet';
+import Pay from './Pay';
 export {
 	Auth,
 	Login,
@@ -17,4 +18,5 @@ export {
 	Profile,
 	FriendProfile,
 	Wallet,
+	Pay,
 };

@@ -8,4 +8,5 @@ export default {
 	Profile: 'Profile',
 	FriendProfile: 'FriendProfile',
 	Wallet: 'Wallet',
+	Pay: 'Pay',
 };

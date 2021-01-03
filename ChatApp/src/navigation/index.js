@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
@@ -12,6 +12,7 @@ import SearchScreen from './SearchScreen';
 import ProfileScreen from './ProfileScreen';
 import FriendProfileScreen from './FriendProfileScreen';
 import WalletScreen from './WalletScreen';
+import PayScreen from './PayScreen';
 
 import { HeaderAuth } from '@components';
 
@@ -102,9 +103,15 @@ const AvailableGroupChat = createStackNavigator({
 			headerShown: false,
 		},
 	},
+	[RouteNames.Pay]: {
+		screen: PayScreen,
+		navigationOptions: {
+			headerShown: false,
+		},
+	},
 });
 
-const groupContainer = createStackNavigator({
+const groupContainer = createSwitchNavigator({
 	AuthStack: {
 		screen: AuthStack,
 		navigationOptions: {

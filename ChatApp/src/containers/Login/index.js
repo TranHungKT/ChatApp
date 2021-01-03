@@ -10,6 +10,7 @@ import { getUserData } from '../../redux/actions/userAction';
 
 import Network from '@services/Network';
 
+import { StackActions, NavigationActions } from 'react-navigation';
 class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -74,7 +75,7 @@ class Login extends Component {
 
 		if (response.status == 200) {
 			await this.props.getUserData();
-			this.props.navigation.navigate(RouteNames.GroupChat);
+			this.props.navigation.navigate('AvailableGroupChat');
 		} else if (response.status == 400) {
 			this.setState({
 				errorEmail: Language.login.loginRontEmail,
@@ -87,6 +88,7 @@ class Login extends Component {
 			});
 		}
 	};
+
 	toggleRemmeber = () => {
 		this.setState((prevState) => ({ remember: !prevState.remember }));
 	};

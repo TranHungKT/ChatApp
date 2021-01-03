@@ -27,7 +27,11 @@ class Wallet extends Component {
 			<>
 				{Object.keys(transfer).length === 0 ? null : (
 					<View style={styles.container}>
-						<Header style={{ flex: 0.08 }} />
+						<Header
+							style={{ flex: 0.08 }}
+							navigation={this.props.navigation}
+							balance={balance}
+						/>
 						<Balance
 							balance={balance}
 							admin={admin}
