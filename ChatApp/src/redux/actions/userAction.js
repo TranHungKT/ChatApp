@@ -14,7 +14,6 @@ export const getUserData = () => (dispatch) => {
 				return response
 					.json()
 					.then((data) => {
-						console.log('data', data);
 						return dispatch({
 							type: LOAD_DATA,
 							payload: data,

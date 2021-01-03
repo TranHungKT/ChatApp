@@ -46,7 +46,7 @@ class ListFriends extends React.Component {
 	_keyExtractor = (item, index) => `${index}`;
 	render() {
 		const { friends } = this.props.friends;
-		console.log(friends.friendList);
+
 		return (
 			<View style={this.props.style}>
 				<FlatList

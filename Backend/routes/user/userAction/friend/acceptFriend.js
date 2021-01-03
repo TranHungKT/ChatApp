@@ -11,7 +11,7 @@ const removeInIdRequest = async (_idRequest, _idFriend) => {
   myFriend.request.splice(index, 1);
   myFriend.friendList.push(_idFriend);
   myFriend.save();
-  console.log({ myFriend });
+
   return;
 };
 
@@ -23,7 +23,7 @@ const removeInIdFriend = async (_idRequest, _idFriend) => {
   response.waiting.splice(index, 1);
   response.friendList.push(_idRequest);
   response.save();
-  console.log(response);
+
   return;
 };
 

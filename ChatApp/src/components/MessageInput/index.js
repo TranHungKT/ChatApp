@@ -86,7 +86,7 @@ class MessageInput extends Component {
 
 	onSentImage = (url) => {
 		const { socket, roomId, sender, userId } = this.props;
-		console.log(url);
+
 		socket.emit(Config.Event.MESSAGE_SENT, {
 			roomId,
 			sender,

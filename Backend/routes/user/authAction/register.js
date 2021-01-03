@@ -21,7 +21,7 @@ router.post("/", (req, res) => {
       //Create new friend list
       const friend = new Friends();
       friend.initialFriendList(user._id);
-      console.log("hi");
+
       // Create new Transfer
       const transfer = new Transfer();
       transfer.admin = user._id;

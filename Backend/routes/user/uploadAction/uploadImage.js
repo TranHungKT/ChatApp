@@ -40,7 +40,7 @@ router.post("/", auth, (req, res) => {
 
 router.post("/gallery", auth, (req, res) => {
   const userId = req.user._id;
-  console.log("userId", userId);
+
   uploadGallery(req, res, async (err) => {
     if (err) {
       console.log("err", err);

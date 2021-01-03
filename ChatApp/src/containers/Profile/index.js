@@ -51,7 +51,7 @@ class Profile extends Component {
 						}
 					);
 					const data = await response.json();
-					console.log('data', data);
+
 					this.addImageToRedux(data.url);
 				} catch (error) {
 					console.log('error upload gallery', error);
@@ -67,7 +67,7 @@ class Profile extends Component {
 	render() {
 		const { userData } = this.props.user;
 		const { friends } = this.props.friend;
-		console.log({ userData });
+
 		return (
 			<View style={styles.container}>
 				<HeaderProfile onPressCamera={this.selectImage} />

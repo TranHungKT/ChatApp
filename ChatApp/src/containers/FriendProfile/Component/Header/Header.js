@@ -36,7 +36,7 @@ export default class HeaderProfile extends Component {
 	};
 	makeFriend = (_idRequest, _idFriend, sender) => {
 		const { socket } = this.props.socket;
-		console.log({ socket });
+
 		const socketID = socket.id;
 		socket.emit(Config.Event.REQUEST_FRIEND, {
 			_idRequest,
@@ -84,7 +84,7 @@ export default class HeaderProfile extends Component {
 
 	renderIconFriend = () => {
 		const { isFriend } = this.props;
-		console.log({ isFriend });
+
 		if (isFriend == 3) {
 			return (
 				<Icon5

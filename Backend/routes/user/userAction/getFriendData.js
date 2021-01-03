@@ -7,7 +7,7 @@ router.post("/", auth, async (req, res) => {
 
   try {
     const friendData = await User.findOne({ _id: _idFriend });
-    console.log("friendData", friendData);
+
     return res.status(200).json({
       userName: friendData.userName,
       image: friendData.image,
